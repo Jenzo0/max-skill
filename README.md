@@ -1,17 +1,16 @@
 <p align="center">
-  <img src="https://img.shields.io/badge/Max%20Super%20Prompt-v3.0-8A2BE2" alt="Version">
   <img src="https://img.shields.io/badge/Google%20AI%20Edge%20Gallery-Compatible-success" alt="Edge Gallery">
   <img src="https://img.shields.io/badge/Any%20Agent-Universal-blue" alt="Universal">
   <img src="https://img.shields.io/badge/Model-Agnostic-FF6B6B" alt="Model Agnostic">
   <img src="https://img.shields.io/badge/License-MIT-green" alt="License">
-  <img src="https://img.shields.io/badge/Language-Egyptian%20Arabic%20%7C%20English-orange" alt="Language">
+  <img src="https://img.shields.io/badge/Locale-English%20%7C%20Arabic-orange" alt="Language">
 </p>
 
-<h1 align="center">🧠 Max Super Prompt — The Jarvis Killer v3.0</h1>
+<h1 align="center">🧠 Max Super Prompt — The Jarvis Killer</h1>
 <h3 align="center">A Universal Agent Persona Skill for Any LLM, Any Platform</h3>
 
 <p align="center">
-  <em>"Egyptian Arabic Senior Engineer · CTO · Architect · Teacher · Full-Stack Company in One Body"</em>
+  <em>"Senior Engineer · CTO · Architect · Teacher · Full-Stack Company in One Body"</em>
 </p>
 
 <p align="center">
@@ -22,7 +21,7 @@
 
 ## 📦 What Is Max Super Prompt?
 
-**Max Super Prompt** is a **universal persona skill** that transforms any LLM into a **Senior Egyptian Arabic Engineer** — with a complete personality system, reasoning protocol, mode switching, and production-quality output standards.
+**Max Super Prompt** is a **universal persona skill** that transforms any LLM into a **multi-mode Senior Engineer personality** — with a complete reasoning protocol, automatic mode switching, and production-quality output standards.
 
 > **Zero dependencies. One SKILL.md file. Works everywhere.**
 
@@ -35,7 +34,7 @@
 | 📝 **Structured Output** | Consistent response template for every answer |
 | 📜 **10 Golden Rules** | Simplicity, Verification, Security, Elegance & more |
 | 🏢 **Full-Stack Knowledge** | FastAPI, React, Docker, DevOps, Auth patterns |
-| 🇪🇬 **Egyptian Arabic** | Native professional tone with Arabic slang where appropriate |
+| 🌐 **Bilingual** | English + native Arabic support when Arabic user input is detected |
 | 🔌 **Universal** | Works with any LLM, any agent framework, any platform |
 
 ---
@@ -106,7 +105,7 @@ echo "System: $SKILL" | your-agent --prompt-file -
 | "Fix this error: \<paste\>" | ⚡ **Fast Solve** | Quick root-cause + immediate fix |
 | "Design an e-commerce system" | 📐 **Architect Mode** | Complete architecture with diagrams and trade-offs |
 | "Just give me the code" | 🤫 **Absolute Mode** | Direct output, no pleasantries |
-| عندي مشكلة في الكود | 🔥 **Arabic Mode** | Full diagnosis in Egyptian Arabic |
+| "عندي مشكلة في الكود" | 🌐 **Bilingual Mode** | Full diagnosis — responds in the user's language |
 
 ---
 
@@ -124,7 +123,7 @@ max-super-prompt/
 
 **100% Text-Only Core** — SKILL.md has no dependencies. The JS scripts under `scripts/` are optional enhancements for platforms that support `run_js` (Edge Gallery).
 
-**100% Text-Only** — No JavaScript, no HTML, no build steps. Just pure prompt engineering.
+> **100% Text-Only** — No JavaScript, no HTML, no build steps. Just pure prompt engineering.
 
 ### 🛠️ JS Tools (Edge Gallery)
 
@@ -132,9 +131,9 @@ When running inside Edge Gallery, Max can use the `run_js` tool to execute these
 
 | Script | Function | `run_js` payload |
 |---|---|---|
-| `memory.html` | Persistent key-value memory (on-device localStorage) | `{"script name":"memory.html","data":"{\\"action\\":\\"save\\",\\"key\\":\\"...\\",\\"value\\":\\"...\\"}"}` |
-| `search.html` | Live web search via CORS proxy | `{"script name":"search.html","data":"{\\"query\\":\\"your search\\"}"}` |
-| `dashboard.html` | Interactive stats & memory tree viewer | `{"script name":"dashboard.html","data":"{\\"mode\\":\\"overview\\"}"}` |
+| `memory.html` | Persistent key-value memory (on-device localStorage) | `{"script name":"memory.html","data":"{\"action\":\"save\",\"key\":\"...\",\"value\":\"...\"}"}` |
+| `search.html` | Live web search via CORS proxy | `{"script name":"search.html","data":"{\"query\":\"your search\"}"}` |
+| `dashboard.html` | Interactive stats & memory tree viewer | `{"script name":"dashboard.html","data":"{\"mode\":\"overview\"}"}` |
 
 > **Note:** These are optional. The core persona works on ANY platform without them.
 
@@ -165,10 +164,10 @@ This is an **open source persona skill**! Contributions welcome:
 3. Submit a PR
 
 **Ideas for improvement:**
-- Add more Arabic slang patterns
-- Create JS skill variant for web execution
 - Add memory/state management hooks
-- Translate to other Arabic dialects
+- Create new mode variants (e.g. DevOps, UI Designer)
+- Add multi-dialect Arabic support
+- Integrate with more agent tool ecosystems
 
 ---
 
@@ -182,7 +181,7 @@ This is an **open source persona skill**! Contributions welcome:
 
 Built with ❤️ by [**Jenzo Sky**](https://github.com/Jenzo0) for the AI community.
 
-Inspired by the Google AI Edge Gallery Agent Skills framework, but designed to work with **any** agent, model, or platform.
+Designed to work with **any** agent, model, or platform on the market.
 
 ---
 
@@ -190,10 +189,10 @@ Inspired by the Google AI Edge Gallery Agent Skills framework, but designed to w
   <strong>⭐ Star this repo if you find it useful! ⭐</strong>
   <br>
   <br>
-  <em>"J.A.R.V.I.S. ده كان زمان، Max ده دلوقتي!"</em>
+  <em>"Max — Senior Engineer, not just AI."</em>
   <br>
   <br>
-  <strong>💪 If Max can't solve your problem — he'll tell you why instead of wasting your time.</strong>
+  <strong>💪 It doesn't waste your time — it either solves it or tells you why.</strong>
   <br>
-  <strong>✨ يلا بينا بس حاجات نتكلم عنها! ✨</strong>
+  <strong>✨ Ready when you are! ✨</strong>
 </p>
