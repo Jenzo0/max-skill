@@ -1,95 +1,180 @@
 <p align="center">
-  <img src="https://img.shields.io/badge/Agent%20Skill-v3.0-8A2BE2" alt="Version">
+  <img src="https://img.shields.io/badge/Max%20Super%20Prompt-v3.0-8A2BE2" alt="Version">
   <img src="https://img.shields.io/badge/Google%20AI%20Edge%20Gallery-Compatible-success" alt="Edge Gallery">
-  <img src="https://img.shields.io/badge/Model-Gemma--4--E4B--IT-blue" alt="Model">
-  <img src="https://img.shields.io/badge/Language-Arabic%20%7C%20English-orange" alt="Language">
-  <img src="https://img.shields.io/badge/Type-Text--Only-777777" alt="Type">
+  <img src="https://img.shields.io/badge/Any%20Agent-Universal-blue" alt="Universal">
+  <img src="https://img.shields.io/badge/Model-Agnostic-FF6B6B" alt="Model Agnostic">
+  <img src="https://img.shields.io/badge/License-MIT-green" alt="License">
+  <img src="https://img.shields.io/badge/Language-Egyptian%20Arabic%20%7C%20English-orange" alt="Language">
 </p>
 
 <h1 align="center">🧠 Max Super Prompt — The Jarvis Killer v3.0</h1>
-<h3 align="center">Egyptian Arabic Senior Engineer · CTO · Architect · Full-Stack Company in One Body</h3>
+<h3 align="center">A Universal Agent Persona Skill for Any LLM, Any Platform</h3>
 
 <p align="center">
-  <em>"مش بس كلام — تنفيذ فعلي، شركة كاملة في جسم واحد"</em>
+  <em>"Egyptian Arabic Senior Engineer · CTO · Architect · Teacher · Full-Stack Company in One Body"</em>
+</p>
+
+<p align="center">
+  <strong>Open Source</strong> · <strong>Model Agnostic</strong> · <strong>Platform Agnostic</strong> · <strong>100% Prompt-Only</strong>
 </p>
 
 ---
 
-## 📦 Overview
+## 📦 What Is Max Super Prompt?
 
-**Max Super Prompt** is a **Text-Only Agent Skill** for [Google AI Edge Gallery](https://github.com/google-ai-edge/gallery) that transforms your **Gemma-4-E4B-IT** local model into a **Senior Egyptian Arabic Engineer** persona.
+**Max Super Prompt** is a **universal persona skill** that transforms any LLM into a **Senior Egyptian Arabic Engineer** — with a complete personality system, reasoning protocol, mode switching, and production-quality output standards.
 
-> **J.A.R.V.I.S. ده كان زمان، Max ده دلوقتي!**
+> **Zero dependencies. One SKILL.md file. Works everywhere.**
 
-### 🌟 Features
+### ✨ Key Features
 
-- 🧠 **Deep Context Protocol** — 3-stage reasoning before any answer
-- 🔄 **Auto Mode Switch** — 5 modes (Architect, Code, Teacher, Fast Solve, Absolute)
-- 📝 **Structured Response Template** — Consistent, professional outputs
-- 📜 **10 Golden Rules** — Simplicity, Verification, Security, and more
-- 🏢 **Full-Stack Capabilities** — FastAPI, React, Docker, DevOps patterns
-- 🇪🇬 **Egyptian Arabic** — Native dialect support with professional tone
+| Feature | Description |
+|---|---|
+| 🧠 **Deep Context Protocol** | 3-stage mandatory reasoning (Understand → Synthesize → Output) |
+| 🔄 **Auto Mode Switch** | 5 modes: Architect, Code, Teacher, Fast Solve, Absolute |
+| 📝 **Structured Output** | Consistent response template for every answer |
+| 📜 **10 Golden Rules** | Simplicity, Verification, Security, Elegance & more |
+| 🏢 **Full-Stack Knowledge** | FastAPI, React, Docker, DevOps, Auth patterns |
+| 🇪🇬 **Egyptian Arabic** | Native professional tone with Arabic slang where appropriate |
+| 🔌 **Universal** | Works with any LLM, any agent framework, any platform |
+
+---
 
 ## 🔧 Installation
 
-### Option 1: From URL (Recommended)
+### 📱 Google AI Edge Gallery
 
-1. Open **Google AI Edge Gallery** app
-2. Select **Gemma-4-E4B-IT** model
-3. Go to **Agent Skills** → **Skill Manager**
-4. Tap **(+)** → **Load skill from URL**
-5. Paste:
+> **Recommended model**: Gemma-4-E4B-IT
 
-```
-https://jenzo0.github.io/max-skill/max-super-prompt/
-```
+1. Open **Edge Gallery** → Select your model → **Agent Skills**
+2. Tap **(+)** → **Load skill from URL**
+3. Paste:
+   ```
+   https://jenzo0.github.io/max-skill/max-super-prompt/
+   ```
+4. Tap **Add**
 
-6. Tap **Add**
-
-### Option 2: Local Import
-
-1. Download the `max-super-prompt/` folder
-2. Open **Edge Gallery** → **Agent Skills** → **(+)** → **Import local skill**
+**Alternative — Local Import:**
+1. Download the `max-super-prompt/` folder to your phone
+2. Open **Edge Gallery** → **(+)** → **Import local skill**
 3. Select the folder
+
+---
+
+### 🤖 Any Agent Framework (Claude Code, Codex, Cursor, Copilot, etc.)
+
+**Option A: System Prompt Injection**
+```bash
+# Claude Code
+claude --prompt "$(curl -s https://jenzo0.github.io/max-skill/max-super-prompt/SKILL.md)"
+
+# OpenCode / Codex
+cat << 'EOF' >> .opencode_prompt
+$(curl -s https://jenzo0.github.io/max-skill/max-super-prompt/SKILL.md)
+EOF
+```
+
+**Option B: Agent Instructions File**
+Copy the SKILL.md content into your agent's instructions/system prompt file (`.claude.md`, `AGENTS.md`, `.cursorrules`, etc.)
+
+**Option C: Direct Prompt Injection**
+```bash
+SKILL=$(curl -s https://jenzo0.github.io/max-skill/max-super-prompt/SKILL.md)
+echo "System: $SKILL" | your-agent --prompt-file -
+```
+
+---
+
+### 💻 Any API / Chat UI (ChatGPT, OpenRouter, Custom)
+
+| Platform | How To Use |
+|---|---|
+| **ChatGPT / Claude.ai** | Paste SKILL.md content into "Custom Instructions" or system prompt field |
+| **OpenRouter** | Add as system prompt in API call: `system: <SKILL.md content>` |
+| **OpenAI API** | `messages=[{"role": "system", "content": "<SKILL.md>"}]` |
+| **Local (Ollama/llama.cpp)** | Include in modelfile: `SYSTEM """<SKILL.md>"""` |
+| **Any Chat UI** | Paste at start of conversation or set as preset persona |
+
+---
 
 ## 🚀 Usage Examples
 
-| Command | Mode | What happens |
+| You Say | Mode | Max Does |
 |---|---|---|
-| "عاوز ابني API ب FastAPI" | 💻 **Code Mode** | Full API with auth, error handling, docs |
-| "علمني OOP بالعامية" | 🎓 **Teacher Mode** | Simple explanation with real examples |
-| "عندي error في الكود" | ⚡ **Fast Solve Mode** | Quick diagnosis and fix |
-| "عاوز تصميم معماري لـ E-commerce" | 📐 **Architect Mode** | Complete architecture plan |
-| "ابعتلي الكود من غير كلام" | 🤫 **Absolute Mode** | Direct code output |
+| "Build me a FastAPI auth API" | 💻 **Code Mode** | Full API with JWT, error handling, Swagger docs |
+| "Explain OOP like I'm 5" | 🎓 **Teacher Mode** | Simple breakdown with real-world analogies |
+| "Fix this error: \<paste\>" | ⚡ **Fast Solve** | Quick root-cause + immediate fix |
+| "Design an e-commerce system" | 📐 **Architect Mode** | Complete architecture with diagrams and trade-offs |
+| "Just give me the code" | 🤫 **Absolute Mode** | Direct output, no pleasantries |
+| عندي مشكلة في الكود | 🔥 **Arabic Mode** | Full diagnosis in Egyptian Arabic |
+
+---
 
 ## ⚙️ Skill Structure
 
 ```
 max-super-prompt/
-└── SKILL.md
+└── SKILL.md          # The entire persona — self-contained, no dependencies
 ```
 
-## 🛠️ Development Notes
+**100% Text-Only** — No JavaScript, no HTML, no build steps. Just pure prompt engineering.
 
-- **Type**: Text-Only Skill (no JS scripts needed)
-- **Model Target**: Gemma-4-E4B-IT (optimized for local on-device inference)
-- **Language**: Egyptian Arabic (مصري) + English for code
-- **Token Efficiency**: Designed for ~8K context window
+### 🧠 Deep Context Protocol Flow
 
-## 📜 License
+```
+1. Understand & Question  →  2. Synthesize & Optimize  →  3. Final Output
+```
 
-MIT — Feel free to fork, modify, and share!
+### 🔄 Auto Mode Switch
+
+| Mode | Trigger | Behavior |
+|---|---|---|
+| **Architect 📐** | Architecture/planning requests | Design for scale, document trade-offs |
+| **Code 💻** | Coding requests | Clean, production-ready, no over-engineering |
+| **Teacher 🎓** | "Explain", "Teach", "What is" | Simplify, compare, teach the "why" |
+| **Fast Solve ⚡** | "Fix", "Error", "Bug" | Immediate diagnosis, minimal conversation |
+| **Absolute 🤫** | "Just code", "No talk" | Direct answer, zero pleasantries |
+
+---
+
+## 🤝 Contributing
+
+This is an **open source persona skill**! Contributions welcome:
+
+1. Fork the repo
+2. Improve the SKILL.md
+3. Submit a PR
+
+**Ideas for improvement:**
+- Add more Arabic slang patterns
+- Create JS skill variant for web execution
+- Add memory/state management hooks
+- Translate to other Arabic dialects
+
+---
+
+## 📄 License
+
+**MIT** — Free to use, modify, share, and redistribute. No attribution required (but appreciated!).
+
+---
 
 ## 🙌 Credits
 
-Built with ❤️ by [Jenzo Sky](https://github.com/Jenzo0) for the Google AI Edge Gallery community.
+Built with ❤️ by [**Jenzo Sky**](https://github.com/Jenzo0) for the AI community.
+
+Inspired by the Google AI Edge Gallery Agent Skills framework, but designed to work with **any** agent, model, or platform.
 
 ---
 
 <p align="center">
-  <strong>⭐ If you find this useful, star the repo! ⭐</strong>
+  <strong>⭐ Star this repo if you find it useful! ⭐</strong>
   <br>
-  <em>💪 لو Max مش قادر يحل مشكلتك — هيقولك ليه بدل ما يضيع وقتك!</em>
+  <br>
+  <em>"J.A.R.V.I.S. ده كان زمان، Max ده دلوقتي!"</em>
+  <br>
+  <br>
+  <strong>💪 If Max can't solve your problem — he'll tell you why instead of wasting your time.</strong>
   <br>
   <strong>✨ يلا بينا بس حاجات نتكلم عنها! ✨</strong>
 </p>
