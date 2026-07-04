@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Max Vision</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, system-ui, sans-serif; background: #1a1a2e; color: #eee; padding: 16px; }
+  .container { max-width: 500px; margin: 0 auto; }
+  h1 { font-size: 1.5em; margin-bottom: 4px; color: #4ecca3; }
+  .subtitle { color: #888; font-size: 0.85em; margin-bottom: 16px; }
+  textarea { width: 100%; background: #16213e; color: #eee; border: 1px solid #0f3460; border-radius: 10px; padding: 12px; font-size: 14px; margin-bottom: 10px; resize: vertical; min-height: 50px; }
+  textarea:focus { outline: 2px solid #4ecca3; }
+  .btn { background: #4ecca3; color: #1a1a2e; border: none; border-radius: 10px; padding: 12px 18px; font-size: 14px; font-weight: 600; cursor: pointer; transition: 0.2s; }
+  .btn-outline { background: transparent; border: 1px solid #4ecca3; color: #4ecca3; }
+  .btn:hover { transform: scale(1.03); opacity: 0.9; }
+  .btn-sm { padding: 8px 14px; font-size: 12px; }
+  .actions { display: flex; flex-wrap: wrap; gap: 6px; margin: 10px 0; }
+  #status { font-size: 12px; color: #4ecca3; margin-top: 6px; }
+  .results { background: #16213e; border-radius: 10px; padding: 12px; margin-top: 12px; min-height: 40px; white-space: pre-wrap; font-size: 13px; line-height: 1.5; max-height: 400px; overflow-y: auto; }
+  canvas { display: none; }
+  .analytics-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; margin: 10px 0; }
+  .stat-card { background: #0f3460; border-radius: 8px; padding: 10px; text-align: center; }
+  .stat-card .num { font-size: 1.5em; font-weight: 700; color: #4ecca3; }
+  .stat-card .label { font-size: 11px; color: #888; }
+  .pill { display: inline-block; background: #0f3460; color: #eee; padding: 2px 10px; border-radius: 12px; font-size: 11px; margin: 2px; }
+  .pill.blue { border: 1px solid #4ecca3; }
+</style>
+</head>
+<body>
+<div class="container">
+  <h1>👁️ Max <span style="color:#0f3460">Vision</span></h1>
+  <div class="subtitle">On-device image analysis & OCR using Web APIs</div>
+
+  <div class="actions">
+    <button class="btn btn-sm" onclick="document.getElementById('imgUpload').click()">📤 Upload Image</button>
+    <input type="file" id="imgUpload" accept="image/*" style="display:none" onchange="analyzeUpload(event)">
+    <button class="btn btn-sm btn-outline" onclick="analyzeURL()">🔗 Analyze URL</button>
+    <button class="btn btn-sm btn-outline" onclick="runOCR()">📝 OCR (Text Extract)</button>
+    <button class="btn btn-sm btn-outline" onclick="analyzeColors()">🎨 Color Analysis</button>
+  </div>
+
+  <textarea id="urlInput" placeholder="Or paste image URL here... (e.g. https://example.com/photo.jpg)"></textarea>
+
+  <div id="previewArea"></div>
+
+  <div class="analytics-grid" id="statsGrid" style="display:none">
+    <div class="stat-card"><div class="num" id="statW">0</div><div class="label">Width</div></div>
+    <div class="stat-card"><div class="num" id="statH">0</div><div class="label">Height</div></div>
+    <div class="stat-card"><div class="num" id="statSize">0</div><div class="label">Ratio</div></div>
+    <div class="stat-card"><div class="num" id="statColors">0</div><div class="label">Dominant Colors</div></div>
+  </div>
+
+  <div id="status">Upload an image or enter a URL</div>
+  <div id="results" class="results">Image analysis results will appear here...</div>
+</div>
+
+<canvas id="analysisCanvas"></canvas>
+
+<script>
+let currentImage = null;
+let currentDataURL = null;
+
+// ─── IMAGE LOADING ───
+function analyzeUpload(event) {
+  const file = event.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = function(e) {
+    currentDataURL = e.target.result;
+    loadAndShowImage(currentDataURL);
+  };
+  reader.readAsDataURL(file);
+  event.target.value = '';
+}
+
+function analyzeURL() {
+  const url = document.getElementById('urlInput').value.trim();
+  if (!url) { setStatus('⚠️ Paste an image URL first', true); return; }
+  currentDataURL = url;
+  loadAndShowImage(url);
+}
+
+function loadAndShowImage(src) {
+  const img = new Image();
+  img.crossOrigin = 'anonymous';
+  img.onload = function() {
+    currentImage = img;
+    document.getElementById('previewArea').innerHTML = `<img src="${src}" style="max-width:100%;max-height:200px;border-radius:10px;margin:8px 0" crossorigin="anonymous">`;
+    document.getElementById('statsGrid').style.display = 'grid';
+    document.getElementById('statW').textContent = img.width;
+    document.getElementById('statH').textContent = img.height;
+    document.getElementById('statSize').textContent = (img.width / img.height).toFixed(2);
+    setStatus(`✅ Loaded: ${img.width}×${img.height}`);
+    document.getElementById('results').textContent = 'Image loaded. Try OCR or Color Analysis.';
+    analyzeColors();
+  };
+  img.onerror = function() { setStatus('❌ Failed to load image. Try another URL.', true); };
+  img.src = src;
+}
+
+// ─── COLOR ANALYSIS ───
+function analyzeColors() {
+  if (!currentImage) { setStatus('⚠️ Load an image first', true); return; }
+  const canvas = document.getElementById('analysisCanvas');
+  canvas.width = currentImage.width;
+  canvas.height = currentImage.height;
+  const ctx = canvas.getContext('2d');
+  ctx.drawImage(currentImage, 0, 0);
+
+  const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+  const data = imageData.data;
+  const colorMap = {};
+
+  // Sample every 10th pixel for performance
+  for (let i = 0; i < data.length; i += 40) {
+    const r = Math.round(data[i] / 32) * 32;
+    const g = Math.round(data[i+1] / 32) * 32;
+    const b = Math.round(data[i+2] / 32) * 32;
+    const hex = `#${r.toString(16).padStart(2,'0')}${g.toString(16).padStart(2,'0')}${b.toString(16).padStart(2,'0')}`;
+    colorMap[hex] = (colorMap[hex] || 0) + 1;
+  }
+
+  const sorted = Object.entries(colorMap).sort((a,b) => b[1] - a[1]).slice(0, 8);
+  document.getElementById('statColors').textContent = sorted.length;
+
+  let html = '<div style="margin:8px 0"><strong>🎨 Dominant Colors:</strong></div><div>';
+  sorted.forEach(([hex, count]) => {
+    html += `<span class="pill blue" style="background:${hex};color:${isLight(hex)?'#000':'#fff'}">${hex} (${count})</span> `;
+  });
+  html += '</div>';
+
+  // Brightness & mood
+  const avgBrightness = sorted.reduce((sum, [hex]) => sum + getBrightness(hex), 0) / sorted.length;
+  let mood = avgBrightness > 180 ? '☀️ Bright / Daylight' : avgBrightness > 100 ? '🌤️ Balanced' : '🌙 Dark / Mood';
+  html += `<div style="margin-top:8px"><strong>📊 Mood:</strong> ${mood} (avg brightness: ${Math.round(avgBrightness)}/255)</div>`;
+
+  const results = document.getElementById('results');
+  results.innerHTML = html;
+  setStatus('🎨 Color analysis complete');
+}
+
+function getBrightness(hex) {
+  const r = parseInt(hex.slice(1,3), 16);
+  const g = parseInt(hex.slice(3,5), 16);
+  const b = parseInt(hex.slice(5,7), 16);
+  return (r * 0.299 + g * 0.587 + b * 0.114);
+}
+
+function isLight(hex) {
+  return getBrightness(hex) > 160;
+}
+
+// ─── OCR (Basic Text Detection) ───
+function runOCR() {
+  if (!currentImage) { setStatus('⚠️ Load an image first', true); return; }
+  setStatus('📝 Running OCR analysis...');
+
+  const canvas = document.getElementById('analysisCanvas');
+  canvas.width = currentImage.width;
+  canvas.height = currentImage.height;
+  const ctx = canvas.getContext('2d');
+  ctx.drawImage(currentImage, 0, 0);
+
+  // Sharpness detection (proxy for text presence)
+  const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+  const data = imageData.data;
+  let edgeCount = 0;
+  const totalPixels = (canvas.width * canvas.height);
+
+  // Simple edge detection via horizontal contrast
+  for (let y = 0; y < canvas.height; y++) {
+    for (let x = 1; x < canvas.width - 1; x++) {
+      const idx = (y * canvas.width + x) * 4;
+      const prevIdx = (y * canvas.width + (x - 1)) * 4;
+      const diff = Math.abs(data[idx] - data[prevIdx]) +
+                   Math.abs(data[idx+1] - data[prevIdx+1]) +
+                   Math.abs(data[idx+2] - data[prevIdx+2]);
+      if (diff > 60) edgeCount++;
+    }
+  }
+
+  const edgeRatio = (edgeCount / totalPixels * 100).toFixed(1);
+  const hasText = edgeRatio > 5;
+
+  const results = document.getElementById('results');
+  results.innerHTML = `
+    <div><strong>📝 OCR Report</strong></div>
+    <div class="stat-card" style="margin:8px 0">
+      <div class="num">${edgeRatio}%</div>
+      <div class="label">Edge / Contrast Ratio</div>
+    </div>
+    <div><strong>🔍 Text Detection:</strong> ${hasText ? '✅ Likely contains text' : '❌ Likely no text'}</div>
+    <div style="margin-top:8px;color:#888;font-size:12px">
+      Note: For full OCR (text extraction), use the <strong>Vision OCR script</strong> in Agent mode.
+      This on-device analyzer detects edges and contrast as a proxy for text presence.
+    </div>
+  `;
+  setStatus(`📝 Edge analysis: ${edgeRatio}% contrast`);
+}
+
+// ─── UTILITY ───
+function setStatus(msg, isError) {
+  document.getElementById('status').textContent = msg;
+  document.getElementById('status').style.color = isError ? '#e94560' : '#4ecca3';
+}
+</script>
+</body>
+</html>

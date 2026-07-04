@@ -10,6 +10,7 @@
   .container { max-width: 500px; margin: 0 auto; }
   h1 { font-size: 1.5em; margin-bottom: 8px; color: #e94560; }
   h1 span { color: #0f3460; }
+  h2 { font-size: 1.1em; margin: 20px 0 8px; color: #e9a845; border-bottom: 1px solid #0f3460; padding-bottom: 6px; }
   .subtitle { color: #888; font-size: 0.85em; margin-bottom: 20px; }
   textarea { width: 100%; background: #16213e; color: #eee; border: 1px solid #0f3460; border-radius: 10px; padding: 12px; font-size: 14px; margin-bottom: 12px; resize: vertical; min-height: 60px; }
   textarea:focus { outline: 2px solid #e94560; }
@@ -18,8 +19,10 @@
   input:focus { outline: 2px solid #e94560; }
   .btn { background: #e94560; color: #fff; border: none; border-radius: 10px; padding: 12px 18px; font-size: 14px; font-weight: 600; cursor: pointer; transition: 0.2s; }
   .btn-outline { background: transparent; border: 1px solid #e94560; color: #e94560; }
+  .btn-gold { background: #e9a845; color: #1a1a2e; }
   .btn:hover { transform: scale(1.03); opacity: 0.9; }
   .btn-sm { padding: 6px 12px; font-size: 12px; }
+  .btn-danger { background: #e94560; color: #fff; }
   .results { background: #16213e; border-radius: 10px; padding: 12px; margin-top: 12px; min-height: 40px; white-space: pre-wrap; font-size: 13px; line-height: 1.5; }
   .tag { display: inline-block; background: #0f3460; color: #e94560; padding: 2px 8px; border-radius: 12px; font-size: 11px; margin: 2px; }
   .actions { display: flex; flex-wrap: wrap; gap: 6px; margin: 10px 0; }
@@ -28,6 +31,15 @@
   .memory-item .key { color: #e94560; font-weight: 600; }
   .memory-item .val { color: #4ecca3; }
   .memory-item .time { color: #888; font-size: 11px; float: right; }
+  .vault { background: #1a1a2e; border: 2px solid #e9a845; border-radius: 12px; padding: 14px; margin: 16px 0; }
+  .vault-locked { background: #16213e; }
+  .vault-title { color: #e9a845; font-weight: 700; font-size: 14px; margin-bottom: 10px; }
+  .tabs { display: flex; gap: 2px; margin-bottom: 14px; }
+  .tab-btn { flex: 1; padding: 8px; text-align: center; border: none; background: #16213e; color: #888; border-radius: 8px 8px 0 0; cursor: pointer; font-size: 12px; }
+  .tab-btn.active { background: #0f3460; color: #e94560; font-weight: 600; }
+  .tab-content { display: none; }
+  .tab-content.active { display: block; }
+  .badge-secret { display: inline-block; background: #e9a84533; color: #e9a845; font-size: 10px; padding: 1px 6px; border-radius: 8px; margin-left: 4px; border: 1px solid #e9a84555; }
 </style>
 </head>
 <body>
@@ -35,37 +47,109 @@
   <h1>🧠 Max <span>Memory</span></h1>
   <div class="subtitle">Persistent memory across sessions · Data stays on-device</div>
 
-  <div class="row">
-    <input id="keyInput" placeholder="Key (e.g. user_name)" />
-    <textarea id="valInput" placeholder='Value (e.g. {"name":"Alex"})' rows="1" style="min-height:40px;flex:1.5"></textarea>
+  <div class="tabs">
+    <div class="tab-btn active" onclick="switchTab('general')">📝 General</div>
+    <div class="tab-btn" onclick="switchTab('vault')">🔒 Vault</div>
   </div>
 
-  <div class="actions">
-    <button class="btn btn-sm" onclick="saveMemory()">💾 Save</button>
-    <button class="btn btn-sm btn-outline" onclick="loadMemory()">📂 Load</button>
-    <button class="btn btn-sm btn-outline" onclick="searchMemory()">🔍 Search</button>
-    <button class="btn btn-sm btn-outline" onclick="deleteMemory()">🗑️ Delete</button>
-    <button class="btn btn-sm btn-outline" onclick="clearMemory()">🧹 Clear All</button>
-    <button class="btn btn-sm btn-outline" onclick="listMemory()">📋 List All</button>
+  <!-- General Memory Tab -->
+  <div id="tab-general" class="tab-content active">
+    <div class="row">
+      <input id="keyInput" placeholder="Key (e.g. user_name)" />
+      <textarea id="valInput" placeholder='Value (e.g. {"name":"Alex"})' rows="1" style="min-height:40px;flex:1.5"></textarea>
+    </div>
+    <div class="actions">
+      <button class="btn btn-sm" onclick="saveMemory()">💾 Save</button>
+      <button class="btn btn-sm btn-outline" onclick="loadMemory()">📂 Load</button>
+      <button class="btn btn-sm btn-outline" onclick="searchMemory()">🔍 Search</button>
+      <button class="btn btn-sm btn-outline" onclick="deleteMemory()">🗑️ Delete</button>
+      <button class="btn btn-sm btn-outline" onclick="clearMemory()">🧹 Clear All</button>
+      <button class="btn btn-sm btn-outline" onclick="listMemory()">📋 List All</button>
+      <button class="btn btn-sm btn-outline" onclick="exportMemory()">📤 Export JSON</button>
+      <button class="btn btn-sm btn-outline" onclick="document.getElementById('importFile').click()">📥 Import JSON</button>
+      <input type="file" id="importFile" accept=".json" style="display:none" onchange="importMemory(event)">
+    </div>
+    <div id="status">Ready</div>
+    <div id="results" class="results">Memory store is empty. Save something to get started!</div>
   </div>
 
-  <div id="status">Ready</div>
-  <div id="results" class="results">Memory store is empty. Save something to get started!</div>
+  <!-- Secrets Vault Tab -->
+  <div id="tab-vault" class="tab-content">
+    <div class="vault" id="vaultBox">
+      <div class="vault-title">🔒 Secrets Vault</div>
+      <div id="vaultStatus" class="subtitle" style="margin-bottom:10px">🔐 Locked — enter master password to unlock</div>
+      <div class="row">
+        <input id="vaultPwd" type="password" placeholder="🔑 Master password" />
+        <button class="btn btn-sm btn-gold" id="vaultUnlockBtn" onclick="toggleVault()">🔓 Unlock</button>
+      </div>
+      <div id="vaultContent" style="display:none">
+        <div class="row">
+          <input id="vaultKeyInput" placeholder="Secret key (e.g. api_key_openai)" />
+          <textarea id="vaultValInput" placeholder="🔒 Secret value" rows="1" style="min-height:40px;flex:1.5"></textarea>
+        </div>
+        <div class="actions">
+          <button class="btn btn-sm btn-gold" onclick="saveSecret()">💾 Save Secret</button>
+          <button class="btn btn-sm btn-outline" onclick="loadSecret()">📂 Load Secret</button>
+          <button class="btn btn-sm btn-outline" onclick="listSecrets()">📋 List Keys</button>
+          <button class="btn btn-sm btn-outline" onclick="deleteSecret()">🗑️ Delete</button>
+        </div>
+        <div id="vaultResults" class="results">Vault unlocked. Secrets are encrypted with AES-GCM.</div>
+      </div>
+    </div>
+  </div>
 </div>
 
 <script>
 const STORAGE_KEY = 'max_memory_store';
+const VAULT_KEY = 'max_vault_store';
+const BACKUP_KEY = 'max_memory_autobackup';
+let vaultKey = null;
 
-function getStore() {
-  try {
-    const raw = localStorage.getItem(STORAGE_KEY);
-    return raw ? JSON.parse(raw) : {};
-  } catch { return {}; }
+// ─── TAB SWITCHING ───
+function switchTab(tab) {
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+  document.querySelector(`.tab-btn[onclick*='${tab}']`).classList.add('active');
+  document.getElementById(`tab-${tab}`).classList.add('active');
 }
 
+// ─── GENERAL MEMORY ───
+function getStore() {
+  try { const raw = localStorage.getItem(STORAGE_KEY); return raw ? JSON.parse(raw) : {}; }
+  catch { return {}; }
+}
 function saveStore(store) {
   localStorage.setItem(STORAGE_KEY, JSON.stringify(store));
+  autoBackup(store);
 }
+
+// ─── AUTO BACKUP ───
+function autoBackup(store) {
+  try {
+    const entryCount = Object.keys(store).length;
+    if (entryCount === 0) return;
+    const backup = {
+      timestamp: Date.now(),
+      count: entryCount,
+      data: store
+    };
+    localStorage.setItem('max_memory_autobackup', JSON.stringify(backup));
+  } catch(e) { /* silent - backup is best-effort */ }
+}
+
+// Restore from auto-backup if main store is lost
+(function() {
+  const store = localStorage.getItem('max_memory_store');
+  const backup = localStorage.getItem('max_memory_autobackup');
+  if (!store && backup) {
+    try {
+      const parsed = JSON.parse(backup);
+      if (parsed.data && Object.keys(parsed.data).length > 0) {
+        localStorage.setItem('max_memory_store', JSON.stringify(parsed.data));
+      }
+    } catch(e) { /* silent */ }
+  }
+})();
 
 function setStatus(msg, isError) {
   document.getElementById('status').textContent = msg;
@@ -79,8 +163,9 @@ function displayData(data) {
     if (data.length === 0) { el.innerHTML = '📭 No entries found'; return; }
     el.innerHTML = data.map(item => {
       const time = item.t ? new Date(item.t).toLocaleString() : '';
+      const isSecret = item._secret ? '<span class="badge-secret">🔒</span>' : '';
       return `<div class="memory-item">
-        <span class="key">🔑 ${item.k}</span>
+        <span class="key">🔑 ${item.k} ${isSecret}</span>
         <span class="time">${time}</span><br>
         <span class="val">${typeof item.v === 'object' ? JSON.stringify(item.v, null, 1) : item.v}</span>
       </div>`;
@@ -112,10 +197,7 @@ function loadMemory() {
   if (store[key]) {
     setStatus(`📂 Loaded: "${key}"`);
     displayData([{ k: key, v: store[key].v, t: store[key].t }]);
-  } else {
-    setStatus(`❌ Key not found: "${key}"`, true);
-    document.getElementById('results').textContent = 'No value stored for this key.';
-  }
+  } else { setStatus(`❌ Key not found: "${key}"`, true); }
 }
 
 function searchMemory() {
@@ -125,27 +207,16 @@ function searchMemory() {
   const found = Object.entries(store)
     .filter(([k, v]) => k.toLowerCase().includes(q) || JSON.stringify(v.v).toLowerCase().includes(q))
     .map(([k, v]) => ({ k, ...v }));
-  if (found.length > 0) {
-    setStatus(`🔍 Found ${found.length} result(s) for "${q}"`);
-    displayData(found);
-  } else {
-    setStatus(`🔍 No results for "${q}"`, true);
-    document.getElementById('results').textContent = 'No matching entries found.';
-  }
+  if (found.length > 0) { setStatus(`🔍 Found ${found.length} result(s)`); displayData(found); }
+  else { setStatus(`🔍 No results`, true); document.getElementById('results').textContent = 'No matching entries.'; }
 }
 
 function deleteMemory() {
   const key = document.getElementById('keyInput').value.trim();
   if (!key) { setStatus('⚠️ Enter a key to delete', true); return; }
   const store = getStore();
-  if (store[key]) {
-    delete store[key];
-    saveStore(store);
-    setStatus(`🗑️ Deleted: "${key}"`);
-    document.getElementById('results').textContent = `Deleted key: "${key}"`;
-  } else {
-    setStatus(`❌ Key not found: "${key}"`, true);
-  }
+  if (store[key]) { delete store[key]; saveStore(store); setStatus(`🗑️ Deleted: "${key}"`); document.getElementById('results').textContent = `Deleted key: "${key}"`; }
+  else { setStatus(`❌ Key not found: "${key}"`, true); }
 }
 
 function clearMemory() {
@@ -159,13 +230,197 @@ function clearMemory() {
 function listMemory() {
   const store = getStore();
   const entries = Object.entries(store).map(([k, v]) => ({ k, ...v }));
-  if (entries.length === 0) {
-    setStatus('📭 No entries');
-    document.getElementById('results').textContent = 'Memory store is empty. Save something to get started!';
-  } else {
-    setStatus(`📋 Total: ${entries.length} entries`);
-    displayData(entries);
+  if (entries.length === 0) { setStatus('📭 No entries'); document.getElementById('results').textContent = 'Memory store is empty.'; }
+  else { setStatus(`📋 Total: ${entries.length} entries`); displayData(entries); }
+}
+
+// ─── IMPORT / EXPORT ───
+function exportMemory() {
+  const store = getStore();
+  const count = Object.keys(store).length;
+  if (count === 0) { setStatus('📭 Nothing to export'); return; }
+  const blob = new Blob([JSON.stringify(store, null, 2)], { type: 'application/json' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = `max_memory_backup_${new Date().toISOString().slice(0,10)}.json`;
+  a.click();
+  URL.revokeObjectURL(url);
+  setStatus(`📤 Exported ${count} entries`);
+}
+
+function importMemory(event) {
+  const file = event.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = function(e) {
+    try {
+      const imported = JSON.parse(e.target.result);
+      if (typeof imported !== 'object') throw new Error('Invalid format');
+      const existing = getStore();
+      const merged = { ...existing, ...imported };
+      const newCount = Object.keys(imported).length;
+      saveStore(merged);
+      setStatus(`📥 Imported ${newCount} entries (merged with existing)`);
+      listMemory();
+    } catch(err) { setStatus(`❌ Import failed: ${err.message}`, true); }
+  };
+  reader.readAsText(file);
+  event.target.value = '';
+}
+
+// ─── SECRETS VAULT (AES-GCM) ───
+async function deriveKey(password, salt) {
+  const enc = new TextEncoder();
+  const keyMaterial = await crypto.subtle.importKey('raw', enc.encode(password), 'PBKDF2', false, ['deriveKey']);
+  return crypto.subtle.deriveKey(
+    { name: 'PBKDF2', salt, iterations: 100000, hash: 'SHA-256' },
+    keyMaterial,
+    { name: 'AES-GCM', length: 256 },
+    false,
+    ['encrypt', 'decrypt']
+  );
+}
+
+async function encryptData(key, data) {
+  const enc = new TextEncoder();
+  const iv = crypto.getRandomValues(new Uint8Array(12));
+  const encrypted = await crypto.subtle.encrypt({ name: 'AES-GCM', iv }, key, enc.encode(JSON.stringify(data)));
+  return { iv: Array.from(iv), data: Array.from(new Uint8Array(encrypted)) };
+}
+
+async function decryptData(key, encData) {
+  const dec = new TextDecoder();
+  const decrypted = await crypto.subtle.decrypt(
+    { name: 'AES-GCM', iv: new Uint8Array(encData.iv) },
+    key,
+    new Uint8Array(encData.data)
+  );
+  return JSON.parse(dec.decode(decrypted));
+}
+
+function getVaultSalt() {
+  let salt = localStorage.getItem('max_vault_salt');
+  if (!salt) { salt = Array.from(crypto.getRandomValues(new Uint8Array(16))); localStorage.setItem('max_vault_salt', JSON.stringify(salt)); }
+  else { salt = JSON.parse(salt); }
+  return new Uint8Array(salt);
+}
+
+async function toggleVault() {
+  const pwd = document.getElementById('vaultPwd').value.trim();
+  const btn = document.getElementById('vaultUnlockBtn');
+  const status = document.getElementById('vaultStatus');
+
+  if (vaultKey) {
+    // Lock
+    vaultKey = null;
+    document.getElementById('vaultContent').style.display = 'none';
+    document.getElementById('vaultPwd').value = '';
+    btn.textContent = '🔓 Unlock';
+    status.innerHTML = '🔐 Locked — enter master password to unlock';
+    return;
   }
+
+  if (!pwd) { status.innerHTML = '⚠️ Enter a master password'; return; }
+
+  try {
+    const salt = getVaultSalt();
+    vaultKey = await deriveKey(pwd, salt);
+    // Verify by trying to decrypt or create empty store
+    let store = localStorage.getItem(VAULT_KEY);
+    if (store) {
+      try {
+        const parsed = JSON.parse(store);
+        await decryptData(vaultKey, parsed);
+      } catch {
+        vaultKey = null;
+        status.innerHTML = '❌ Wrong password!';
+        return;
+      }
+    }
+    document.getElementById('vaultContent').style.display = 'block';
+    btn.textContent = '🔒 Lock';
+    status.innerHTML = '🔓 Unlocked — secrets encrypted with AES-256-GCM';
+    listSecrets();
+  } catch(e) {
+    vaultKey = null;
+    status.innerHTML = `❌ Error: ${e.message}`;
+  }
+}
+
+async function saveSecret() {
+  if (!vaultKey) { setVaultStatus('⚠️ Unlock vault first'); return; }
+  const key = document.getElementById('vaultKeyInput').value.trim();
+  const val = document.getElementById('vaultValInput').value.trim();
+  if (!key) { setVaultStatus('⚠️ Key required'); return; }
+
+  try {
+    let store = {};
+    const raw = localStorage.getItem(VAULT_KEY);
+    if (raw) store = JSON.parse(raw);
+    store[key] = await encryptData(vaultKey, { v: val, t: Date.now() });
+    localStorage.setItem(VAULT_KEY, JSON.stringify(store));
+    document.getElementById('vaultKeyInput').value = '';
+    document.getElementById('vaultValInput').value = '';
+    setVaultStatus(`✅ Secret saved: "${key}" (AES-GCM encrypted)`);
+    listSecrets();
+  } catch(e) { setVaultStatus(`❌ ${e.message}`); }
+}
+
+async function loadSecret() {
+  if (!vaultKey) { setVaultStatus('⚠️ Unlock vault first'); return; }
+  const key = document.getElementById('vaultKeyInput').value.trim();
+  if (!key) { setVaultStatus('⚠️ Enter key to load'); return; }
+
+  try {
+    const raw = localStorage.getItem(VAULT_KEY);
+    const store = raw ? JSON.parse(raw) : {};
+    if (!store[key]) { setVaultStatus(`❌ Key not found: "${key}"`); return; }
+    const decrypted = await decryptData(vaultKey, store[key]);
+    setVaultStatus(`📂 Loaded: "${key}"`);
+    document.getElementById('vaultResults').innerHTML = `<div class="memory-item">
+      <span class="key">🔑 ${key}</span>
+      <span class="time">${new Date(decrypted.t).toLocaleString()}</span><br>
+      <span class="val">${decrypted.v}</span>
+    </div>`;
+  } catch(e) { setVaultStatus(`❌ ${e.message}`); }
+}
+
+async function listSecrets() {
+  if (!vaultKey) { setVaultStatus('⚠️ Unlock vault first'); return; }
+  try {
+    const raw = localStorage.getItem(VAULT_KEY);
+    const store = raw ? JSON.parse(raw) : {};
+    const keys = Object.keys(store);
+    if (keys.length === 0) {
+      document.getElementById('vaultResults').textContent = '🔒 No secrets stored yet. Save your first secret!';
+      return;
+    }
+    let html = `<div style="color:#e9a845;margin-bottom:8px">🔑 ${keys.length} stored secret(s):</div>`;
+    for (const k of keys) {
+      try {
+        const d = await decryptData(vaultKey, store[k]);
+        html += `<div class="memory-item"><span class="key">🔒 ${k}</span><span class="time">${new Date(d.t).toLocaleString()}</span></div>`;
+      } catch { html += `<div class="memory-item"><span class="key">⚠️ ${k}</span><span class="val">(decrypt failed)</span></div>`; }
+    }
+    document.getElementById('vaultResults').innerHTML = html;
+  } catch(e) { setVaultStatus(`❌ ${e.message}`); }
+}
+
+async function deleteSecret() {
+  if (!vaultKey) { setVaultStatus('⚠️ Unlock vault first'); return; }
+  const key = document.getElementById('vaultKeyInput').value.trim();
+  if (!key) { setVaultStatus('⚠️ Enter key to delete'); return; }
+  try {
+    const raw = localStorage.getItem(VAULT_KEY);
+    const store = raw ? JSON.parse(raw) : {};
+    if (store[key]) { delete store[key]; localStorage.setItem(VAULT_KEY, JSON.stringify(store)); setVaultStatus(`🗑️ Deleted secret: "${key}"`); listSecrets(); }
+    else { setVaultStatus(`❌ Key not found: "${key}"`); }
+  } catch(e) { setVaultStatus(`❌ ${e.message}`); }
+}
+
+function setVaultStatus(msg) {
+  document.getElementById('vaultResults').textContent = msg;
 }
 
 // Load on init

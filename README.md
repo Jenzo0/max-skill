@@ -171,6 +171,21 @@ This is an **open source persona skill**! Contributions welcome:
 
 ---
 
+## 📚 Wiki
+
+Complete documentation available in the [`wiki/`](wiki/) folder:
+
+| Page | Description |
+|---|---|
+| [🏠 Home](wiki/Home.md) | Overview & quick start |
+| [📦 Installation](wiki/Installation.md) | All platform guides |
+| [🔄 Modes Reference](wiki/Modes.md) | All 7 modes explained |
+| [🛠️ JS Tools](wiki/JS-Tools.md) | Memory, Vision, Voice, Dashboard |
+| [🌍 Arabic Dialects](wiki/Arabic-Dialects.md) | Dialect detection & examples |
+| [🔒 Security & Vault](wiki/Security.md) | AES-256-GCM encryption details |
+
+---
+
 ## 📄 License
 
 **MIT** — Free to use, modify, share, and redistribute. No attribution required (but appreciated!).
