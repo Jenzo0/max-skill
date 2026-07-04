@@ -1,8 +1,0 @@
-{
-  "tag_name": "v1.0.0",
-  "target_commitish": "main",
-  "name": "Max Super Prompt — The Jarvis Killer",
-  "body": "## Max Super Prompt — The Jarvis Killer\n\nA universal multi-mode Senior Engineer persona for any LLM or agent platform.\n\n### What's Inside\n- Deep Context Protocol: 3-stage mandatory reasoning before any answer\n- Auto Mode Switch: 5 modes (Architect, Code, Teacher, Fast Solve, Absolute)\n- 10 Golden Rules: Simplicity, Verification, Security, Elegance & more\n- Full-Stack Technical Capabilities\n- Optional JS scripts (memory, search, dashboard) for Edge Gallery\n\n### Works With\n- Google AI Edge Gallery\n- Claude Code / Claude.ai\n- ChatGPT / OpenAI API\n- Cursor / Copilot / Codex\n- Ollama / llama.cpp\n- Any API or Chat UI\n\nOpen Source — MIT License",
-  "draft": false,
-  "prerelease": false
-}
