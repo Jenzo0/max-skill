@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Max Memory System</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, system-ui, sans-serif; background: #1a1a2e; color: #eee; padding: 16px; }
+  .container { max-width: 500px; margin: 0 auto; }
+  h1 { font-size: 1.5em; margin-bottom: 8px; color: #e94560; }
+  h1 span { color: #0f3460; }
+  .subtitle { color: #888; font-size: 0.85em; margin-bottom: 20px; }
+  textarea { width: 100%; background: #16213e; color: #eee; border: 1px solid #0f3460; border-radius: 10px; padding: 12px; font-size: 14px; margin-bottom: 12px; resize: vertical; min-height: 60px; }
+  textarea:focus { outline: 2px solid #e94560; }
+  .row { display: flex; gap: 8px; margin-bottom: 12px; }
+  input { flex: 1; background: #16213e; color: #eee; border: 1px solid #0f3460; border-radius: 10px; padding: 12px; font-size: 14px; }
+  input:focus { outline: 2px solid #e94560; }
+  .btn { background: #e94560; color: #fff; border: none; border-radius: 10px; padding: 12px 18px; font-size: 14px; font-weight: 600; cursor: pointer; transition: 0.2s; }
+  .btn-outline { background: transparent; border: 1px solid #e94560; color: #e94560; }
+  .btn:hover { transform: scale(1.03); opacity: 0.9; }
+  .btn-sm { padding: 6px 12px; font-size: 12px; }
+  .results { background: #16213e; border-radius: 10px; padding: 12px; margin-top: 12px; min-height: 40px; white-space: pre-wrap; font-size: 13px; line-height: 1.5; }
+  .tag { display: inline-block; background: #0f3460; color: #e94560; padding: 2px 8px; border-radius: 12px; font-size: 11px; margin: 2px; }
+  .actions { display: flex; flex-wrap: wrap; gap: 6px; margin: 10px 0; }
+  #status { font-size: 12px; color: #4ecca3; margin-top: 6px; }
+  .memory-item { background: #0f3460; border-radius: 8px; padding: 10px; margin: 6px 0; font-size: 13px; }
+  .memory-item .key { color: #e94560; font-weight: 600; }
+  .memory-item .val { color: #4ecca3; }
+  .memory-item .time { color: #888; font-size: 11px; float: right; }
+</style>
+</head>
+<body>
+<div class="container">
+  <h1>🧠 Max <span>Memory</span></h1>
+  <div class="subtitle">Persistent memory across sessions · Data stays on-device</div>
+
+  <div class="row">
+    <input id="keyInput" placeholder="Key (e.g. user_name)" />
+    <textarea id="valInput" placeholder='Value (e.g. {"name":"Alex"})' rows="1" style="min-height:40px;flex:1.5"></textarea>
+  </div>
+
+  <div class="actions">
+    <button class="btn btn-sm" onclick="saveMemory()">💾 Save</button>
+    <button class="btn btn-sm btn-outline" onclick="loadMemory()">📂 Load</button>
+    <button class="btn btn-sm btn-outline" onclick="searchMemory()">🔍 Search</button>
+    <button class="btn btn-sm btn-outline" onclick="deleteMemory()">🗑️ Delete</button>
+    <button class="btn btn-sm btn-outline" onclick="clearMemory()">🧹 Clear All</button>
+    <button class="btn btn-sm btn-outline" onclick="listMemory()">📋 List All</button>
+  </div>
+
+  <div id="status">Ready</div>
+  <div id="results" class="results">Memory store is empty. Save something to get started!</div>
+</div>
+
+<script>
+const STORAGE_KEY = 'max_memory_store';
+
+function getStore() {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    return raw ? JSON.parse(raw) : {};
+  } catch { return {}; }
+}
+
+function saveStore(store) {
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(store));
+}
+
+function setStatus(msg, isError) {
+  document.getElementById('status').textContent = msg;
+  document.getElementById('status').style.color = isError ? '#e94560' : '#4ecca3';
+}
+
+function displayData(data) {
+  const el = document.getElementById('results');
+  if (typeof data === 'string') { el.textContent = data; return; }
+  if (Array.isArray(data)) {
+    if (data.length === 0) { el.innerHTML = '📭 No entries found'; return; }
+    el.innerHTML = data.map(item => {
+      const time = item.t ? new Date(item.t).toLocaleString() : '';
+      return `<div class="memory-item">
+        <span class="key">🔑 ${item.k}</span>
+        <span class="time">${time}</span><br>
+        <span class="val">${typeof item.v === 'object' ? JSON.stringify(item.v, null, 1) : item.v}</span>
+      </div>`;
+    }).join('');
+    return;
+  }
+  el.textContent = JSON.stringify(data, null, 2);
+}
+
+function saveMemory() {
+  const key = document.getElementById('keyInput').value.trim();
+  const val = document.getElementById('valInput').value.trim();
+  if (!key) { setStatus('⚠️ Key is required', true); return; }
+  const store = getStore();
+  let parsedVal;
+  try { parsedVal = JSON.parse(val); } catch { parsedVal = val; }
+  store[key] = { v: parsedVal, t: Date.now() };
+  saveStore(store);
+  document.getElementById('keyInput').value = '';
+  document.getElementById('valInput').value = '';
+  setStatus(`✅ Saved: "${key}"`);
+  displayData([{ k: key, v: parsedVal, t: store[key].t }]);
+}
+
+function loadMemory() {
+  const key = document.getElementById('keyInput').value.trim();
+  if (!key) { setStatus('⚠️ Enter a key to load', true); return; }
+  const store = getStore();
+  if (store[key]) {
+    setStatus(`📂 Loaded: "${key}"`);
+    displayData([{ k: key, v: store[key].v, t: store[key].t }]);
+  } else {
+    setStatus(`❌ Key not found: "${key}"`, true);
+    document.getElementById('results').textContent = 'No value stored for this key.';
+  }
+}
+
+function searchMemory() {
+  const q = document.getElementById('keyInput').value.trim().toLowerCase();
+  if (!q) { listMemory(); return; }
+  const store = getStore();
+  const found = Object.entries(store)
+    .filter(([k, v]) => k.toLowerCase().includes(q) || JSON.stringify(v.v).toLowerCase().includes(q))
+    .map(([k, v]) => ({ k, ...v }));
+  if (found.length > 0) {
+    setStatus(`🔍 Found ${found.length} result(s) for "${q}"`);
+    displayData(found);
+  } else {
+    setStatus(`🔍 No results for "${q}"`, true);
+    document.getElementById('results').textContent = 'No matching entries found.';
+  }
+}
+
+function deleteMemory() {
+  const key = document.getElementById('keyInput').value.trim();
+  if (!key) { setStatus('⚠️ Enter a key to delete', true); return; }
+  const store = getStore();
+  if (store[key]) {
+    delete store[key];
+    saveStore(store);
+    setStatus(`🗑️ Deleted: "${key}"`);
+    document.getElementById('results').textContent = `Deleted key: "${key}"`;
+  } else {
+    setStatus(`❌ Key not found: "${key}"`, true);
+  }
+}
+
+function clearMemory() {
+  if (confirm('Delete ALL memory entries?')) {
+    localStorage.removeItem(STORAGE_KEY);
+    setStatus('🧹 Memory cleared');
+    document.getElementById('results').textContent = 'All memory entries deleted.';
+  }
+}
+
+function listMemory() {
+  const store = getStore();
+  const entries = Object.entries(store).map(([k, v]) => ({ k, ...v }));
+  if (entries.length === 0) {
+    setStatus('📭 No entries');
+    document.getElementById('results').textContent = 'Memory store is empty. Save something to get started!';
+  } else {
+    setStatus(`📋 Total: ${entries.length} entries`);
+    displayData(entries);
+  }
+}
+
+// Load on init
+listMemory();
+</script>
+</body>
+</html>

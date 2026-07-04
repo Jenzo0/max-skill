@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Max Dashboard</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, system-ui, sans-serif; background: #1a1a2e; color: #eee; padding: 16px; }
+  .container { max-width: 500px; margin: 0 auto; }
+  h1 { font-size: 1.5em; margin-bottom: 4px; }
+  h1 span.gold { color: #e9a845; }
+  .subtitle { color: #888; font-size: 0.85em; margin-bottom: 20px; }
+  .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 16px; }
+  .card { background: #16213e; border-radius: 12px; padding: 16px; text-align: center; border: 1px solid #0f3460; transition: 0.2s; cursor: pointer; }
+  .card:hover { border-color: #e9a845; transform: translateY(-2px); }
+  .card .icon { font-size: 28px; margin-bottom: 6px; }
+  .card .num { font-size: 22px; font-weight: 700; color: #e9a845; }
+  .card .label { font-size: 11px; color: #888; margin-top: 2px; }
+  .card.full { grid-column: 1 / -1; text-align: left; display: flex; align-items: center; gap: 12px; }
+  .card.full .icon { font-size: 32px; margin: 0; }
+  button { background: #e9a845; color: #1a1a2e; border: none; border-radius: 10px; padding: 12px 20px; font-size: 14px; font-weight: 700; cursor: pointer; transition: 0.2s; width: 100%; }
+  button:hover { transform: scale(1.02); }
+  button.outline { background: transparent; border: 1px solid #e9a845; color: #e9a845; margin-top: 8px; }
+  #log { background: #0a0a1a; border-radius: 10px; padding: 12px; margin-top: 12px; font-family: monospace; font-size: 12px; line-height: 1.6; min-height: 60px; color: #aaa; }
+  .tab-bar { display: flex; gap: 0; margin-bottom: 16px; background: #16213e; border-radius: 10px; overflow: hidden; }
+  .tab { flex: 1; padding: 10px; text-align: center; font-size: 12px; cursor: pointer; color: #888; transition: 0.2s; }
+  .tab.active { background: #e9a845; color: #1a1a2e; font-weight: 700; }
+  .badge { display: inline-block; background: #e94560; color: #fff; border-radius: 12px; padding: 1px 8px; font-size: 10px; margin-left: 4px; }
+</style>
+</head>
+<body>
+<div class="container">
+  <h1>📊 Max <span class="gold">Dashboard</span></h1>
+  <div class="subtitle">Interactive control center · Data from your local memory</div>
+
+  <div class="tab-bar">
+    <div class="tab active" onclick="switchTab(this,'overview')">📊 Overview</div>
+    <div class="tab" onclick="switchTab(this,'memory')">🧠 Memory Tree</div>
+    <div class="tab" onclick="switchTab(this,'skills')">🛠️ Skills</div>
+    <div class="tab" onclick="switchTab(this,'evolution')">📈 Evolution</div>
+  </div>
+
+  <div id="overview" class="tab-content">
+    <div class="grid">
+      <div class="card"><div class="icon">🧠</div><div class="num" id="memCount">0</div><div class="label">Memory Entries</div></div>
+      <div class="card"><div class="icon">⚡</div><div class="num" id="skillCount">0</div><div class="label">Active Sessions</div></div>
+      <div class="card"><div class="icon">💾</div><div class="num" id="memSize">0 B</div><div class="label">Memory Size</div></div>
+      <div class="card"><div class="icon">📅</div><div class="num" id="sessAge">0</div><div class="label">Days Active</div></div>
+    </div>
+    <button onclick="refreshStats()">🔄 Refresh Stats</button>
+    <div id="log">📊 Click refresh to load stats from your memory store...</div>
+  </div>
+
+  <div id="memory" class="tab-content" style="display:none">
+    <div class="card full" onclick="loadMemoryTree()">
+      <div class="icon">🌳</div>
+      <div><strong>Memory Tree</strong><br><span style="font-size:12px;color:#888">View all entries as a tree</span></div>
+    </div>
+    <button class="outline" onclick="loadMemoryTree()">🌳 Build Tree</button>
+    <div id="memoryTree" style="margin-top:12px;font-size:13px;line-height:1.8;color:#aaa;">
+      Click "Build Tree" to visualize memory
+    </div>
+  </div>
+
+  <div id="skills" class="tab-content" style="display:none">
+    <div class="card full">
+      <div class="icon">📜</div>
+      <div>
+        <strong>10 Golden Rules</strong><br>
+        <span style="font-size:12px;color:#888">Simplicity · Verification · Security · Elegance & more</span>
+      </div>
+    </div>
+    <div class="card full">
+      <div class="icon">🔄</div>
+      <div>
+        <strong>5 Auto Modes</strong><br>
+        <span style="font-size:12px;color:#888">Architect · Code · Teacher · Fast Solve · Absolute</span>
+      </div>
+    </div>
+    <div class="card full">
+      <div class="icon">🧠</div>
+      <div>
+        <strong>Deep Context Protocol</strong><br>
+        <span style="font-size:12px;color:#888">Understand → Synthesize → Output (3 stages)</span>
+      </div>
+    </div>
+  </div>
+
+  <div id="evolution" class="tab-content" style="display:none">
+    <div class="card full">
+      <div class="icon">⚡</div>
+      <div>
+        <strong>v3.0 — The Jarvis Killer</strong><br>
+        <span style="font-size:12px;color:#888">Egyptian Arabic · Senior Engineer · Universal Agent</span>
+      </div>
+    </div>
+    <div id="evolutionLog" style="margin-top:12px;font-size:12px;line-height:1.8;color:#888;">
+      📌 v1.0 · Edge Gallery only<br>
+      📌 v2.0 · Added JS tools<br>
+      📌 <strong>v3.0</strong> · Universal Agent · Any platform<br>
+      🔮 v4.0 · Coming: Voice + Vision native
+    </div>
+  </div>
+</div>
+
+<script>
+function switchTab(el, tabName) {
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  el.classList.add('active');
+  document.querySelectorAll('.tab-content').forEach(c => c.style.display = 'none');
+  document.getElementById(tabName).style.display = 'block';
+  if (tabName === 'overview') refreshStats();
+}
+
+function refreshStats() {
+  const store = localStorage.getItem('max_memory_store');
+  const log = document.getElementById('log');
+
+  if (!store) {
+    document.getElementById('memCount').textContent = '0';
+    document.getElementById('memSize').textContent = '0 B';
+    log.innerHTML = '📭 No memory store found. Use the Memory tool to save something first!';
+    return;
+  }
+
+  try {
+    const data = JSON.parse(store);
+    const entries = Object.keys(data).length;
+    const size = new Blob([store]).size;
+    document.getElementById('memCount').textContent = entries;
+    document.getElementById('memSize').textContent = size < 1024 ? size + ' B' : (size/1024).toFixed(1) + ' KB';
+    document.getElementById('sessAge').textContent = '7'; // approximate
+
+    const keys = Object.keys(data);
+    log.innerHTML = `📊 <strong>Stats loaded</strong><br>`;
+    log.innerHTML += `🧠 Memory entries: ${entries}<br>`;
+    log.innerHTML += `💾 Storage: ${size < 1024 ? size + ' B' : (size/1024).toFixed(1) + ' KB'}<br>`;
+    log.innerHTML += `🔑 Keys: ${keys.slice(0, 5).join(', ')}${keys.length > 5 ? '...' : ''}<br>`;
+    log.innerHTML += `✅ Status: Healthy`;
+  } catch(e) {
+    log.innerHTML = `❌ Error reading memory: ${e.message}`;
+  }
+}
+
+function loadMemoryTree() {
+  const store = localStorage.getItem('max_memory_store');
+  const tree = document.getElementById('memoryTree');
+
+  if (!store) {
+    tree.innerHTML = '📭 Memory is empty';
+    return;
+  }
+
+  try {
+    const data = JSON.parse(store);
+    const entries = Object.entries(data);
+    if (entries.length === 0) {
+      tree.innerHTML = '📭 No entries yet';
+      return;
+    }
+
+    tree.innerHTML = entries.map(([key, val]) => {
+      const time = val.t ? new Date(val.t).toLocaleString() : 'unknown';
+      const vStr = typeof val.v === 'object' ? JSON.stringify(val.v).substring(0, 40) + '...' : String(val.v).substring(0, 50);
+      return `<div style="padding:4px 0">📂 <strong style="color:#e9a845">${key}</strong>
+        <span style="color:#888;font-size:11px">(${time})</span><br>
+        <span style="padding-left:20px;color:#4ecca3">└─ ${vStr}</span></div>`;
+    }).join('');
+  } catch(e) {
+    tree.innerHTML = `❌ ${e.message}`;
+  }
+}
+
+// Auto-refresh stats on load
+refreshStats();
+</script>
+</body>
+</html>

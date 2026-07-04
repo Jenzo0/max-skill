@@ -114,10 +114,29 @@ echo "System: $SKILL" | your-agent --prompt-file -
 
 ```
 max-super-prompt/
-└── SKILL.md          # The entire persona — self-contained, no dependencies
+├── SKILL.md              # The entire persona — self-contained, no dependencies
+├── scripts/
+│   ├── memory.html       # Persistent local memory (localStorage-based)
+│   ├── search.html       # Web search via CORS proxy
+│   └── dashboard.html    # Interactive stats dashboard
+└── assets/               # (icons, themes)
 ```
 
+**100% Text-Only Core** — SKILL.md has no dependencies. The JS scripts under `scripts/` are optional enhancements for platforms that support `run_js` (Edge Gallery).
+
 **100% Text-Only** — No JavaScript, no HTML, no build steps. Just pure prompt engineering.
+
+### 🛠️ JS Tools (Edge Gallery)
+
+When running inside Edge Gallery, Max can use the `run_js` tool to execute these scripts:
+
+| Script | Function | `run_js` payload |
+|---|---|---|
+| `memory.html` | Persistent key-value memory (on-device localStorage) | `{"script name":"memory.html","data":"{\\"action\\":\\"save\\",\\"key\\":\\"...\\",\\"value\\":\\"...\\"}"}` |
+| `search.html` | Live web search via CORS proxy | `{"script name":"search.html","data":"{\\"query\\":\\"your search\\"}"}` |
+| `dashboard.html` | Interactive stats & memory tree viewer | `{"script name":"dashboard.html","data":"{\\"mode\\":\\"overview\\"}"}` |
+
+> **Note:** These are optional. The core persona works on ANY platform without them.
 
 ### 🧠 Deep Context Protocol Flow
 

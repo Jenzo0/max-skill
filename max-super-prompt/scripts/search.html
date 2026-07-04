@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Max Web Search</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, system-ui, sans-serif; background: #1a1a2e; color: #eee; padding: 16px; }
+  .container { max-width: 500px; margin: 0 auto; }
+  h1 { font-size: 1.5em; margin-bottom: 4px; color: #4ecca3; }
+  h1 span { color: #0f3460; }
+  .subtitle { color: #888; font-size: 0.85em; margin-bottom: 20px; }
+  .search-box { display: flex; gap: 8px; margin-bottom: 12px; }
+  input { flex: 1; background: #16213e; color: #eee; border: 1px solid #0f3460; border-radius: 10px; padding: 14px; font-size: 15px; }
+  input:focus { outline: 2px solid #4ecca3; }
+  .btn { background: #4ecca3; color: #1a1a2e; border: none; border-radius: 10px; padding: 14px 20px; font-size: 15px; font-weight: 700; cursor: pointer; transition: 0.2s; }
+  .btn:hover { transform: scale(1.03); }
+  .btn-outline { background: transparent; border: 1px solid #4ecca3; color: #4ecca3; }
+  .filters { display: flex; gap: 6px; margin-bottom: 12px; flex-wrap: wrap; }
+  .filter-btn { background: #16213e; color: #888; border: 1px solid #0f3460; border-radius: 20px; padding: 6px 14px; font-size: 12px; cursor: pointer; transition: 0.2s; }
+  .filter-btn.active { background: #4ecca3; color: #1a1a2e; border-color: #4ecca3; }
+  .result { background: #16213e; border-radius: 10px; padding: 14px; margin: 10px 0; border-left: 3px solid #4ecca3; }
+  .result h3 { font-size: 15px; margin-bottom: 4px; }
+  .result a { color: #4ecca3; text-decoration: none; font-size: 12px; }
+  .result p { color: #aaa; font-size: 13px; margin-top: 4px; }
+  #results { margin-top: 12px; }
+  #status { font-size: 12px; color: #888; text-align: center; margin: 10px 0; }
+  .loading { text-align: center; color: #4ecca3; animation: pulse 1s infinite; }
+  @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.3; } }
+</style>
+</head>
+<body>
+<div class="container">
+  <h1>🌐 Max <span>Web Search</span></h1>
+  <div class="subtitle">Live search via CORS proxy · Max handles the results</div>
+
+  <div class="search-box">
+    <input id="query" placeholder="Search the web..." onkeydown="if(event.key==='Enter') search()" />
+    <button class="btn" onclick="search()">🔍</button>
+  </div>
+
+  <div class="filters">
+    <span class="filter-btn active" onclick="setFilter(this,'web')">🌐 Web</span>
+    <span class="filter-btn" onclick="setFilter(this,'news')">📰 News</span>
+    <span class="filter-btn" onclick="setFilter(this,'scholar')">🎓 Scholar</span>
+    <span class="filter-btn" onclick="setFilter(this,'github')">💻 GitHub</span>
+  </div>
+
+  <div id="results"></div>
+  <div id="status">Ready to search</div>
+</div>
+
+<script>
+let currentFilter = 'web';
+const PROXIES = [
+  'https://api.allorigins.win/raw?url=',
+  'https://corsproxy.io/?',
+  'https://api.codetabs.com/v1/proxy?quest='
+];
+let proxyIndex = 0;
+
+function setFilter(el, mode) {
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  el.classList.add('active');
+  currentFilter = mode;
+}
+
+function getSearchUrl(query, mode) {
+  const q = encodeURIComponent(query);
+  switch(mode) {
+    case 'news': return `https://lite.duckduckgo.com/lite/?q=${q}&ia=news`;
+    case 'github': return `https://github.com/search?q=${q}&type=repositories`;
+    case 'scholar': return `https://scholar.google.com/scholar?q=${q}`;
+    default: return `https://lite.duckduckgo.com/lite/?q=${q}`;
+  }
+}
+
+async function fetchWithProxy(url) {
+  for (let i = 0; i < PROXIES.length; i++) {
+    const idx = (proxyIndex + i) % PROXIES.length;
+    try {
+      const resp = await fetch(PROXIES[idx] + encodeURIComponent(url), { signal: AbortSignal.timeout(8000) });
+      if (resp.ok) {
+        proxyIndex = idx;
+        return await resp.text();
+      }
+    } catch(e) { console.log('Proxy fail:', idx, e.message); }
+  }
+  return null;
+}
+
+function parseHTML(html) {
+  const parser = new DOMParser();
+  return parser.parseFromString(html, 'text/html');
+}
+
+async function search() {
+  const q = document.getElementById('query').value.trim();
+  if (!q) return;
+
+  const resultsDiv = document.getElementById('results');
+  const statusDiv = document.getElementById('status');
+  resultsDiv.innerHTML = '<div class="loading">🔍 Searching...</div>';
+  statusDiv.textContent = 'Fetching results...';
+
+  const url = getSearchUrl(q, currentFilter);
+  const html = await fetchWithProxy(url);
+
+  if (!html) {
+    resultsDiv.innerHTML = '<div class="result" style="border-color:#e94560;"><h3>⚠️ Search unavailable</h3><p>CORS proxy blocked. Try direct search or use a different filter.</p></div>';
+    statusDiv.textContent = 'Search failed — proxies unreachable';
+    return;
+  }
+
+  const doc = parseHTML(html);
+  const links = doc.querySelectorAll('a[href^="http"]');
+  const results = [];
+  const seen = new Set();
+
+  links.forEach(a => {
+    const href = a.href;
+    const text = a.textContent.trim();
+    if (seen.has(href)) return;
+    seen.add(href);
+    if (text.length < 5) return;
+    if (href.includes('google') || href.includes('duckduckgo') || href.includes('facebook')) return;
+
+    let parent = a.parentElement;
+    let snippet = '';
+    if (parent) {
+      const sibling = parent.nextElementSibling || parent.nextSibling;
+      if (sibling) snippet = sibling.textContent.trim();
+      if (!snippet) snippet = parent.textContent.replace(text, '').trim();
+    }
+
+    results.push({ title: text, url: href, snippet: snippet.substring(0, 200) });
+  });
+
+  if (results.length === 0) {
+    resultsDiv.innerHTML = '<div class="result"><h3>📭 No results</h3><p>Try a different query or filter.</p></div>';
+    statusDiv.textContent = `No results for "${q}"`;
+    return;
+  }
+
+  const top = results.slice(0, 7);
+  resultsDiv.innerHTML = top.map(r => `
+    <div class="result">
+      <h3>${r.title.substring(0, 60)}</h3>
+      <a href="${r.url}" target="_blank">${r.url.substring(0, 60)}...</a>
+      <p>${r.snippet || 'No description available'}</p>
+    </div>
+  `).join('');
+  statusDiv.textContent = `✅ ${top.length} results for "${q}" | Mode: ${currentFilter}`;
+  window.results = top; // accessible by run_js
+}
+</script>
+</body>
+</html>
