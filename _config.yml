@@ -1,0 +1,11 @@
+title: Max Super Prompt — The Jarvis Killer
+description: "Universal multi-mode Senior Engineer persona for any LLM. Works with Google Edge Gallery, Claude, ChatGPT, Ollama, OpenRouter, and any agent platform. Open source, 100% prompt-only."
+url: https://jenzo0.github.io/max-skill
+theme: jekyll-theme-cayman
+show_downloads: true
+google_analytics:
+lang: en_US
+og:
+  title: Max Super Prompt — Universal Agent Persona
+  description: "A multi-mode CTO/Architect/Dev/Teacher persona skill for any LLM. Open source, model-agnostic, platform-agnostic."
+  image: https://jenzo0.github.io/max-skill/assets/og-image.png
