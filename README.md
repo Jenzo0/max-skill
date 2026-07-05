@@ -1,213 +1,202 @@
 <p align="center">
-  <img src="https://img.shields.io/badge/Google%20AI%20Edge%20Gallery-Compatible-success" alt="Edge Gallery">
+  <img src="https://img.shields.io/badge/v4.0-Modular-FF6B6B" alt="v4.0">
+  <img src="https://img.shields.io/badge/Edge%20Gallery-Compatible-success" alt="Edge Gallery">
   <img src="https://img.shields.io/badge/Any%20Agent-Universal-blue" alt="Universal">
   <img src="https://img.shields.io/badge/Model-Agnostic-FF6B6B" alt="Model Agnostic">
   <img src="https://img.shields.io/badge/License-MIT-green" alt="License">
   <img src="https://img.shields.io/badge/Locale-English%20%7C%20Arabic-orange" alt="Language">
+  <img src="https://img.shields.io/badge/Architecture-Modular-purple" alt="Modular">
 </p>
 
-<h1 align="center">🧠 Max Super Prompt — The Jarvis Killer</h1>
-<h3 align="center">A Universal Agent Persona Skill for Any LLM, Any Platform</h3>
+<h1 align="center">🧠 Max Super Prompt v4.0 — The Jarvis Killer</h1>
+<h3 align="center">Modular Multi-Mode Senior Engineer Persona for Any LLM</h3>
 
 <p align="center">
-  <em>"Senior Engineer · CTO · Architect · Teacher · Full-Stack Company in One Body"</em>
+  <em>"A full-stack company in one body — modular, adaptive, token-efficient."</em>
 </p>
 
 <p align="center">
-  <strong>Open Source</strong> · <strong>Model Agnostic</strong> · <strong>Platform Agnostic</strong> · <strong>100% Prompt-Only</strong>
+  <strong>Open Source</strong> · <strong>Model Agnostic</strong> · <strong>Platform Agnostic</strong> · <strong>100% Prompt</strong>
 </p>
 
 ---
 
-## 📦 What Is Max Super Prompt?
+## 📦 What Is Max Super Prompt v4.0?
 
-**Max Super Prompt** is a **universal persona skill** that transforms any LLM into a **multi-mode Senior Engineer personality** — with a complete reasoning protocol, automatic mode switching, and production-quality output standards.
+**Max Super Prompt** is a **universal persona skill** that transforms any LLM into a **multi-mode Senior Engineer** — with a complete reasoning protocol, automatic mode switching, and production-quality output standards.
 
-> **Zero dependencies. One SKILL.md file. Works everywhere.**
-
-### ✨ Key Features
+### v4.0 Architectural Highlights
 
 | Feature | Description |
 |---|---|
-| 🧠 **Deep Context Protocol** | 3-stage mandatory reasoning (Understand → Synthesize → Output) |
-| 🔄 **Auto Mode Switch** | 5 modes: Architect, Code, Teacher, Fast Solve, Absolute |
-| 📝 **Structured Output** | Consistent response template for every answer |
-| 📜 **10 Golden Rules** | Simplicity, Verification, Security, Elegance & more |
-| 🏢 **Full-Stack Knowledge** | FastAPI, React, Docker, DevOps, Auth patterns |
-| 🌐 **Bilingual** | English + native Arabic support when Arabic user input is detected |
-| 🔌 **Universal** | Works with any LLM, any agent framework, any platform |
+| 🧩 **Modular Architecture** | 12 independent modules, 1 compressed assembler — load what you need |
+| 🔄 **Decision Engine** | Keyword scoring + priority-based mode selection — no ambiguity |
+| 📦 **Dynamic Capability Loading** | Backend/Frontend/DevOps modules load only when relevant |
+| 🧩 **4 Context Layers** | System → Project → Memory → Task — clean separation of concerns |
+| 🔌 **Tool Abstraction** | Unified API maps to Hermes, Edge Gallery, Claude, ChatGPT natively |
+| 🪶 **Dual Version** | Full (5.8KB) for Claude/ChatGPT/Hermes + Lite (2.2KB) for Edge Gallery/Gemma |
+| 📜 **10 Golden Rules** | Simplicity, Root Cause, Verify Before Done, Security First & more |
+
+---
+
+## 📂 Repository Structure
+
+```
+max-skill/
+├── README.md                          ← This file
+├── _config.yml                        ← GitHub Pages config
+├── index.html                         ← Landing page (SEO)
+├── .nojekyll                          ← Disable Jekyll processing
+│
+├── max-super-prompt/
+│   ├── SKILL.md                       ← 🪶 LITE VERSION (Edge Gallery default, 2.2KB)
+│   │
+│   ├── full/                          ← 📦 FULL V4.0 (for Claude/Hermes/ChatGPT)
+│   │   ├── SKILL.md                   ← Compressed assembler (5.8KB)
+│   │   └── references/
+│   │       ├── core-persona.md        ← Identity + Deep Context Protocol
+│   │       ├── core-rules.md          ← 10 Golden Rules with examples
+│   │       ├── core-modes.md          ← Full Decision Engine + output formats
+│   │       ├── core-response.md       ← Response template per mode
+│   │       ├── core-context-layers.md ← 4-layer context separation
+│   │       ├── core-tool-abstraction.md ← Platform-adaptive tool mapping
+│   │       ├── capabilities-backend.md  ← Backend/API expertise
+│   │       ├── capabilities-frontend.md ← Frontend/UI expertise
+│   │       ├── capabilities-devops.md   ← DevOps/Cloud expertise
+│   │       ├── js-tools.md            ← Edge Gallery JS tool reference
+│   │       ├── arabic-dialect-system.md ← 5-dialect Arabic support
+│   │       └── edge-gallery-hosting.md  ← GH Pages deployment guide
+│   │
+│   └── scripts/                      ← JS tools (Edge Gallery)
+│       ├── memory.html               ← Persistent KV store + AES vault
+│       ├── search.html               ← Web search via CORS proxy
+│       ├── vision.html               ← Image color/texture analysis
+│       ├── voice.html                ← Text-to-Speech (Web Speech API)
+│       └── dashboard.html            ← Stats & memory tree viewer
+│
+└── wiki/                             ← Full documentation
+    ├── Home.md
+    ├── Installation.md
+    ├── Modes.md
+    ├── JS-Tools.md
+    ├── Arabic-Dialects.md
+    └── Security.md
+```
 
 ---
 
 ## 🔧 Installation
 
-### 📱 Google AI Edge Gallery
+### 📱 Google AI Edge Gallery (Lite)
 
 > **Recommended model**: Gemma-4-E4B-IT
 
-1. Open **Edge Gallery** → Select your model → **Agent Skills**
-2. Tap **(+)** → **Load skill from URL**
-3. Paste:
-   ```
-   https://jenzo0.github.io/max-skill/max-super-prompt/
-   ```
-4. Tap **Add**
-
-**Alternative — Local Import:**
-1. Download the `max-super-prompt/` folder to your phone
-2. Open **Edge Gallery** → **(+)** → **Import local skill**
-3. Select the folder
-
----
-
-### 🤖 Any Agent Framework (Claude Code, Codex, Cursor, Copilot, etc.)
-
-**Option A: System Prompt Injection**
-```bash
-# Claude Code
-claude --prompt "$(curl -s https://jenzo0.github.io/max-skill/max-super-prompt/SKILL.md)"
-
-# OpenCode / Codex
-cat << 'EOF' >> .opencode_prompt
-$(curl -s https://jenzo0.github.io/max-skill/max-super-prompt/SKILL.md)
-EOF
+**URL import:**
+```
+https://jenzo0.github.io/max-skill/max-super-prompt/
 ```
 
-**Option B: Agent Instructions File**
-Copy the SKILL.md content into your agent's instructions/system prompt file (`.claude.md`, `AGENTS.md`, `.cursorrules`, etc.)
+**Local import:** Download `max-super-prompt/` folder → Edge Gallery → (+) → Import local skill.
 
-**Option C: Direct Prompt Injection**
+### 🤖 Claude Code / OpenCode / Codex (Full)
 ```bash
-SKILL=$(curl -s https://jenzo0.github.io/max-skill/max-super-prompt/SKILL.md)
-echo "System: $SKILL" | your-agent --prompt-file -
+# Load the full v4.0 assembler
+SKILL=$(curl -s https://jenzo0.github.io/max-skill/max-super-prompt/full/SKILL.md)
+claude --prompt "$SKILL"
 ```
 
+### 💻 Hermes Agent (Full)
+```bash
+# Install as Hermes skill
+git clone https://github.com/Jenzo0/max-skill.git
+cp -r max-skill/max-super-prompt ~/AppData/Local/hermes/skills/persona/
+# Then load via skill_view(name='max-super-prompt')
+```
+
+### 🌐 ChatGPT / OpenRouter / Any API (Full)
+Paste `max-super-prompt/full/SKILL.md` into the System Prompt field.
+
 ---
 
-### 💻 Any API / Chat UI (ChatGPT, OpenRouter, Custom)
-
-| Platform | How To Use |
-|---|---|
-| **ChatGPT / Claude.ai** | Paste SKILL.md content into "Custom Instructions" or system prompt field |
-| **OpenRouter** | Add as system prompt in API call: `system: <SKILL.md content>` |
-| **OpenAI API** | `messages=[{"role": "system", "content": "<SKILL.md>"}]` |
-| **Local (Ollama/llama.cpp)** | Include in modelfile: `SYSTEM """<SKILL.md>"""` |
-| **Any Chat UI** | Paste at start of conversation or set as preset persona |
-
----
-
-## 🚀 Usage Examples
+## 🚀 Usage
 
 | You Say | Mode | Max Does |
 |---|---|---|
-| "Build me a FastAPI auth API" | 💻 **Code Mode** | Full API with JWT, error handling, Swagger docs |
-| "Explain OOP like I'm 5" | 🎓 **Teacher Mode** | Simple breakdown with real-world analogies |
-| "Fix this error: \<paste\>" | ⚡ **Fast Solve** | Quick root-cause + immediate fix |
-| "Design an e-commerce system" | 📐 **Architect Mode** | Complete architecture with diagrams and trade-offs |
-| "Just give me the code" | 🤫 **Absolute Mode** | Direct output, no pleasantries |
-| "عندي مشكلة في الكود" | 🌐 **Bilingual Mode** | Full diagnosis — responds in the user's language |
+| "Design an e-commerce system" | 📐 Architect | Architecture doc + trade-offs + phased plan |
+| "Build a FastAPI auth API" | 💻 Code | Full API with JWT, Pydantic, Swagger docs |
+| "Explain async/await like I'm 5" | 🎓 Teacher | Simple analogy + technical breakdown |
+| "Fix this 500 error" | ⚡ Fast Solve | Root cause → immediate fix → prevention |
+| "Just give me the Dockerfile" | 🤫 Absolute | Code only, no explanation |
+| "Deploy to K8s with CI/CD" | 🐳 DevOps | IaC + pipeline config + monitoring |
 
 ---
 
-## ⚙️ Skill Structure
+## 🧠 Architecture
 
+### Decision Engine
 ```
-max-super-prompt/
-├── SKILL.md              # The entire persona — self-contained, no dependencies
-├── scripts/
-│   ├── memory.html       # Persistent local memory (localStorage-based)
-│   ├── search.html       # Web search via CORS proxy
-│   └── dashboard.html    # Interactive stats dashboard
-└── assets/               # (icons, themes)
+User Input → Keyword Scoring → Priority Order → Best Mode → Load Modules
 ```
 
-**100% Text-Only Core** — SKILL.md has no dependencies. The JS scripts under `scripts/` are optional enhancements for platforms that support `run_js` (Edge Gallery).
+### Context Layers
+```
+┌──────────────────────────────────┐
+│  L4: TASK (current message)      │ ← Overrides everything
+├──────────────────────────────────┤
+│  L3: MEMORY (user preferences)   │ ← Cross-session
+├──────────────────────────────────┤
+│  L2: PROJECT (current repo)      │ ← Per-project
+├──────────────────────────────────┤
+│  L1: SYSTEM (persona + rules)    │ ← Always active
+└──────────────────────────────────┘
+```
 
-> **100% Text-Only** — No JavaScript, no HTML, no build steps. Just pure prompt engineering.
+### Dynamic Loading
+```
+Mode: Code → Load: capabilities-backend + capabilities-frontend
+Mode: DevOps → Load: capabilities-devops
+Mode: Teacher → Load: core-persona + core-rules (full)
+Mode: Fast Solve → No extra load (use compressed core)
+```
 
-### 🛠️ JS Tools (Edge Gallery)
+---
 
-When running inside Edge Gallery, Max can use the `run_js` tool to execute these scripts:
+## 🪶 Version Comparison
 
-| Script | Function | `run_js` payload |
+| Feature | Lite (2.2KB) | Full (5.8KB + modules) |
 |---|---|---|
-| `memory.html` | Persistent key-value memory (on-device localStorage) | `{"script name":"memory.html","data":"{\"action\":\"save\",\"key\":\"...\",\"value\":\"...\"}"}` |
-| `search.html` | Live web search via CORS proxy | `{"script name":"search.html","data":"{\"query\":\"your search\"}"}` |
-| `dashboard.html` | Interactive stats & memory tree viewer | `{"script name":"dashboard.html","data":"{\"mode\":\"overview\"}"}` |
-
-> **Note:** These are optional. The core persona works on ANY platform without them.
-
-### 🧠 Deep Context Protocol Flow
-
-```
-1. Understand & Question  →  2. Synthesize & Optimize  →  3. Final Output
-```
-
-### 🔄 Auto Mode Switch
-
-| Mode | Trigger | Behavior |
-|---|---|---|
-| **Architect 📐** | Architecture/planning requests | Design for scale, document trade-offs |
-| **Code 💻** | Coding requests | Clean, production-ready, no over-engineering |
-| **Teacher 🎓** | "Explain", "Teach", "What is" | Simplify, compare, teach the "why" |
-| **Fast Solve ⚡** | "Fix", "Error", "Bug" | Immediate diagnosis, minimal conversation |
-| **Absolute 🤫** | "Just code", "No talk" | Direct answer, zero pleasantries |
+| **Platform** | Edge Gallery only | Claude, ChatGPT, Hermes, API, Ollama |
+| **Modes** | 7 (trigger-based) | 7 (Decision Engine + priority) |
+| **Rules** | 5 core | 10 Golden Rules |
+| **Context Layers** | — | 4-layer separation |
+| **Tool Abstraction** | run_js only | Hermes/Claude/ChatGPT/Edge |
+| **Dynamic Loading** | — | Capability modules per mode |
+| **File Size** | ✅ 2.2KB | ~44KB total (6KB active) |
+| **Gemma Safe** | ✅ Yes | ⚠️ Use lite for Edge Gallery |
+| **References** | — | 12 reference modules |
 
 ---
 
 ## 🤝 Contributing
 
-This is an **open source persona skill**! Contributions welcome:
-
 1. Fork the repo
-2. Improve the SKILL.md
+2. Improve modules under `max-super-prompt/full/references/`
 3. Submit a PR
-
-**Ideas for improvement:**
-- Add memory/state management hooks
-- Create new mode variants (e.g. DevOps, UI Designer)
-- Add multi-dialect Arabic support
-- Integrate with more agent tool ecosystems
-
----
-
-## 📚 Wiki
-
-Complete documentation available in the [`wiki/`](wiki/) folder:
-
-| Page | Description |
-|---|---|
-| [🏠 Home](wiki/Home.md) | Overview & quick start |
-| [📦 Installation](wiki/Installation.md) | All platform guides |
-| [🔄 Modes Reference](wiki/Modes.md) | All 7 modes explained |
-| [🛠️ JS Tools](wiki/JS-Tools.md) | Memory, Vision, Voice, Dashboard |
-| [🌍 Arabic Dialects](wiki/Arabic-Dialects.md) | Dialect detection & examples |
-| [🔒 Security & Vault](wiki/Security.md) | AES-256-GCM encryption details |
 
 ---
 
 ## 📄 License
 
-**MIT** — Free to use, modify, share, and redistribute. No attribution required (but appreciated!).
-
----
-
-## 🙌 Credits
-
-Built with ❤️ by [**Jenzo Sky**](https://github.com/Jenzo0) for the AI community.
-
-Designed to work with **any** agent, model, or platform on the market.
+**MIT** — Free to use, modify, share.
 
 ---
 
 <p align="center">
-  <strong>⭐ Star this repo if you find it useful! ⭐</strong>
-  <br>
-  <br>
+  Built with ❤️ by <a href="https://github.com/Jenzo0">Jenzo Sky</a>
+  <br><br>
+  <strong>⭐ Star if useful! ⭐</strong>
+  <br><br>
   <em>"Max — Senior Engineer, not just AI."</em>
   <br>
-  <br>
-  <strong>💪 It doesn't waste your time — it either solves it or tells you why.</strong>
-  <br>
-  <strong>✨ Ready when you are! ✨</strong>
+  <strong>💪 Ready when you are! ✨</strong>
 </p>
