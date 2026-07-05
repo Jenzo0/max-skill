@@ -36,6 +36,8 @@ A **universal persona skill** that transforms any LLM into a **multi-mode Senior
 | 🔌 **Tool Registry** | 14 operations × 5 platforms with permissions, fallback chains & compatibility matrix |
 | 🪶 **Dual Version** | Full (~6KB) for Claude/ChatGPT/Hermes + Lite (~2.9KB) for Edge Gallery/Gemma |
 | 📜 **10 Golden Rules** | Simplicity, Root Cause, Verify Before Done, Security First & more |
+| 🎯 **Scored Mode Selection** | Weighted keyword matrix + context cues + base energy — deterministic scoring |
+| 💰 **Token-Budget Layer** | Module registry with token costs + context-dependent greedy fit algorithm |
 
 ---
 
@@ -139,12 +141,49 @@ https://jenzo0.github.io/max-skill/max-super-prompt/lite/
 
 ## 🧠 Architecture
 
-### Decision Engine Algorithm
-```
-User Input → Keyword Scoring → Priority Match → Select Mode → Load Modules
+### System Flow
+
+```mermaid
+flowchart TB
+    INPUT["👤 User Input"]
+    DECISION["🔀 Decision Engine\nScored Mode Selection"]
+    
+    subgraph MODES["Mode Scoring Matrix"]
+        ARCH["📐 Architect"]
+        CODE["💻 Code"]
+        TEACH["🎓 Teacher"]
+        FAST["⚡ Fast Solve"]
+        ABS["🤫 Absolute"]
+        AGENT["🤖 Agent"]
+        DEVOPS["🐳 DevOps"]
+    end
+    
+    BUDGET["💰 Token-Budget Layer\nGreedy Module Fit"]
+    
+    subgraph MODULES["Module Registry"]
+        CAP_B["capabilities-backend<br/>~380 tokens"]
+        CAP_F["capabilities-frontend<br/>~380 tokens"]
+        CAP_ML["capabilities-ai-ml<br/>~420 tokens"]
+        CAP_MO["capabilities-mobile<br/>~400 tokens"]
+        CAP_D["capabilities-desktop<br/>~400 tokens"]
+        CAP_DO["capabilities-devops<br/>~420 tokens"]
+        CTX["core-context-layers<br/>~300 tokens"]
+        TOOL["core-tool-abstraction<br/>~480 tokens"]
+    end
+    
+    LAYERS["🧩 Context Layers\nL1 System → L2 Project → L3 Memory → L4 Task"]
+    OUTPUT["📝 Response Engine\nTemplate + Mode-Specific Format"]
+    
+    INPUT --> DECISION
+    DECISION -->|Score each mode| MODES
+    MODES -->|Highest score| BUDGET
+    BUDGET -->|Fit by context window| MODULES
+    MODULES --> LAYERS
+    LAYERS --> OUTPUT
+    OUTPUT -->|"[mode: X | alt: Y | score: Z]"| RESULT["🏁 Final Output"]
 ```
 
-### Context Layers
+### Context Override Priority
 ```
 ┌──────────────────────────────────┐
 │  L4: TASK (current message)      │ ← Overrides everything
@@ -157,20 +196,17 @@ User Input → Keyword Scoring → Priority Match → Select Mode → Load Modul
 └──────────────────────────────────┘
 ```
 
-### Dynamic Module Loading
-```
-Mode: Code      → Load: capabilities-backend + capabilities-frontend
-Mode: AI/ML     → Load: capabilities-ai-ml
-Mode: Mobile    → Load: capabilities-mobile
-Mode: Desktop   → Load: capabilities-desktop
-Mode: DevOps    → Load: capabilities-devops
-Mode: Teacher   → Load: core-persona + core-rules (extended)
-Mode: Fast Solve→ No extra load (use compressed core only)
-```
-
 ### Tool Resolution
 ```
 Operation → Detect Platform → Check Availability → Execute → Fallback if Failed
+```
+
+### Load Algorithm (Token-Budget Fit)
+```
+1. Score each module by relevance (0–5) based on active mode + user query
+2. Sort by relevance × (1 — token cost / total budget)
+3. Greedy fit: pick highest-scoring modules until budget full
+4. Fallback: if total avail tokens < module budget → skip all, use Lite core
 ```
 
 ---
@@ -192,12 +228,34 @@ Operation → Detect Platform → Check Availability → Execute → Fallback if
 
 ---
 
+## 📖 Demo Gallery
+
+See the 7-mode Decision Engine in action:
+
+| Query | Mode Selected | Score | Output Style |
+|---|---|---|---|
+| *"Design a microservices architecture for a fintech app"* | 📐 **Architect** | 8 (keywords: design×2, system×2, scale×1 → ×1.0) | Trade-off doc with C4 diagrams |
+| *"Fix this MySQL deadlock error"* | ⚡ **Fast Solve** | 6 (keywords: fix×2, error×2, wrong×1 → ×1.2) | Root cause → `SHOW ENGINE INNODB STATUS` → fix |
+| *"Just write the Dockerfile, no talk"* | 🤫 **Absolute** | 7 (keywords: just code×2, direct×1, only code×1 → ×1.5) | Raw Dockerfile, zero commentary |
+| *"Explain Kubernetes ingress in simple terms"* | 🎓 **Teacher** | 5 (keywords: explain×2, how does×1, understand×1 → ×0.8) | Analogy + technical breakdown |
+| *"Deploy a 3-tier app to AWS EKS with Terraform"* | 🐳 **DevOps** | 9 (keywords: deploy×2, k8s×2, cloud×1, terraform×2 → ×1.0) | Full IaC + pipeline |
+
+> 💡 **Pro tip**: Append `[mode: absolute]` in your query to force Absolute mode — overrides scoring entirely.
+> 
+> 📹 *[Screen recording demo coming soon]*
+
+---
+
 ## 🤝 Contributing
 
+See **[CONTRIBUTING.md](CONTRIBUTING.md)** for full guide — module templates, PR workflow, token-budget checks, and style guide.
+
+Quick start:
 1. Fork the repo
-2. Improve modules under `references/` — each module is a standalone `.md` file
-3. Test with the Lite version for Edge Gallery safety
-4. Submit a PR
+2. Improve modules under `references/` — each is a standalone `.md` file
+3. Run the token-budget check (instructions in CONTRIBUTING.md)
+4. Test with Lite version for Edge Gallery safety
+5. Submit a PR
 
 ---
 
