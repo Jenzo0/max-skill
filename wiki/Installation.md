@@ -1,81 +1,74 @@
-# 📦 Installation Guide
+# 📥 Installation
 
-## Google AI Edge Gallery
-
-1. Open **Edge Gallery** app
-2. Select your model → **Agent Skills** tab
-3. Tap **(+)** → **Load skill from URL**
-4. Paste:
-   ```
-   https://jenzo0.github.io/max-skill/max-super-prompt/
-   ```
-5. Tap **Add**
-
-### Local Import
-1. Download the `max-super-prompt/` folder
-2. Open **Edge Gallery** → **(+)** → **Import local skill**
-3. Select the folder
+> How to use Max Super Prompt on any platform.
 
 ---
 
-## Claude Code (Anthropic)
+## 🏆 Full v4.0 (Recommended — 5.9KB)
 
+### Claude Code / OpenCode / Codex
 ```bash
-# Method 1: CLI prompt injection
-claude --prompt "$(curl -s https://jenzo0.github.io/max-skill/max-super-prompt/SKILL.md)"
-
-# Method 2: .claude.md file
-curl -s https://jenzo0.github.io/max-skill/max-super-prompt/SKILL.md > .claude.md
+curl -s https://jenzo0.github.io/max-skill/max-super-prompt/SKILL.md > /tmp/max.md
+claude --prompt "$(cat /tmp/max.md)"
+# or: opencode --prompt "$(cat /tmp/max.md)"
 ```
 
----
-
-## OpenAI API / OpenRouter
-
-```python
-import openai
-openai.base_url = "https://openrouter.ai/api/v1"
-
-response = openai.chat.completions.create(
-  model="openai/gpt-4o",
-  messages=[
-    {
-      "role": "system",
-      "content": """<PASTE FULL SKILL.md HERE>"""
-    },
-    {"role": "user", "content": "Build me a FastAPI auth API"}
-  ]
-)
-```
-
----
-
-## ChatGPT / Claude.ai
-
-1. Open **Settings** → **Custom Instructions**
-2. Paste the entire `SKILL.md` content in the **System Prompt** field
-3. Save and start chatting
-
----
-
-## Ollama (Local)
-
+### Hermes Agent
 ```bash
-# Create a modelfile
-echo "FROM gemma-4
-SYSTEM \"\"\"
-$(curl -s https://jenzo0.github.io/max-skill/max-super-prompt/SKILL.md)
-\"\"\"" > Maxfile
+git clone https://github.com/Jenzo0/max-skill.git
+cp -r max-skill/max-super-prompt ~/AppData/Local/hermes/skills/persona/
+# Then load: skill_view(name='max-super-prompt')
+# For reference modules: skill_view(name='max-super-prompt', file_path='references/<module>.md')
+```
 
-# Build and run
-ollama create max -f Maxfile
-ollama run max
+### ChatGPT / OpenRouter / Any API
+Paste the contents of `max-super-prompt/SKILL.md` into the **System Prompt** field.
+
+Available at:
+```
+https://raw.githubusercontent.com/Jenzo0/max-skill/main/max-super-prompt/SKILL.md
+```
+
+### Ollama / Local Models
+```bash
+curl -s https://raw.githubusercontent.com/Jenzo0/max-skill/main/max-super-prompt/SKILL.md
+# Pipe to Ollama: cat /tmp/max.md | ollama run llama3
 ```
 
 ---
 
-## Cursor / Copilot
+## 🪶 Lite v4.0 (Edge Gallery / Gemma — 2.2KB)
 
-1. Create `.cursorrules` or `.github/copilot-instructions.md`
-2. Paste SKILL.md contents
-3. Start coding with Max persona active
+### Google AI Edge Gallery
+**URL import:**
+```
+https://jenzo0.github.io/max-skill/max-super-prompt/lite/
+```
+
+**Local import:** Download `max-super-prompt/lite/SKILL.md` → Edge Gallery (+) → Import local skill.
+
+**Models tested:** Gemma-4-E4B-IT, Gemma-3-27B
+
+---
+
+## 🛠️ Reference Modules (Full v4.0 only)
+
+Load extended modules on demand for deep dives:
+
+```
+skill_view(name='max-super-prompt', file_path='references/core-modes.md')
+skill_view(name='max-super-prompt', file_path='references/core-context-layers.md')
+skill_view(name='max-super-prompt', file_path='references/core-tool-abstraction.md')
+```
+
+---
+
+## ⚡ Which Version Should I Use?
+
+| Use Case | Version |
+|---|---|
+| Claude, ChatGPT, Hermes, OpenRouter | 🏆 **Full v4.0** |
+| Edge Gallery, Gemma | 🪶 **Lite v4.0** |
+| Low-token-budget applications | 🪶 **Lite v4.0** |
+| Complex projects with deep dives | 🏆 **Full v4.0** |
+| Quick prototyping | 🏆 **Full v4.0** |

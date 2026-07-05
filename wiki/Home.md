@@ -1,50 +1,48 @@
-# 🧠 Max Super Prompt — Wiki
+# 🧠 Max Super Prompt v4.0 — The Jarvis Killer
 
-Welcome to the **Max Super Prompt** wiki! This is the complete documentation for the universal multi-mode Senior Engineer persona skill.
+> **Welcome to the wiki!** Max Super Prompt is a **modular multi-mode Senior Engineer persona** that transforms any LLM into a complete tech team in one body.
 
-## 📖 Topics
+## 🏆 Primary: Full v4.0
 
-| Page | Description |
-|---|---|
-| [🏠 Home](Home) | Overview, what's new, quick start |
-| [📦 Installation](Installation) | All platforms: Edge Gallery, Claude, ChatGPT, Ollama, API |
-| [🔄 Modes Reference](Modes) | Architect, Code, Teacher, Fast Solve, Absolute, Agent, DevOps |
-| [🛠️ JS Tools](JS-Tools) | Memory, Search, Vision, Voice, Dashboard scripts |
-| [🌍 Arabic Dialects](Arabic-Dialects) | Egyptian, Levantine, Gulf, Maghrebi, MSA support |
-| [🔒 Security & Vault](Security) | AES-256-GCM vault, encryption model, best practices |
-| [📊 Project Scaffolder](Project-Scaffolder) | Generate complete projects with one command |
-| [🤝 Contributing](Contributing) | How to improve, fork, and submit PRs |
-| [❓ FAQ](FAQ) | Troubleshooting, common questions, tips |
+The full version (5.9KB) is the recommended default for Claude, ChatGPT, Hermes, OpenRouter, and API users.
 
-## 🚀 Quick Start
+**Features:**
+- 🧩 **Modular architecture** with 12 reference modules
+- 🔄 **Decision Engine** — keyword scoring + priority-based mode selection
+- 📦 **Dynamic capability loading** — load Backend/Frontend/DevOps only when needed
+- 🧩 **4 Context Layers** — System → Project → Memory → Task
+- 🔌 **Tool Abstraction** — unified API across all platforms
+- 📜 **10 Golden Rules** with full explanations
 
-### Edge Gallery
+## 🪶 Secondary: Lite v4.0
+
+The lite version (2.2KB) is for Edge Gallery, Gemma, and resource-constrained environments. Zero conflicting instructions, safe for all models.
+
+## 🚀 Quick Links
+
+- [Installation](Installation) — Get started with any platform
+- [Modes](Modes) — 7 modes: Architect, Code, Teacher, Fast Solve, Absolute, Agent, DevOps
+- [JS Tools](JS-Tools) — Memory, Search, Vision, Voice, Dashboard scripts
+- [Arabic Dialects](Arabic-Dialects) — Egyptian, Levantine, Gulf, Maghrebi, MSA
+- [Security](Security) — AES-256-GCM vault, secrets management
+
+## 📂 Repo Structure
+
 ```
-https://jenzo0.github.io/max-skill/max-super-prompt/
+max-super-prompt/
+├── SKILL.md              ← 🏆 Full v4.0 (primary, 5.9KB)
+├── lite/SKILL.md         ← 🪶 Lite v4.0 (Edge Gallery, 2.2KB)
+├── references/           ← 🧩 12 reference modules
+│   ├── core-persona.md, core-rules.md, core-modes.md
+│   ├── core-response.md, core-context-layers.md
+│   ├── core-tool-abstraction.md
+│   ├── capabilities-backend/frontend/devops.md
+│   ├── js-tools.md, arabic-dialect-system.md
+│   └── edge-gallery-hosting.md
+└── scripts/              ← 5 JS tools for Edge Gallery
 ```
-
-### Claude Code
-```bash
-claude --prompt "$(curl -s https://jenzo0.github.io/max-skill/max-super-prompt/SKILL.md)"
-```
-
-### Any Chat UI
-Paste the contents of `SKILL.md` into the System Prompt / Custom Instructions field.
 
 ---
 
-## ✨ Features at a Glance
-
-- **7 Auto Modes**: Architect, Code, Teacher, Fast Solve, Absolute, Agent, DevOps
-- **🌍 Arabic Dialect Detection**: Egyptian, Levantine, Gulf, Maghrebi + MSA
-- **🔒 Secrets Vault**: AES-256-GCM encrypted storage for API keys
-- **📦 Project Scaffolder**: Generate full-stack projects from one command
-- **🧠 Persistent Memory**: On-device localStorage with auto-backup
-- **👁️ Vision Analysis**: Color analysis, edge detection, OCR proxy
-- **🎤 Voice Mode**: Text-to-Speech via Web Speech API
-- **📊 Dashboard**: Interactive control center with 3 themes
-- **🔗 Platform Agnostic**: Works with ANY LLM, agent framework, or chat UI
-
----
-
-**License:** MIT — Free to use, modify, share
+> **I am Max — CTO + Senior Dev + Architect + Teacher** 🚀
+> *Ready when you are!* ✨
