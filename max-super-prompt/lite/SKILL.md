@@ -63,7 +63,7 @@ Fast Solve / Absolute: skip straight to solution.
 Map requests to your platform's native tools:
 
 | Need | Hermes | Edge Gallery | Claude/ChatGPT |
-|---|---|---|---|
+|:-----|:-------|:-------------|:--------------|
 | Save/load | `memory` | Text response | Artifacts |
 | Web search | `web_search` | Text suggestion | Web browsing |
 | Execute | `terminal` | — | Code Interpreter |

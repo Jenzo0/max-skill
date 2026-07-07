@@ -31,7 +31,7 @@ cd max-skill
 ### 2. Choose What to Work On
 
 | Area | Where to Start | Difficulty |
-|---|---|---|
+|:-----|:---------------|:-----------|
 | **New capability domain** | Add `references/capabilities-<name>.md` | Medium |
 | **New decision mode** | Update `SKILL.md` Decision Engine + core-modes reference | Hard |
 | **Platform mapping** | Update `core-tool-abstraction.md` | Medium |
@@ -91,7 +91,7 @@ Each reference module under `references/{core,modes,capabilities,memory,tools}/`
 ## Core Stack
 
 | Technology | Expertise Level | Notes |
-|---|---|---|
+|:-----------|:----------------|:------|
 | ... | Proficient / Expert / Master | ... |
 
 ## Patterns & Conventions
@@ -118,7 +118,7 @@ Each reference module under `references/{core,modes,capabilities,memory,tools}/`
 This repository has a **GitHub Actions workflow** (`.github/workflows/token-budget-check.yml`) that automatically runs on every push and pull request touching `max-super-prompt/` files. It enforces per-category budgets:
 
 | Category | Limit | Notes |
-|---|---|---|
+|:---------|:-----:|:------|
 | `SKILL.md` | 2,000 tokens | Main entry point |
 | `lite/SKILL.md` | 800 tokens | Edge Gallery / Gemma |
 | `references/core/` | 1,000 tokens each | Persona, rules, workflow |
