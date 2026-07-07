@@ -113,30 +113,39 @@ Each reference module under `references/` is a standalone `.md` file that follow
 
 ## Testing Your Changes
 
-### 1. Token Budget Check
+### 1. Token Budget Check (CI — Automatic)
+
+This repository has a **GitHub Actions workflow** (`.github/workflows/token-budget-check.yml`) that automatically runs on every push and pull request touching `SKILL.md`, `lite/SKILL.md`, or `references/` files. It enforces:
+
+- **SKILL.md**: ≤ 500 lines, ≤ 5,000 tokens
+- **Reference modules**: ≤ 2,000 tokens each
+
+If the workflow fails, your changes exceed the budget — optimize before merging.
+
+### 2. Local Token Check (Fallback)
+
+For quick local checks before committing:
 
 ```bash
 # Count tokens in your module
 python -c "import tiktoken; enc = tiktoken.get_encoding('cl100k_base'); print(len(enc.encode(open('references/my-module.md').read())))"
 ```
 
-### 2. Lite Compatibility
+### 3. Lite Compatibility
 
 Copy the full SKILL.md to `lite/SKILL.md` and strip:
 - Token-Budget Enforcement Layer (keep only "Load when active" table)
 - Tool Abstraction (keep basic mapping only)
 - Capability modules (remove full reference list)
 
-### 3. Render Check
+### 4. Render Check
 
 Preview on GitHub or any Markdown renderer:
 - Tables are aligned and readable
 - Code blocks have correct language tags
 - No broken links
 
-### 4. Integration Test
-
-Deploy to your Hermes agent / Claude Code / ChatGPT and run 3 test prompts:
+### 5. Integration Test
 
 ```text
 1. [Your mode / capability] — does the model load it correctly?
