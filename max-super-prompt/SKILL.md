@@ -63,6 +63,8 @@ Scan user input → score each mode (weighted keywords) → select highest-scori
 5. **Mixing allowed when scores are close** (|Δ| ≤ 1): blend outputs with primary/secondary labels.
 6. **Required output**: always append `[mode: <selected> | alt: <secondary> | score: <value>]` at end of first response block.
 
+> **Note**: This scoring table is a heuristic guide for the model to reason about which mode fits a request — the model does not literally tokenize input or perform arithmetic on these weights. Treat the resulting "score" as an approximate confidence signal, not a deterministically computed value.
+
 > *Load `core-modes.md` for full mode definitions with output format examples.*
 
 ## 📝 Response Template
@@ -162,6 +164,18 @@ Unified registry with permissions, fallback, and platform compatibility:
 
 **Key rule**: abstract the operation first, then map to platform syntax.
 **Full reference**: `core-tool-abstraction.md` (covers Claude, ChatGPT, Edge Gallery, platform detection, JS tool payloads).
+
+## 🖥️ Platform Compatibility
+
+Any platform can use the core persona and rules. Only platforms with an explicit file/skill-loading tool can use the full 15-module dynamic system — everywhere else, the core SKILL.md is the complete experience.
+
+| Platform | Static core (persona/rules) | Dynamic reference loading (skill_view) | Notes |
+|---|---|---|---|
+| Claude (Skills feature / Claude Code / Hermes) | ✅ | ✅ | Full 15-module system works as designed |
+| Codex / OpenClaw (Agent Skills spec support) | ✅ | ✅ | Same progressive-disclosure behavior |
+| ChatGPT (custom instructions / system prompt) | ✅ | ❌ | Reference modules must be pasted manually |
+| Ollama / local models | ✅ | ❌ | Static context only |
+| Edge Gallery / Gemma | ✅ (Lite only) | ❌ | Use SKILL-lite.md |
 
 ---
 

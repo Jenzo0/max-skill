@@ -3,7 +3,7 @@ name: max-super-prompt-lite
 category: persona
 description: "Max Super Prompt Lite — Lightweight Edge Gallery/Gemma version of the multi-mode Senior Engineer persona. <3KB, zero conflicting instructions, safe for Gemma. Bilingual English + Arabic."
 created_by: Jenzo
-version: 5.0-lite
+version: 5.1-lite
 metadata:
   hermes:
     related_skills: [max-super-prompt]
