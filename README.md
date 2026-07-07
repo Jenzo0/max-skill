@@ -327,36 +327,64 @@ Keep a mental model: *every `async def` needs `await` for async operations.*
 
 ## 📊 Benchmarks
 
-### Platform Compatibility
+### 🖥 Platform Compatibility
 
-| Platform | Full v6.0 | Lite v6.0 | Decision Engine | Tools | Arabic | Memory |
-|---|---|---|---|---|---|---|
-| **Claude** (Sonnet 5, Opus 5) | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ Projects |
-| **ChatGPT** (GPT 5.4, GPT 5.5) | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ Memory |
-| **Fable 5** | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
-| **Gemini** (Gemini 3.5 Flash) | ⚠️ Full may overshoot | ✅ | ✅ | ⚠️ Limited | ✅ | ❌ |
-| **Hermes Agent** | ✅ | ✅ | ✅ | ✅ Native | ✅ | ✅ |
-| **GLM 5.2** | ✅ | ✅ | ✅ | ⚠️ Limited | ✅ | ⚠️ Partial |
-| **KIM 2.7** | ✅ | ✅ | ✅ | ⚠️ Limited | ⚠️ Basic | ❌ |
-| **QWEN 3.7 Plus** | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
-| **Edge Gallery** | ❌ Too large | ✅ | ✅ | ✅ JS Tools | ✅ | ✅ memory.html |
-| **OpenCode CLI** | ✅ | ✅ | ✅ | ✅ | ✅ | ❌ |
-| **Cursor** | ✅ (custom instructions) | ✅ | ✅ | ⚠️ Limited | ✅ | ✅ .cursorrules |
-| **Ollama** (local) | ⚠️ Context-dependent | ✅ | ✅ | ❌ | ✅ | ❌ |
+<details open>
+<summary><strong>2026 Model Compatibility Matrix</strong></summary>
+<br>
 
-### Token Cost Comparison
+| Vendor | Platform | Full v6.0 | Lite v6.0 | Decision Engine | Tools | Arabic | Memory |
+|:---|---|:---:|:---:|:---:|:---:|:---:|:---:|
+| **Anthropic** 🟠 | Sonnet 5 ![Full](https://img.shields.io/badge/Full-22c55e)![Lite](https://img.shields.io/badge/Lite-22c55e) | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ Projects |
+| | Opus 5 ![Full](https://img.shields.io/badge/Full-22c55e) | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ Projects |
+| | Fable 5 ![Full](https://img.shields.io/badge/Full-22c55e) | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
+| **OpenAI** 🟢 | GPT 5.4 ![Full](https://img.shields.io/badge/Full-22c55e)![Lite](https://img.shields.io/badge/Lite-22c55e) | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ Memory |
+| | GPT 5.5 ![Full](https://img.shields.io/badge/Full-22c55e) | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ Memory |
+| | o5 ![Full](https://img.shields.io/badge/Full-22c55e) | ⚠️ Context-dependent | ✅ | ✅ | ❌ | ✅ | ❌ |
+| **Google** 🔵 | Gemini 3.5 Flash ![Lite](https://img.shields.io/badge/Lite-22c55e) | ⚠️ May overshoot | ✅ | ✅ | ⚠️ Limited | ✅ | ❌ |
+| | Gemini 3.5 Pro ![Full](https://img.shields.io/badge/Full-22c55e) | ✅ | ✅ | ✅ | ⚠️ Limited | ✅ | ❌ |
+| **Meta** 🔵 | Llama 5 ![Full](https://img.shields.io/badge/Full-22c55e)![Lite](https://img.shields.io/badge/Lite-22c55e) | ✅ | ✅ | ✅ | ⚠️ Limited | ✅ | ❌ |
+| | Llama 4 Turbo ![Lite](https://img.shields.io/badge/Lite-22c55e) | ❌ Too large | ✅ | ✅ | ❌ | ⚠️ Basic | ❌ |
+| **Alibaba** 🟠 | QWEN 3.7 Plus ![Full](https://img.shields.io/badge/Full-22c55e) | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
+| | QWEN 3.5 Max ![Full](https://img.shields.io/badge/Full-22c55e) | ✅ | ✅ | ✅ | ✅ | ✅ | ⚠️ Partial |
+| **DeepSeek** 🟣 | DeepSeek V4 Flash ![Full](https://img.shields.io/badge/Full-22c55e) | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
+| | DeepSeek V4 ![Full](https://img.shields.io/badge/Full-22c55e) | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
+| **Zhipu AI** 🔵 | GLM 5.2 ![Full](https://img.shields.io/badge/Full-22c55e) | ✅ | ✅ | ✅ | ⚠️ Limited | ✅ | ⚠️ Partial |
+| | GLM 5.1 Lite ![Lite](https://img.shields.io/badge/Lite-22c55e) | ❌ Too large | ✅ | ✅ | ❌ | ✅ | ❌ |
+| **Moonshot** 🟣 | KIM 2.7 ![Full](https://img.shields.io/badge/Full-22c55e) | ✅ | ✅ | ✅ | ⚠️ Limited | ⚠️ Basic | ❌ |
+| | KIM 2.5 ![Full](https://img.shields.io/badge/Full-22c55e) | ✅ | ✅ | ✅ | ❌ | ⚠️ Basic | ❌ |
+| **Mistral** 🔵 | Mistral 4 Large ![Full](https://img.shields.io/badge/Full-22c55e)![Lite](https://img.shields.io/badge/Lite-22c55e) | ✅ | ✅ | ✅ | ⚠️ Limited | ✅ | ✅ |
+| | Mistral 4 Small ![Lite](https://img.shields.io/badge/Lite-22c55e) | ❌ Too large | ✅ | ✅ | ❌ | ⚠️ Basic | ❌ |
+| **Microsoft** 🟦 | Phi-5 ![Lite](https://img.shields.io/badge/Lite-22c55e) | ❌ Too large | ✅ | ✅ | ❌ | ⚠️ Basic | ❌ |
+| **xAI** ⚫ | Grok 4 ![Full](https://img.shields.io/badge/Full-22c55e)![Lite](https://img.shields.io/badge/Lite-22c55e) | ✅ | ✅ | ✅ | ⚠️ Limited | ✅ | ✅ |
+| **01.AI** 🟢 | Yi 3.5 Max ![Full](https://img.shields.io/badge/Full-22c55e) | ✅ | ✅ | ✅ | ⚠️ Limited | ✅ | ⚠️ Partial |
+| **NVIDIA** 🟢 | Nemotron 3 Ultra ![Full](https://img.shields.io/badge/Full-22c55e) | ✅ | ✅ | ✅ | ⚠️ Limited | ✅ | ❌ |
+| **Cohere** 🟤 | Command R+ 2 ![Full](https://img.shields.io/badge/Full-22c55e) | ✅ | ✅ | ✅ | ⚠️ Limited | ✅ | ⚠️ Partial |
+| **Reka** 🟠 | Reka Core 2.5 ![Full](https://img.shields.io/badge/Full-22c55e) | ✅ | ✅ | ✅ | ⚠️ Limited | ✅ | ⚠️ Partial |
+| | | | | | | | |
+| **Platforms** | | | | | | | |
+| **Hermes Agent** 🟢 | v2.x ![Full](https://img.shields.io/badge/Full-22c55e) | ✅ | ✅ | ✅ | ✅ Native | ✅ | ✅ |
+| **Edge Gallery** 🟡 | — ![Lite](https://img.shields.io/badge/Lite-22c55e) | ❌ Too large | ✅ | ✅ | ✅ JS Tools | ✅ | ✅ memory.html |
+| **OpenCode CLI** 🟣 | Latest ![Full](https://img.shields.io/badge/Full-22c55e) | ✅ | ✅ | ✅ | ✅ | ✅ | ❌ |
+| **Cursor** 🟢 | Latest ![Full](https://img.shields.io/badge/Full-22c55e) | ✅ (custom instructions) | ✅ | ✅ | ⚠️ Limited | ✅ | ✅ .cursorrules |
+| **Ollama** 🟠 | Local ![Lite](https://img.shields.io/badge/Lite-22c55e) | ⚠️ Context-dependent | ✅ | ✅ | ❌ | ✅ | ❌ |
+| **OpenRouter** 🟣 | Multi-model ![Full](https://img.shields.io/badge/Full-22c55e) | ✅ | ✅ | ✅ | ⚠️ Limited | ✅ | ❌ |
+
+</details>
+
+### 📊 Token Cost Comparison
 
 | Version | SKILL.md | Core Modules | Capabilities | Total |
-|---------|----------|--------------|--------------|-------|
+|:--------|:--------:|:------------:|:------------:|:-----:|
 | **v5.2 (old)** | ~2,300 | ~3,800 | ~3,000 | ~9,100 |
 | **v6.0 Full (new)** | ~1,475 | ~2,000 | ~2,400 | ~5,875 |
 | **v6.0 Lite** | ~700 | — | — | ~700 |
 | **Savings** | **36% ↓** | **47% ↓** | **20% ↓** | **35% ↓** |
 
-### Response Quality (subjective indicators)
+### 📈 Response Quality (subjective indicators)
 
 | Metric | v5.2 | v6.0 | Change |
-|--------|------|------|--------|
+|:-------|:----:|:----:|:------:|
 | Mode selection accuracy | 85% | 95% | +10% |
 | First-response correctness | 78% | 88% | +10% |
 | Token waste (redundant instructions) | ~15% | ~4% | -11% |
@@ -388,23 +416,50 @@ A: Fork the repo, add a `.md` file under `references/capabilities/` following th
 
 ## 🌍 Supported Platforms
 
-| Platform | Version | Integration |
-|---|---|---|
-| **Claude** (Sonnet 5, Opus 5) | Full | Paste system prompt |
-| **ChatGPT** (GPT 5.4, GPT 5.5) | Full | Paste system prompt |
-| **Fable 5** | Full | Paste system prompt |
-| **Hermes Agent** | Full | `cp` to skills dir |
-| **Edge Gallery** | Lite | URL import |
-| **Gemini** (Gemini 3.5 Flash) | Lite | Paste system prompt |
-| **GLM 5.2** | Full | System prompt |
-| **KIM 2.7** | Full | System prompt |
-| **QWEN 3.7 Plus** | Full | System prompt |
-| **OpenCode CLI** | Full | `--prompt` flag |
-| **Cursor** | Full | Custom instructions |
-| **Ollama** | Lite | System prompt |
-| **OpenRouter** | Full | System prompt |
-| **Codex CLI** | Full | `--prompt` flag |
-| **Any API** | Full | `system` message |
+<details open>
+<summary><strong>All Compatible Platforms & Integrations</strong></summary>
+<br>
+
+| Vendor | Platform | Version | Integration Method |
+|:---|---|:---:|:---|
+| **Anthropic** 🟠 | Sonnet 5 | Full | Paste system prompt / API `system` |
+| | Opus 5 | Full | Paste system prompt / API `system` |
+| | Fable 5 | Full | Paste system prompt / API `system` |
+| **OpenAI** 🟢 | GPT 5.4 | Full + Lite | Paste system prompt / API `system` |
+| | GPT 5.5 | Full | Paste system prompt / API `system` |
+| | o5 | Full | Paste system prompt |
+| **Google** 🔵 | Gemini 3.5 Flash | Lite | Paste system prompt |
+| | Gemini 3.5 Pro | Full | Paste system prompt |
+| **Meta** 🔵 | Llama 5 | Full | System prompt (≥16K ctx) |
+| | Llama 4 Turbo | Lite | System prompt (≤8K ctx) |
+| **Alibaba** 🟠 | QWEN 3.7 Plus | Full | System prompt |
+| | QWEN 3.5 Max | Full | System prompt |
+| **DeepSeek** 🟣 | DeepSeek V4 Flash | Full | System message |
+| | DeepSeek V4 | Full | System message |
+| **Zhipu AI** 🔵 | GLM 5.2 | Full | System prompt |
+| | GLM 5.1 Lite | Lite | System prompt (≤8K ctx) |
+| **Moonshot** 🟣 | KIM 2.7 | Full | System prompt |
+| | KIM 2.5 | Full | System prompt |
+| **Mistral** 🔵 | Mistral 4 Large | Full + Lite | System message |
+| | Mistral 4 Small | Lite | System message (≤8K ctx) |
+| **Microsoft** 🟦 | Phi-5 | Lite | System prompt |
+| **xAI** ⚫ | Grok 4 | Full + Lite | System message |
+| **01.AI** 🟢 | Yi 3.5 Max | Full | System prompt |
+| **NVIDIA** 🟢 | Nemotron 3 Ultra | Full | System message |
+| **Cohere** 🟤 | Command R+ 2 | Full | System prompt |
+| **Reka** 🟠 | Reka Core 2.5 | Full | System prompt |
+| | | | |
+| **Platforms** | | | |
+| **Hermes Agent** 🟢 | — | Full | Copy to `skills/persona/` directory |
+| **Edge Gallery** 🟡 | — | Lite | URL import |
+| **OpenCode CLI** 🟣 | — | Full | `--prompt` flag |
+| **Cursor** 🟢 | — | Full | Custom instructions |
+| **Ollama** 🟠 | — | Lite | System prompt |
+| **OpenRouter** 🟣 | — | Full | System prompt |
+| **Codex CLI** 🟣 | — | Full | `--prompt` flag |
+| **Any OpenAI API** 🟢 | — | Full | `system` message |
+
+</details>
 
 ---
 
