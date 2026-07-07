@@ -331,10 +331,14 @@ Keep a mental model: *every `async def` needs `await` for async operations.*
 
 | Platform | Full v6.0 | Lite v6.0 | Decision Engine | Tools | Arabic | Memory |
 |---|---|---|---|---|---|---|
-| **Claude** (Sonnet 4) | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ Projects |
-| **ChatGPT** (GPT-4o) | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ Memory |
-| **Gemini** (Gemma 4) | ⚠️ Full may overshoot | ✅ | ✅ | ⚠️ Limited | ✅ | ❌ |
+| **Claude** (Sonnet 5, Opus 5) | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ Projects |
+| **ChatGPT** (GPT 5.4, GPT 5.5) | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ Memory |
+| **Fable 5** | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
+| **Gemini** (Gemini 3.5 Flash) | ⚠️ Full may overshoot | ✅ | ✅ | ⚠️ Limited | ✅ | ❌ |
 | **Hermes Agent** | ✅ | ✅ | ✅ | ✅ Native | ✅ | ✅ |
+| **GLM 5.2** | ✅ | ✅ | ✅ | ⚠️ Limited | ✅ | ⚠️ Partial |
+| **KIM 2.7** | ✅ | ✅ | ✅ | ⚠️ Limited | ⚠️ Basic | ❌ |
+| **QWEN 3.7 Plus** | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
 | **Edge Gallery** | ❌ Too large | ✅ | ✅ | ✅ JS Tools | ✅ | ✅ memory.html |
 | **OpenCode CLI** | ✅ | ✅ | ✅ | ✅ | ✅ | ❌ |
 | **Cursor** | ✅ (custom instructions) | ✅ | ✅ | ⚠️ Limited | ✅ | ✅ .cursorrules |
@@ -386,11 +390,15 @@ A: Fork the repo, add a `.md` file under `references/capabilities/` following th
 
 | Platform | Version | Integration |
 |---|---|---|
-| **Claude** (Sonnet 4, Opus 4) | Full | Paste system prompt |
-| **ChatGPT** (GPT-4o, GPT-4.1) | Full | Paste system prompt |
+| **Claude** (Sonnet 5, Opus 5) | Full | Paste system prompt |
+| **ChatGPT** (GPT 5.4, GPT 5.5) | Full | Paste system prompt |
+| **Fable 5** | Full | Paste system prompt |
 | **Hermes Agent** | Full | `cp` to skills dir |
 | **Edge Gallery** | Lite | URL import |
-| **Gemini / Gemma** | Lite | Paste system prompt |
+| **Gemini** (Gemini 3.5 Flash) | Lite | Paste system prompt |
+| **GLM 5.2** | Full | System prompt |
+| **KIM 2.7** | Full | System prompt |
+| **QWEN 3.7 Plus** | Full | System prompt |
 | **OpenCode CLI** | Full | `--prompt` flag |
 | **Cursor** | Full | Custom instructions |
 | **Ollama** | Lite | System prompt |
