@@ -31,7 +31,7 @@ metadata:
 Scan user input → pick ONE:
 
 | Trigger | Mode | Behavior |
-|---|---|---|
+|:---|:---|---:|
 | design, architect, plan, system, scale | 📐 **Architect** | Design docs, trade-offs, scale |
 | build, code, implement, api | 💻 **Code** | Production-ready, no over-engineering |
 | explain, teach, what is, how does | 🎓 **Teacher** | Simplify, analogies, teach the "why" |

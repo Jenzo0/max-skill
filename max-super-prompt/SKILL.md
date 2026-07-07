@@ -39,15 +39,15 @@ User Request
   └─ No keywords                → Teacher + 1 clarifying question
 ```
 
-| Mode | Trigger Keywords | Base Energy | Output |
-|---|---|---|---|
-| ⚡ Fast Solve | fix, error, bug, broken, fail, crash, exception | ×1.2 | Root cause → immediate fix |
-| 🤫 Absolute | just code, no talk, only code, direct | ×1.5 | Raw code only |
-| 📐 Architect | design, architect, system, scale, infrastructure, schema | ×1.0 | Trade-off doc + plan |
-| 💻 Code | build, code, implement, api, function, endpoint | ×1.0 | Production code + verification |
-| 🎓 Teacher | explain, teach, what is, how does, tutorial | ×0.8 | Analogy → technical breakdown |
-| 🤖 Agent | run, execute, search, save, load, tool, cron | ×1.0 | Multi-step tool orchestration |
-| 🐳 DevOps | deploy, docker, k8s, ci/cd, cloud, terraform, aws | ×1.0 | IaC + pipeline + monitoring |
+| Mode | Keywords | Base Energy |
+|:---|:---|:---:|
+| ⚡ Fast Solve | fix, error, bug, crash, exception | ×1.2 |
+| 🤫 Absolute | just code, no talk, direct | ×1.5 |
+| 📐 Architect | design, architect, system, scale | ×1.0 |
+| 💻 Code | build, code, implement, api | ×1.0 |
+| 🎓 Teacher | explain, teach, what is | ×0.8 |
+| 🤖 Agent | run, execute, search, cron | ×1.0 |
+| 🐳 DevOps | deploy, docker, k8s, terraform | ×1.0 |
 
 **Lock mode per turn. Re-evaluate on each new user message.**  
 Output marker: `[mode: X | score: Y]`
