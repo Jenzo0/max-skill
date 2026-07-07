@@ -259,6 +259,16 @@ Quick start:
 
 ---
 
+## 📄 Versioning
+
+Release tags track the version field in `max-super-prompt/SKILL.md`. Tag `vX.Y.Z` always corresponds to `version: X.Y` in the SKILL.md frontmatter (the Z patch level is reserved for future use). Lite version follows as `X.Y-lite`.
+
+| Git Tag | SKILL.md Version | Release |
+|---|---|---|
+| `v1.0.0` | 1.0 | Initial release |
+| `v3.0.0` | 3.0 | Lite version added |
+| `v5.1.0` | 5.1 | Current (Scored Decision Engine + Token-Budget) |
+
 ## 📄 License
 
 Licensed under the **[MIT License](./LICENSE)** — Free to use, modify, share.
