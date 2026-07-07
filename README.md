@@ -261,7 +261,7 @@ Quick start:
 
 ## 📄 License
 
-**MIT** — Free to use, modify, share.
+Licensed under the **[MIT License](./LICENSE)** — Free to use, modify, share.
 
 ---
 
