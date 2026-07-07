@@ -31,72 +31,59 @@ jobs:
       - name: Run Token Budget Check
         shell: python
         run: |
-          import os
-          import sys
-          import glob
-          import tiktoken
+          import os, sys, glob, tiktoken
 
-          def analyze_file(file_path, encoding_name="cl100k_base"):
-              if not os.path.exists(file_path):
-                  return None, None
-              with open(file_path, "r", encoding="utf-8", errors="ignore") as f:
+          FAILED = False
+
+          def tokens_of(path):
+              with open(path, "r", encoding="utf-8", errors="ignore") as f:
                   content = f.read()
-              lines = len(content.splitlines())
-              try:
-                  encoding = tiktoken.get_encoding(encoding_name)
-                  tokens = len(encoding.encode(content))
-              except Exception as e:
-                  print(f"❌ Error encoding file {file_path}: {e}")
-                  sys.exit(1)
-              return lines, tokens
+              enc = tiktoken.get_encoding("cl100k_base")
+              return len(enc.encode(content))
 
-          failed = False
-          skill_path = "max-super-prompt/SKILL.md"
+          # Per-category budget limits (realistic for on-demand reference modules)
+          BUDGETS = {
+              "references/core/": 1000,
+              "references/modes/": 500,
+              "references/capabilities/": 800,
+              "references/memory/": 800,
+              "references/tools/": 1000,
+          }
+
+          # 1. SKILL.md (main) — max 2,000 tokens
+          sk = tokens_of("max-super-prompt/SKILL.md")
+          print(f"📄 max-super-prompt/SKILL.md: {sk} tokens (limit: 2000)")
+          if sk > 2000:
+              print(f"   ❌ OVER LIMIT by {sk - 2000} tokens")
+              FAILED = True
+
+          # 2. Lite — max 800 tokens
+          lt = tokens_of("max-super-prompt/lite/SKILL.md")
+          print(f"📄 max-super-prompt/lite/SKILL.md: {lt} tokens (limit: 800)")
+          if lt > 800:
+              print(f"   ❌ OVER LIMIT by {lt - 800} tokens")
+              FAILED = True
+
+          # 3. All reference files (recursive) — per-category budgets
+          refs = glob.glob("max-super-prompt/references/**/*.md", recursive=True)
+          for r in sorted(refs):
+              t = tokens_of(r)
+              short = r.replace("\\", "/")
+              # Determine category from path
+              cat_limit = 500  # default
+              for prefix, limit in BUDGETS.items():
+                  if prefix in short:
+                      cat_limit = limit
+                      break
+              ok = "✅" if t <= cat_limit else "❌"
+              print(f"   {ok} {short}: {t} tokens (limit: {cat_limit})")
+              if t > cat_limit:
+                  print(f"   ❌ EXCEEDS CATEGORY LIMIT by {t - cat_limit} tokens")
+                  FAILED = True
 
           print("=" * 60)
-          print("🚀 STARTING TOKEN AND LINE BUDGET CHECK")
-          print("=" * 60)
-
-          lines, tokens = analyze_file(skill_path)
-          if lines is None:
-              print(f"❌ CRITICAL ERROR: Target file not found at {skill_path}")
+          if FAILED:
+              print("❌ BUDGET VIOLATION: One or more files exceed token limits.")
               sys.exit(1)
-
-          print(f"📊 Analyzing: {skill_path}")
-          print(f"   • Lines:  {lines} / 500")
-          print(f"   • Tokens: {tokens} / 5000")
-
-          if lines > 500:
-              overflow = lines - 500
-              print(f"   ⚠️ BUDGET VIOLATION: Exceeded line limit! [Limit: 500 | Actual: {lines} | Overflow: +{overflow}]")
-              failed = True
-
-          if tokens > 5000:
-              overflow = tokens - 5000
-              print(f"   ⚠️ BUDGET VIOLATION: Exceeded token limit! [Limit: 5000 | Actual: {tokens} | Overflow: +{overflow}]")
-              failed = True
-
-          print("-" * 60)
-          ref_pattern = "max-super-prompt/references/*.md"
-          ref_files = glob.glob(ref_pattern)
-
-          if not ref_files:
-              print("ℹ️ No reference files found in max-super-prompt/references/")
-          else:
-              print("🔍 Checking Reference Files (Limit: 2000 tokens per file):")
-              for ref_path in ref_files:
-                  _, ref_tokens = analyze_file(ref_path)
-                  print(f"   • {os.path.basename(ref_path)}: {ref_tokens} tokens")
-
-                  if ref_tokens > 2000:
-                      overflow = ref_tokens - 2000
-                      print(f"   ⚠️ BUDGET VIOLATION: {os.path.basename(ref_path)} exceeded token limit! [Limit: 2000 | Actual: {ref_tokens} | Overflow: +{overflow}]")
-                      failed = True
-
-          print("=" * 60)
-          if failed:
-              print("❌ CI CHECK FAILED: Token or Line budget exceeded. Please optimize your prompt files.")
-              sys.exit(1)
-
-          print("✅ SUCCESS: All files are within the defined token and line budgets!")
+          print("✅ All files within token budgets!")
           sys.exit(0)

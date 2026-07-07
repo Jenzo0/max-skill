@@ -2,47 +2,51 @@
 name: max-super-prompt
 ---
 
-# Roadmap — Max Super Prompt
+# Roadmap — Max Universal AI Skill Framework
 
 ## Vision
 
-Transform Max from a single persona prompt into a complete **AI Skill Framework** — modular, extensible, platform-agnostic, and production-ready for any LLM or agent system.
+Transform Max from a single persona prompt into a complete **AI Skill Framework** — modular, extensible, platform-agnostic, production-ready for any LLM or agent system, with a community skill ecosystem.
 
-## Priorities
+## What's New in v6.0
 
-### ✅ Done (v5.0)
-- [x] 3 new capability files: AI/ML, Mobile, Desktop
-- [x] Tool Registry with permissions, fallback, and platform matrix
-- [x] Merged js-tools → core-tool-abstraction (unified reference)
-- [x] CHANGELOG.md + ROADMAP.md
-- [x] Version numbers removed from public titles
-- [x] "Egyptian Arabic" → "Bilingual English + Arabic" rebranding
+| Feature | Status |
+|---------|--------|
+| Enterprise modular architecture (core/modes/capabilities/memory/tools) | ✅ Done |
+| SKILL.md compressed 36% (~1,475 tokens) | ✅ Done |
+| Memory abstraction layer (strategy + 6 backends) | ✅ Done |
+| Tool Registry v6.0 (14 ops × 7 platforms) | ✅ Done |
+| Database + Security capability modules | ✅ Done |
+| Practical examples directory (5 guides) | ✅ Done |
+| Open-source files (SECURITY, CODE_OF_CONDUCT, SUPPORT) | ✅ Done |
+| GitHub Issue templates | ✅ Done |
+| Zero NEVER directives in Lite (Gemma-safe) | ✅ Done |
 
-### 🔜 Next (v5.x)
+### 🔜 Next (v6.x)
 
 | Priority | Item | Impact |
 |---|---|---|
-| P1 | **Prompt Compression**: target SKILL.md <5KB without losing info | Reduced tokens, faster load |
-| P2 | **Memory Interface Layer**: formal abstraction for Hermes memory, SQLite, JSON, Vector DB | Cross-platform persistence |
-| P2 | **Architecture Diagrams**: decision flow, tool resolution flow, memory flow (for contributors) | Easier contributions |
-| P3 | **Capability: Game Development** (Unity, Unreal, Godot, Phaser) | Broader coverage |
-| P3 | **Capability: Embedded Systems** (Arduino, ESP32, Raspberry Pi, Zephyr) | IoT/embedded coverage |
+| P1 | **Plugin SDK**: Define standard for third-party capability modules | Community contributions |
+| P2 | **Skill Marketplace**: Hosted community registry for user-contributed skills | Discovery & reuse |
+| P2 | **Auto-Compressor**: Script that analyzes SKILL.md + references and suggests token savings | Performance |
+| P3 | **Capability: Game Development** (Unity, Unreal, Godot) | Broader coverage |
+| P3 | **Capability: Embedded Systems** (Arduino, ESP32, Zephyr) | IoT coverage |
+| P3 | **Benchmark Suite**: Automated tests across LLMs (accuracy, tokens, adherence) | Quality |
 
-### 🚀 Future (v6+)
+### 🚀 Future (v7+)
 
-| Theme | Description |
-|---|---|
-| **Benchmark Suite** | Automated tests measuring Max across 5+ LLMs (accuracy, tokens, latency, adherence) |
-| **Plugin System** | Third-party capability modules that anyone can author and publish |
-| **Auto-Compressor** | Script that analyzes SKILL.md + references and suggests token savings |
-| **Multi-Agent Orchestration** | Max as the coordinator delegating sub-tasks to specialized agents |
-| **Visual Skill Builder** | GUI tool for assembling persona skills without editing markdown |
+| Theme | Description | Target |
+|---|---|---|
+| **Memory Providers** | Redis adapter, SQLite backend, Vector DB (Chroma/Qdrant) | Q4 2026 |
+| **Multi-Agent Runtime** | Max as coordinator delegating to specialized sub-agents | Q1 2027 |
+| **Community Skill Library** | Published skill registry with versioning and dependency management | Q1 2027 |
+| **Tool Providers SDK** | Third-party tool integrations via webhook/plugin | Q2 2027 |
+| **Visual Skill Builder** | GUI for assembling persona skills without markdown editing | Q2 2027 |
 
 ## How to Contribute
 
 1. Fork the repo
-2. Improve modules under `references/`
-3. Test with the Lite version for Edge Gallery safety
-4. Submit a PR
-
-> *"Every great achievement starts with the decision to try."* 🚀
+2. Add/improve modules under `references/{core,modes,capabilities,memory,tools}/`
+3. Ensure token budget passes (run the CI check)
+4. Test with Lite version for Edge Gallery safety
+5. Submit a PR

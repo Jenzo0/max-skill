@@ -1,4 +1,4 @@
-# 🤝 Contributing to Max Super Prompt
+# 🤝 Contributing to Max — Universal AI Skill Framework
 
 Thank you for considering contributing! This project thrives on community additions — modules, platforms, modes, and improvements.
 
@@ -47,12 +47,12 @@ git checkout -b feat/my-improvement
 
 ## Module Development Guide
 
-Each reference module under `references/` is a standalone `.md` file that follows this template:
+Each reference module under `references/{core,modes,capabilities,memory,tools}/` is a standalone `.md` file that follows this template:
 
 ```markdown
 # Module Name
 
-> Brief description (1–2 lines)
+> Brief description (1–2 lines) — use the appropriate subdirectory
 
 ## When to Load
 
@@ -69,16 +69,16 @@ Each reference module under `references/` is a standalone `.md` file that follow
 ### Rules
 
 - Keep each module **≤ 500 tokens** (tokenize with `tiktoken` or any tokenizer)
-- Use **absolute paths** for cross-references: `skill_view(name='max-super-prompt', file_path='references/<module>.md')`
-- Do NOT import modules that import each other cyclically (see dependency graph in SKILL.md)
+- Use **absolute paths** for cross-references: `skill_view(name='max-super-prompt', file_path='references/<category>/<module>.md')`
+- Do NOT import modules that import each other cyclically
 - Test with both Full and Lite versions
 
 ## Adding a New Capability Domain
 
-1. Create `references/capabilities-<name>.md`
-2. Add it to **SKILL.md** — `Token-Budget Enforcement Layer` → Module Registry table
-3. Add it to **README.md** — Repository Structure tree + Mode Reference table
-4. Add loading condition in **core-modes.md** (if a new mode)
+1. Create `references/capabilities/<name>.md`
+2. Add it to **SKILL.md** — Dynamic Module Loading table
+3. Add it to **README.md** — Module Structure tree
+4. Add loading condition in the mode's capability mapping (if loading by mode)
 5. Update Lite version if the domain is essential
 
 ### Capability Template
@@ -105,9 +105,9 @@ Each reference module under `references/` is a standalone `.md` file that follow
 
 ## Adding a New Mode
 
-1. **Decision Engine**: Add row to scoring matrix in `SKILL.md` — keywords, context cues, base energy
-2. **Full definition**: Add section in `core-modes.md` — output format, examples, behavior rules
-3. **Capability mapping**: Link to relevant capability modules in the Token-Budget table
+1. **Decision Engine**: Add row to scoring matrix in `SKILL.md` — keywords, base energy
+2. **Full definition**: Add file in `references/modes/<name>.md` — output format, examples, behavior rules
+3. **Capability mapping**: Link to relevant capability modules in the Dynamic Loading table
 4. **README**: Add row to Mode Reference table
 5. **Lite version**: Add trigger-only entry to `lite/SKILL.md`
 
@@ -115,10 +115,17 @@ Each reference module under `references/` is a standalone `.md` file that follow
 
 ### 1. Token Budget Check (CI — Automatic)
 
-This repository has a **GitHub Actions workflow** (`.github/workflows/token-budget-check.yml`) that automatically runs on every push and pull request touching `SKILL.md`, `lite/SKILL.md`, or `references/` files. It enforces:
+This repository has a **GitHub Actions workflow** (`.github/workflows/token-budget-check.yml`) that automatically runs on every push and pull request touching `max-super-prompt/` files. It enforces per-category budgets:
 
-- **SKILL.md**: ≤ 500 lines, ≤ 5,000 tokens
-- **Reference modules**: ≤ 2,000 tokens each
+| Category | Limit | Notes |
+|---|---|---|
+| `SKILL.md` | 2,000 tokens | Main entry point |
+| `lite/SKILL.md` | 800 tokens | Edge Gallery / Gemma |
+| `references/core/` | 1,000 tokens each | Persona, rules, workflow |
+| `references/modes/` | 500 tokens each | Per-mode modules |
+| `references/capabilities/` | 800 tokens each | Domain expertise |
+| `references/memory/` | 800 tokens each | Memory abstraction |
+| `references/tools/` | 1,000 tokens | Tool registry |
 
 If the workflow fails, your changes exceed the budget — optimize before merging.
 
@@ -128,7 +135,7 @@ For quick local checks before committing:
 
 ```bash
 # Count tokens in your module
-python -c "import tiktoken; enc = tiktoken.get_encoding('cl100k_base'); print(len(enc.encode(open('references/my-module.md').read())))"
+python -c "import tiktoken; enc = tiktoken.get_encoding('cl100k_base'); print(len(enc.encode(open('references/capabilities/my-module.md').read())))"
 ```
 
 ### 3. Lite Compatibility

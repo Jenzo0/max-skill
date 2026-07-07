@@ -6,6 +6,32 @@ name: max-super-prompt
 
 All notable changes to the Max Super Prompt skill.
 
+## 6.0 — 2026-07-07 — Enterprise Universal AI Skill Framework
+
+### Added
+- **Enterprise modular architecture**: `references/core/`, `modes/`, `capabilities/`, `memory/`, `tools/` subdirectories
+- **2 new capability modules**: `database.md` (SQL/NoSQL, ORMs, performance), `security.md` (OWASP Top 10, web security, infra security)
+- **Memory abstraction layer**: `strategy.md` (interface spec) + `persistence.md` (6 backend implementations)
+- **Tool Registry v6.0**: 14 operations × 7 platforms with fallback chains & platform detection
+- **Practical examples directory**: `examples/01-code-api.md` through `examples/05-contributing-guide.md`
+- **GitHub Issue Templates**: `bug_report.md`, `feature_request.md`, `pull_request_template.md`
+- **Open-source supporting files**: `SECURITY.md`, `CODE_OF_CONDUCT.md`, `SUPPORT.md`
+- **Complete AUDIT-REPORT.md**: 28 issues identified across 8 categories
+- **Token budget CI workflow**: Updated for recursive subdirectory checking
+
+### Changed
+- **SKILL.md**: Compressed from ~2,300 tokens to ~1,475 tokens (36% reduction)
+- **README.md**: Completely rewritten with Why Max, Architecture, Examples, Benchmarks, FAQ, Comparison table
+- **Lite SKILL.md**: Updated to v6.0-lite, zero NEVER directives (2,924 bytes / ~700 tokens)
+- **Decision Engine**: Deterministic routing tree — weighted keywords × base energy + mode locking
+- **Capability modules**: Refreshed with current frameworks (FastAPI 2026 era, React 19, Kwai, etc.)
+- **CONTRIBUTING.md**: Updated for new subdirectory module structure
+- **ROADMAP.md**: Updated with v6+ milestones (Plugin SDK Q3, Multi-Agent Q1 2027)
+
+### Removed
+- Flat `references/*.md` files (migrated to subdirectories)
+- `wiki/` directory (content merged into README + modular references)
+
 ## 5.1 — 2026-07-05 — Scored Decision Engine + Token-Budget + MoA Fix
 
 ### Added
