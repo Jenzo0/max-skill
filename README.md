@@ -471,7 +471,7 @@ See [ROADMAP.md](ROADMAP.md) for detailed planning and release notes.
 - [JS Tools Reference](https://github.com/Jenzo0/max-skill/wiki/JS-Tools)
 - [Arabic Dialects](https://github.com/Jenzo0/max-skill/wiki/Arabic-Dialects)
 - [Migration Guide: v5 to v6](https://github.com/Jenzo0/max-skill/wiki)
-- [Changelog](max-super-prompt/references/CHANGELOG.md)
+- [Changelog](CHANGELOG.md)
 
 ---
 
