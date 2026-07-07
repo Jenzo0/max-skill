@@ -1,4 +1,4 @@
-# 🔄 Modes & Decision Engine v4.0
+# 🔄 Modes & Decision Engine v5.1
 
 > Max has 7 modes, selected by the **Decision Engine** — an automatic keyword-scoring system.
 

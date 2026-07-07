@@ -1,11 +1,11 @@
-title: Max Super Prompt v4.0 — The Jarvis Killer
-description: "Primary: Full v4.0 (5.9KB) for Claude/ChatGPT/Hermes. Secondary: Lite v4.0 (2.2KB) for Edge Gallery/Gemma. Decision Engine, dynamic capability loading, 4 context layers, tool abstraction. Open source."
+title: Max Super Prompt v5.1 — The Jarvis Killer
+description: "Primary: Full v5.1 (9.4KB) for Claude/ChatGPT/Hermes. Secondary: Lite v5.1 (3.0KB) for Edge Gallery/Gemma. Decision Engine, dynamic capability loading, 4 context layers, tool abstraction. Open source."
 url: https://jenzo0.github.io/max-skill
 theme: jekyll-theme-cayman
 show_downloads: true
 google_analytics:
 lang: en_US
 og:
-  title: Max Super Prompt v4.0 — Universal Agent Persona
-  description: "Multi-mode CTO/Architect/Dev/Teacher/DevOps persona for any LLM. Full v4.0 (primary) + Lite v4.0 (Edge Gallery). Decision Engine, dynamic capabilities, 4 context layers, tool abstraction. Open source."
+  title: Max Super Prompt v5.1 — Universal Agent Persona
+  description: "Multi-mode CTO/Architect/Dev/Teacher/DevOps persona for any LLM. Full v5.1 (primary) + Lite v5.1 (Edge Gallery). Decision Engine, dynamic capabilities, 4 context layers, tool abstraction. Open source."
   image: https://jenzo0.github.io/max-skill/assets/og-image.png

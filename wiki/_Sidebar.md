@@ -7,5 +7,5 @@
 
 ---
 
-**🏆 Full v4.0** · **🪶 Lite v4.0**
-**v4.0** | *Modular* | *Decision Engine* | *Context Layers*
+**🏆 Full v5.1** · **🪶 Lite v5.1**
+**v5.1** | *Modular* | *Decision Engine* | *Context Layers*

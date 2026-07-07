@@ -1,10 +1,10 @@
-# 🧠 Max Super Prompt v4.0 — The Jarvis Killer
+# 🧠 Max Super Prompt v5.1 — The Jarvis Killer
 
 > **Welcome to the wiki!** Max Super Prompt is a **modular multi-mode Senior Engineer persona** that transforms any LLM into a complete tech team in one body.
 
-## 🏆 Primary: Full v4.0
+## 🏆 Primary: Full v5.1
 
-The full version (5.9KB) is the recommended default for Claude, ChatGPT, Hermes, OpenRouter, and API users.
+The full version (9.4KB) is the recommended default for Claude, ChatGPT, Hermes, OpenRouter, and API users.
 
 **Features:**
 - 🧩 **Modular architecture** with 12 reference modules
@@ -14,9 +14,9 @@ The full version (5.9KB) is the recommended default for Claude, ChatGPT, Hermes,
 - 🔌 **Tool Abstraction** — unified API across all platforms
 - 📜 **10 Golden Rules** with full explanations
 
-## 🪶 Secondary: Lite v4.0
+## 🪶 Secondary: Lite v5.1
 
-The lite version (2.2KB) is for Edge Gallery, Gemma, and resource-constrained environments. Zero conflicting instructions, safe for all models.
+The lite version (3.0KB) is for Edge Gallery, Gemma, and resource-constrained environments. Zero conflicting instructions, safe for all models.
 
 ## 🚀 Quick Links
 
@@ -30,8 +30,8 @@ The lite version (2.2KB) is for Edge Gallery, Gemma, and resource-constrained en
 
 ```
 max-super-prompt/
-├── SKILL.md              ← 🏆 Full v4.0 (primary, 5.9KB)
-├── lite/SKILL.md         ← 🪶 Lite v4.0 (Edge Gallery, 2.2KB)
+├── SKILL.md              ← 🏆 Full v5.1 (primary, 9.4KB)
+├── lite/SKILL.md         ← 🪶 Lite v5.1 (Edge Gallery, 3.0KB)
 ├── references/           ← 🧩 12 reference modules
 │   ├── core-persona.md, core-rules.md, core-modes.md
 │   ├── core-response.md, core-context-layers.md
