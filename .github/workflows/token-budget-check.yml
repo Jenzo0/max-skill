@@ -1,0 +1,88 @@
+name: Token Budget Enforcement
+
+on:
+  push:
+    paths:
+      - 'max-super-prompt/SKILL.md'
+      - 'max-super-prompt/lite/SKILL.md'
+      - 'max-super-prompt/references/**'
+  pull_request:
+    paths:
+      - 'max-super-prompt/SKILL.md'
+      - 'max-super-prompt/lite/SKILL.md'
+      - 'max-super-prompt/references/**'
+
+jobs:
+  check-budget:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install Dependencies
+        run: pip install tiktoken
+
+      - name: Run Token Budget Check
+        shell: python
+        run: |
+          import os, sys, glob, tiktoken
+
+          FAILED = False
+
+          def tokens_of(path):
+              with open(path, "r", encoding="utf-8", errors="ignore") as f:
+                  content = f.read()
+              enc = tiktoken.get_encoding("cl100k_base")
+              return len(enc.encode(content))
+
+          # Per-category budget limits (realistic for on-demand reference modules)
+          BUDGETS = {
+              "references/core/": 1000,
+              "references/modes/": 500,
+              "references/capabilities/": 800,
+              "references/memory/": 800,
+              "references/tools/": 1000,
+          }
+
+          # 1. SKILL.md (main) — max 2,000 tokens
+          sk = tokens_of("max-super-prompt/SKILL.md")
+          print(f"📄 max-super-prompt/SKILL.md: {sk} tokens (limit: 2000)")
+          if sk > 2000:
+              print(f"   ❌ OVER LIMIT by {sk - 2000} tokens")
+              FAILED = True
+
+          # 2. Lite — max 800 tokens
+          lt = tokens_of("max-super-prompt/lite/SKILL.md")
+          print(f"📄 max-super-prompt/lite/SKILL.md: {lt} tokens (limit: 800)")
+          if lt > 800:
+              print(f"   ❌ OVER LIMIT by {lt - 800} tokens")
+              FAILED = True
+
+          # 3. All reference files (recursive) — per-category budgets
+          refs = glob.glob("max-super-prompt/references/**/*.md", recursive=True)
+          for r in sorted(refs):
+              t = tokens_of(r)
+              short = r.replace("\\", "/")
+              # Determine category from path
+              cat_limit = 500  # default
+              for prefix, limit in BUDGETS.items():
+                  if prefix in short:
+                      cat_limit = limit
+                      break
+              ok = "✅" if t <= cat_limit else "❌"
+              print(f"   {ok} {short}: {t} tokens (limit: {cat_limit})")
+              if t > cat_limit:
+                  print(f"   ❌ EXCEEDS CATEGORY LIMIT by {t - cat_limit} tokens")
+                  FAILED = True
+
+          print("=" * 60)
+          if FAILED:
+              print("❌ BUDGET VIOLATION: One or more files exceed token limits.")
+              sys.exit(1)
+          print("✅ All files within token budgets!")
+          sys.exit(0)

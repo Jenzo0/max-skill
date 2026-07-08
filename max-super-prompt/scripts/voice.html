@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Max Voice</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, system-ui, sans-serif; background: #1a1a2e; color: #eee; padding: 16px; }
+  .container { max-width: 500px; margin: 0 auto; }
+  h1 { font-size: 1.5em; margin-bottom: 4px; color: #e9a845; }
+  .subtitle { color: #888; font-size: 0.85em; margin-bottom: 20px; }
+  textarea { width: 100%; background: #16213e; color: #eee; border: 1px solid #0f3460; border-radius: 10px; padding: 12px; font-size: 14px; margin-bottom: 10px; resize: vertical; min-height: 80px; }
+  textarea:focus { outline: 2px solid #e9a845; }
+  .row { display: flex; gap: 8px; margin-bottom: 12px; flex-wrap: wrap; }
+  select { flex: 1; min-width: 120px; background: #16213e; color: #eee; border: 1px solid #0f3460; border-radius: 10px; padding: 12px; font-size: 14px; }
+  select:focus { outline: 2px solid #e9a845; }
+  .btn { background: #e9a845; color: #1a1a2e; border: none; border-radius: 10px; padding: 12px 18px; font-size: 14px; font-weight: 600; cursor: pointer; transition: 0.2s; }
+  .btn-outline { background: transparent; border: 1px solid #e9a845; color: #e9a845; }
+  .btn:hover { transform: scale(1.03); opacity: 0.9; }
+  .btn-sm { padding: 8px 14px; font-size: 12px; }
+  .btn-danger { background: #e94560; color: #fff; }
+  .actions { display: flex; flex-wrap: wrap; gap: 6px; margin: 10px 0; }
+  #status { font-size: 12px; color: #4ecca3; margin-top: 6px; }
+  .results { background: #16213e; border-radius: 10px; padding: 12px; margin-top: 12px; min-height: 40px; white-space: pre-wrap; font-size: 13px; line-height: 1.5; }
+  .voice-visualizer { display: flex; align-items: center; justify-content: center; gap: 4px; height: 60px; margin: 16px 0; }
+  .voice-bar { width: 6px; background: #e9a845; border-radius: 3px; transition: 0.1s; }
+  .voice-bar.active { animation: pulse 0.5s ease-in-out infinite alternate; }
+  @keyframes pulse { from { height: 8px; } to { height: 48px; } }
+  .lang-tag { display: inline-block; background: #0f3460; color: #e9a845; padding: 2px 10px; border-radius: 12px; font-size: 11px; margin: 2px; }
+</style>
+</head>
+<body>
+<div class="container">
+  <h1>🎤 Max <span style="color:#0f3460">Voice</span></h1>
+  <div class="subtitle">On-device Text-to-Speech · Uses Web Speech API (offline voices available)</div>
+
+  <label style="font-size:12px;color:#888;margin-bottom:4px;display:block">Enter text to speak:</label>
+  <textarea id="textInput" placeholder="Type or paste text here for Max to read aloud...">Hello! I'm Max, your Senior Engineer. How can I help you today?</textarea>
+
+  <div class="row">
+    <select id="voiceSelect">
+      <option value="">🌐 Default voice (auto)</option>
+    </select>
+    <select id="rateSelect">
+      <option value="1">🐢 Speed: Normal</option>
+      <option value="0.5">🐌 Speed: Slow</option>
+      <option value="0.75">🚶 Speed: Relaxed</option>
+      <option value="1.25">🏃 Speed: Fast</option>
+      <option value="1.5">🚀 Speed: Very Fast</option>
+    </select>
+  </div>
+
+  <div class="voice-visualizer" id="visualizer">
+    <div class="voice-bar" style="height:12px"></div>
+    <div class="voice-bar" style="height:18px"></div>
+    <div class="voice-bar" style="height:8px"></div>
+    <div class="voice-bar" style="height:24px"></div>
+    <div class="voice-bar" style="height:14px"></div>
+    <div class="voice-bar" style="height:30px"></div>
+    <div class="voice-bar" style="height:10px"></div>
+    <div class="voice-bar" style="height:22px"></div>
+  </div>
+
+  <div class="actions">
+    <button class="btn btn-sm" onclick="speak()">🔊 Speak</button>
+    <button class="btn btn-sm btn-outline" onclick="stopSpeaking()">⏹️ Stop</button>
+    <button class="btn btn-sm btn-outline" onclick="pauseSpeaking()">⏸️ Pause</button>
+    <button class="btn btn-sm btn-outline" onclick="resumeSpeaking()">▶️ Resume</button>
+  </div>
+
+  <div style="margin-top:8px">
+    <span class="lang-tag">🇺🇸 English (US)</span>
+    <span class="lang-tag">🇬🇧 English (UK)</span>
+    <span class="lang-tag">🇪🇬 Arabic (Egypt)</span>
+    <span class="lang-tag">🇸🇦 Arabic (SA)</span>
+    <span class="lang-tag">🇫🇷 French</span>
+    <span class="lang-tag">🇩🇪 German</span>
+  </div>
+
+  <div id="status">Ready to speak</div>
+  <div id="results" class="results">Click "Speak" or send text via run_js to hear Max's voice!</div>
+</div>
+
+<script>
+let voices = [];
+let currentUtterance = null;
+
+// ─── LOAD VOICES ───
+function loadVoices() {
+  voices = speechSynthesis.getVoices();
+  const sel = document.getElementById('voiceSelect');
+  const currentVal = sel.value;
+  sel.innerHTML = '<option value="">🌐 Default voice (auto)</option>';
+
+  // Group by language
+  const groups = {};
+  voices.forEach(v => {
+    const lang = v.lang || 'unknown';
+    if (!groups[lang]) groups[lang] = [];
+    groups[lang].push(v);
+  });
+
+  Object.entries(groups).forEach(([lang, vlist]) => {
+    const label = lang + (vlist.some(v => v.localService) ? ' 📡' : ' ☁️');
+    const optgroup = document.createElement('optgroup');
+    optgroup.label = label;
+    vlist.forEach(v => {
+      const opt = document.createElement('option');
+      opt.value = v.name;
+      opt.textContent = `${v.name} (${v.lang})${v.localService ? ' ●' : ' ○'}`;
+      optgroup.appendChild(opt);
+    });
+    sel.appendChild(optgroup);
+  });
+
+  if (currentVal) sel.value = currentVal;
+}
+
+// Load voices (they might already be loaded)
+if (speechSynthesis.getVoices().length > 0) loadVoices();
+speechSynthesis.onvoiceschanged = loadVoices;
+
+// ─── SPEECH CONTROLS ───
+function speak() {
+  const text = document.getElementById('textInput').value.trim();
+  if (!text) { setStatus('⚠️ Enter some text first', true); return; }
+
+  // Cancel any current speech
+  speechSynthesis.cancel();
+
+  const utterance = new SpeechSynthesisUtterance(text);
+  currentUtterance = utterance;
+
+  // Selected voice
+  const selectedVoice = document.getElementById('voiceSelect').value;
+  if (selectedVoice) {
+    const voice = voices.find(v => v.name === selectedVoice);
+    if (voice) utterance.voice = voice;
+  }
+
+  // Rate
+  utterance.rate = parseFloat(document.getElementById('rateSelect').value);
+
+  // Events
+  utterance.onstart = () => {
+    setStatus('🔊 Speaking...');
+    document.querySelectorAll('.voice-bar').forEach(b => b.classList.add('active'));
+    document.getElementById('results').innerHTML = `<div style="color:#4ecca3">🔊 Speaking: "${text.substring(0, 60)}${text.length > 60 ? '...' : ''}"</div>`;
+  };
+  utterance.onend = () => {
+    setStatus('✅ Done');
+    document.querySelectorAll('.voice-bar').forEach(b => b.classList.remove('active'));
+  };
+  utterance.onerror = (e) => {
+    setStatus(`❌ Error: ${e.error}`, true);
+    document.querySelectorAll('.voice-bar').forEach(b => b.classList.remove('active'));
+  };
+
+  speechSynthesis.speak(utterance);
+  setStatus(`🔊 Speaking (${utterance.rate}x speed)...`);
+}
+
+function stopSpeaking() {
+  speechSynthesis.cancel();
+  currentUtterance = null;
+  document.querySelectorAll('.voice-bar').forEach(b => b.classList.remove('active'));
+  setStatus('⏹️ Stopped');
+}
+
+function pauseSpeaking() {
+  if (speechSynthesis.speaking) {
+    speechSynthesis.pause();
+    setStatus('⏸️ Paused');
+  }
+}
+
+function resumeSpeaking() {
+  if (speechSynthesis.paused) {
+    speechSynthesis.resume();
+    setStatus('▶️ Resumed');
+  }
+}
+
+function setStatus(msg, isError) {
+  document.getElementById('status').textContent = msg;
+  document.getElementById('status').style.color = isError ? '#e94560' : '#4ecca3';
+}
+</script>
+</body>
+</html>

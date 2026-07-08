@@ -1,0 +1,28 @@
+title: Max — Universal AI Skill Framework
+description: >-
+  Max Super Prompt transforms any LLM into a multi-mode Senior Engineer
+  — CTO, Architect, Developer, Teacher & DevOps in one prompt.
+  Modular, open-source, model-agnostic. 8 modes, 8 capability domains,
+  4 context layers, 14 tools × 7 platforms. Bilingual English + Arabic.
+url: https://jenzo0.github.io/max-skill/
+baseurl: ""
+author: Jenzo Sky
+version: 6.0
+
+# GitHub Pages config
+markdown: GFM
+highlighter: rouge
+permalink: pretty
+
+# SEO
+lang: en
+locale: en_US
+image: https://jenzo0.github.io/max-skill/index.html
+
+# Exclude build artifacts
+exclude:
+  - "*.sh"
+  - "*.bat"
+  - "*.ps1"
+  - node_modules/
+  - wiki/
