@@ -1,8 +1,5 @@
 <p align="center">
-  <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="https://img.shields.io/badge/🧠_Max-Universal_AI_Skill_Framework-FF6B6B?style=for-the-badge">
-    <img alt="Max Banner" src="https://img.shields.io/badge/🧠_Max-Universal_AI_Skill_Framework-FF6B6B?style=for-the-badge" height="60">
-  </picture>
+  <img alt="Max Banner" src="assets/images/max-banner.jpg" width="100%">
 </p>
 
 <h1 align="center">🧠 Max — Universal AI Skill Framework</h1>
