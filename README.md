@@ -1,16 +1,25 @@
 <p align="center">
-  <img src="https://img.shields.io/badge/Version-6.0-FF6B6B" alt="v6.0">
-  <img src="https://img.shields.io/badge/License-MIT-green" alt="MIT">
-  <img src="https://img.shields.io/badge/Model-Agnostic-blue" alt="Model Agnostic">
-  <img src="https://img.shields.io/badge/Platform-Universal-success" alt="Universal">
-  <img src="https://img.shields.io/badge/Locale-English%20%7C%20Arabic-orange" alt="Bilingual">
-  <img src="https://img.shields.io/badge/Architecture-Modular-purple" alt="Modular">
-  <img src="https://img.shields.io/badge/Code%20Review-Ready-brightgreen" alt="Code Review">
-  <img src="https://img.shields.io/badge/GitHub%20Pages-Deployed-blueviolet" alt="Pages">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="https://img.shields.io/badge/🧠_Max-Universal_AI_Skill_Framework-FF6B6B?style=for-the-badge">
+    <img alt="Max Banner" src="https://img.shields.io/badge/🧠_Max-Universal_AI_Skill_Framework-FF6B6B?style=for-the-badge" height="60">
+  </picture>
 </p>
 
 <h1 align="center">🧠 Max — Universal AI Skill Framework</h1>
-<h3 align="center">CTO + Senior Dev + Architect + Teacher in One Prompt</h3>
+<h3 align="center">CTO + Senior Dev + Architect + Teacher in One Prompt · 100% Prompt-Only</h3>
+
+<p align="center">
+  <a href="https://github.com/Jenzo0/max-skill/releases"><img src="https://img.shields.io/github/v/release/Jenzo0/max-skill?style=flat-square&label=Version&color=FF6B6B" alt="Version"></a>
+  <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-green?style=flat-square" alt="MIT License"></a>
+  <a href="https://github.com/Jenzo0/max-skill/stargazers"><img src="https://img.shields.io/github/stars/Jenzo0/max-skill?style=flat-square&label=Stars&color=yellow" alt="Stars"></a>
+  <a href="https://jenzo0.github.io/max-skill/"><img src="https://img.shields.io/badge/GitHub%20Pages-Deployed-blueviolet?style=flat-square" alt="Pages"></a>
+  <br>
+  <img src="https://img.shields.io/badge/Model-Agnostic-4299e1?style=flat-square" alt="Model Agnostic">
+  <img src="https://img.shields.io/badge/Platform-Universal-success?style=flat-square" alt="Universal">
+  <img src="https://img.shields.io/badge/Locale-English%20%7C%20Arabic-orange?style=flat-square" alt="Bilingual">
+  <img src="https://img.shields.io/badge/Architecture-Modular-purple?style=flat-square" alt="Modular">
+  <img src="https://img.shields.io/badge/Integrations-Claude%20·%20ChatGPT%20·%20Hermes%20·%20Edge%20Gallery-blue?style=flat-square" alt="Integrations">
+</p>
 
 <p align="center">
   <em>"Senior Engineer, not just AI."</em>
@@ -19,20 +28,23 @@
 </p>
 
 <p align="center">
-  <a href="#-why-max"><strong>Why Max</strong></a> ·
-  <a href="#-features"><strong>Features</strong></a> ·
-  <a href="#-quick-start"><strong>Quick Start</strong></a> ·
-  <a href="#-architecture-overview"><strong>Architecture</strong></a> ·
-  <a href="#-examples"><strong>Examples</strong></a> ·
-  <a href="#-benchmarks--platform-compatibility"><strong>Benchmarks</strong></a> ·
-  <a href="#-faq"><strong>FAQ</strong></a>
+  <a href="https://github.com/Jenzo0/max-skill#-why-max"><strong>Why Max</strong></a> ·
+  <a href="https://github.com/Jenzo0/max-skill#-features"><strong>Features</strong></a> ·
+  <a href="https://github.com/Jenzo0/max-skill#-30-second-quick-start"><strong>Quick Start</strong></a> ·
+  <a href="https://github.com/Jenzo0/max-skill#%EF%B8%8F-architecture-overview"><strong>Architecture</strong></a> ·
+  <a href="https://github.com/Jenzo0/max-skill#-examples"><strong>Examples</strong></a> ·
+  <a href="https://github.com/Jenzo0/max-skill#-model-compatibility"><strong>Compatibility</strong></a> ·
+  <a href="https://github.com/Jenzo0/max-skill#-faq"><strong>FAQ</strong></a> ·
+  <a href="https://github.com/Jenzo0/max-skill#-contributing"><strong>Contributing</strong></a>
 </p>
 
 ---
 
 ## 🤔 Why Max?
 
-Because you need **more than a chatbot**. You need a **full engineering team** in your prompt.
+**Max is a universal AI skill framework, system prompt, and multi-mode persona** that transforms any large language model into a full engineering team. Unlike generic prompts that handle only one task type, Max ships with an intelligent **Decision Engine** — it reads your request, auto-selects the right mode (Architect, Code, Teacher, Fast Solve, DevOps, Agent, Absolute, AI/ML), and delivers production-quality output.
+
+Whether you need an **AI agent system prompt** for Claude, a **bilingual Arabic-English LLM prompt** for ChatGPT, a **modular persona skill** for Hermes Agent, or a lightweight Edge Gallery skill for Gemma — Max is the most comprehensive open-source **prompt engineering framework** available.
 
 | Need | Without Max | With Max |
 |:-----|:------------|:---------|
@@ -57,7 +69,7 @@ Because you need **more than a chatbot**. You need a **full engineering team** i
 | 🧩 **4-Layer Context** | System → Project → Memory → Task — zero conflict |
 | 🔌 **Universal Tool Registry** | 14 operations × 7 platforms with fallback chains |
 | 🌍 **Arabic Dialect Support** | Egyptian, Levantine, Gulf, Maghrebi, MSA — auto-detected |
-| 🪶 **Dual Version** | Full (1.8K tokens) + Lite (700 tokens, zero `NEVER` directives) |
+| 🪶 **Dual Version** | Full (1.5K tokens) + Lite (700 tokens, zero `NEVER` directives) |
 | 💰 **Token-Budget Loading** | Auto-selects modules based on available context window |
 | 🎯 **8 Output Modes** | Architect · Code · Teacher · Fast Solve · Absolute · Agent · DevOps · AI/ML |
 | 🔒 **Security First** | OWASP Top 10 by default, dependency scanning, supply chain security |
@@ -66,17 +78,34 @@ Because you need **more than a chatbot**. You need a **full engineering team** i
 
 ---
 
-## 🚀 Quick Start
+## 🚀 30-Second Quick Start
 
-### 🏆 Claude Code / OpenCode / Codex (Full — Recommended)
+> **Try Max in under a minute — zero setup required.**
 
 ```bash
-# Load Max directly from GitHub Pages
+# 1️⃣ Load Max into Claude Code / OpenCode / Codex
+curl -s https://jenzo0.github.io/max-skill/max-super-prompt/SKILL.md > /tmp/max.md
+claude --prompt "$(cat /tmp/max.md)"
+
+# 2️⃣ Or paste as system prompt in ChatGPT/Claude/Gemini:
+#    https://raw.githubusercontent.com/Jenzo0/max-skill/main/max-super-prompt/SKILL.md
+
+# 3️⃣ For Edge Gallery / Gemma (Lite version):
+#    https://jenzo0.github.io/max-skill/max-super-prompt/lite/
+```
+
+---
+
+## 📦 Installation
+
+### Claude Code / OpenCode / Codex (Full — Recommended)
+
+```bash
 curl -s https://jenzo0.github.io/max-skill/max-super-prompt/SKILL.md > /tmp/max.md
 claude --prompt "$(cat /tmp/max.md)"
 ```
 
-### 🤖 Hermes Agent
+### Hermes Agent
 
 ```bash
 git clone https://github.com/Jenzo0/max-skill.git
@@ -84,14 +113,14 @@ cp -r max-skill/max-super-prompt ~/AppData/Local/hermes/skills/persona/
 # Then: skill_view(name='max-super-prompt')
 ```
 
-### 🌐 ChatGPT / Claude / Gemini / OpenRouter (API)
+### ChatGPT / Claude / Gemini / OpenRouter (API)
 
-Paste this URL as System Prompt:
+Paste this URL as **System Prompt**:
 ```
 https://raw.githubusercontent.com/Jenzo0/max-skill/main/max-super-prompt/SKILL.md
 ```
 
-### 📱 Edge Gallery / Gemma (Lite — 700 tokens, zero NEVER directives)
+### Edge Gallery / Gemma (Lite — 700 tokens)
 
 **URL import:**
 ```
@@ -100,7 +129,7 @@ https://jenzo0.github.io/max-skill/max-super-prompt/lite/
 
 **Or download:** `max-super-prompt/lite/SKILL.md` → Edge Gallery → (+) → Import local skill.
 
-### 💻 Cursor IDE
+### Cursor IDE
 
 1. Open Cursor → Settings → Custom Instructions
 2. Paste the contents of `max-super-prompt/SKILL.md` into "Custom Instructions"
@@ -137,7 +166,7 @@ https://jenzo0.github.io/max-skill/max-super-prompt/lite/
 
 ```
 max-super-prompt/
-├── SKILL.md                          ← Entry point (1.8K tokens)
+├── SKILL.md                          ← Entry point (1.5K tokens)
 ├── lite/SKILL.md                     ← Lightweight (700 tokens)
 ├── references/
 │   ├── core/                         ← Always-loaded identity
@@ -162,6 +191,10 @@ max-super-prompt/
 ├── scripts/                          ← JS tools (Edge Gallery)
 │   ├── memory.html / search.html / vision.html
 │   └── voice.html / dashboard.html
+└── examples/                         ← Practical walkthroughs
+    ├── 01-code-api.md
+    ├── 02-fast-solve-mysql-deadlock.md
+    └── 03-architect-chat-system.md
 ```
 
 ---
@@ -183,7 +216,6 @@ from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
 from pydantic import BaseModel
 import jwt, datetime
 from passlib.context import CryptContext
-from typing import Optional
 
 app = FastAPI(title="Auth API", version="1.0")
 security = HTTPBearer()
@@ -191,7 +223,6 @@ pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 SECRET_KEY = "change-me-in-production"
 ALGORITHM = "HS256"
 
-# --- Models ---
 class UserCreate(BaseModel):
     username: str
     password: str
@@ -200,10 +231,8 @@ class TokenResponse(BaseModel):
     access_token: str
     token_type: str = "bearer"
 
-# --- Mock DB ---
 fake_users_db: dict[str, dict] = {}
 
-# --- Endpoints ---
 @app.post("/register", response_model=TokenResponse, status_code=201)
 def register(user: UserCreate):
     if user.username in fake_users_db:
@@ -232,121 +261,28 @@ def get_current_user(credentials: HTTPAuthorizationCredentials = Depends(securit
     except jwt.InvalidTokenError:
         raise HTTPException(401, "Invalid token")
 ```
-
-**Verification**
-```bash
-# Register
-curl -X POST http://localhost:8000/register -H "Content-Type: application/json" -d '{"username":"test","password":"secret123"}'
-# Login
-curl -X POST http://localhost:8000/login -H "Content-Type: application/json" -d '{"username":"test","password":"secret123"}'
-# Get current user
-curl http://localhost:8000/me -H "Authorization: Bearer ***"
-```
 ```
 
-### ⚡ Debugging an Error (Fast Solve Mode)
-
-```
-**User**: "Why am I getting a 500 on my /data endpoint?"
-
-**Max**: [mode: fast-solve | score: 7]
-
-## Root Cause
-
-الـ endpoint مش بيعمل `await` للـ async function. السطر 15:
-
-```python
-@app.get("/data")
-async def get_data():
-    return db.query()  # ← Missing await if db.query() is async
-```
-
-## The Fix
-
-```python
-@app.get("/data")
-async def get_data():
-    data = await db.query()  # ← added await
-    return data
-```
-
-## Prevention Tip
-
-Keep a mental model: *every `async def` needs `await` for async operations.*
-```
-
-### 📐 Designing an Architecture (Architect Mode)
-
-```
-**User**: "Design a real-time chat system for 1M users"
-
-**Max**: [mode: architect | score: 8]
-
-## Architecture Overview
-
-+----------------+     WebSocket      +----------------+
-|   Client App   | ────────────────── |   API Gateway  |
-+----------------+                    +----------------+
-                                              |
-                          ┌───────────────────┼───────────────────┐
-                          ↓                   ↓                   ↓
-                   +------------+      +------------+      +------------+
-                   | Room Svc   |      | Message Svc|      | Presence   |
-                   | (Redis)    |      | (Kafka)    |      | (Redis)    |
-                   +------------+      +------------+      +------------+
-                          |                   |                   |
-                          ↓                   ↓                   ↓
-                   +------------+      +------------+      +------------+
-                   | Redis      |      | PostgreSQL |      | Redis      |
-                   | (Pub/Sub)  |      | (History)  |      | (Presence) |
-                   +------------+      +------------+      +------------+
-
-## Trade-offs
-- + Pub/Sub with Redis is very fast for 1:1 and small groups
-- - Kafka needed for chat history persistence at scale
-- - 1M concurrent users needs horizontal scaling on Redis Cluster
-
-## Phased Plan
-1. Python + FastAPI WebSocket server on Kubernetes
-2. Redis Pub/Sub for real-time message routing
-3. Kafka + PostgreSQL for chat history persistence
-4. Client SDK with reconnection + backoff
-```
+> 📚 See [examples/](examples/) for more real-world use cases.
 
 ---
 
-## 📊 Benchmarks & Platform Compatibility
+## 📊 Model Compatibility
 
-### 🖥 Platform Compatibility
+### Top Picks
 
-| Provider | Model | Full | Lite | Tools | Arabic | Memory | Status |
-|----------|-------|:----:|:----:|:-----:|:------:|:------:|--------|
-| Anthropic | Sonnet 5 | ✅ | ✅ | ✅ | ✅ | ✅ | 🏆 Recommended |
-| Anthropic | Opus 5 | ✅ | ✅ | ✅ | ✅ | ✅ | 🏆 Recommended |
-| Anthropic | Fable 5 | ✅ | ✅ | ✅ | ✅ | ✅ | 🏆 Recommended |
-| OpenAI | GPT 5.4 | ✅ | ✅ | ✅ | ✅ | ✅ | 🏆 Excellent |
-| OpenAI | GPT 5.5 | ✅ | ✅ | ✅ | ✅ | ✅ | 🏆 Excellent |
-| OpenAI | o5 | ⚠️ | ✅ | ❌ | ✅ | ❌ | Good |
-| Google | Gemini 3.5 Flash | ⚠️ | ✅ | ⚠️ | ✅ | ❌ | Good |
-| Google | Gemini 3.5 Pro | ✅ | ✅ | ⚠️ | ✅ | ❌ | Good |
-| Meta | Llama 5 | ✅ | ✅ | ⚠️ | ✅ | ❌ | Good |
-| Meta | Llama 4 Turbo | ❌ | ✅ | ❌ | ⚠️ | ❌ | Lite only |
-| Alibaba | QWEN 3.7 Plus | ✅ | ✅ | ✅ | ✅ | ✅ | 🚀 Fast |
-| Alibaba | QWEN 3.5 Max | ✅ | ✅ | ✅ | ✅ | ⚠️ | Fast |
-| DeepSeek | DeepSeek V4 Flash | ✅ | ✅ | ✅ | ✅ | ✅ | 🚀 Fast |
-| DeepSeek | DeepSeek V4 | ✅ | ✅ | ✅ | ✅ | ✅ | Recommended |
-| Zhipu AI | GLM 5.2 | ✅ | ✅ | ⚠️ | ✅ | ⚠️ | Good |
-| Zhipu AI | GLM 5.1 Lite | ❌ | ✅ | ❌ | ✅ | ❌ | Lite only |
-| Moonshot | KIM 2.7 | ✅ | ✅ | ⚠️ | ⚠️ | ❌ | Good |
-| Moonshot | KIM 2.5 | ✅ | ✅ | ❌ | ⚠️ | ❌ | Basic |
-| Mistral | Mistral 4 Large | ✅ | ✅ | ⚠️ | ✅ | ✅ | Good |
-| Mistral | Mistral 4 Small | ❌ | ✅ | ❌ | ⚠️ | ❌ | Lite only |
-| Microsoft | Phi-5 | ❌ | ✅ | ❌ | ⚠️ | ❌ | Lite only |
-| xAI | Grok 4 | ✅ | ✅ | ⚠️ | ✅ | ✅ | Good |
-| 01.AI | Yi 3.5 Max | ✅ | ✅ | ⚠️ | ✅ | ⚠️ | Good |
-| NVIDIA | Nemotron 3 Ultra | ✅ | ✅ | ⚠️ | ✅ | ❌ | Good |
-| Cohere | Command R+ 2 | ✅ | ✅ | ⚠️ | ✅ | ⚠️ | Good |
-| Reka | Reka Core 2.5 | ✅ | ✅ | ⚠️ | ✅ | ⚠️ | Good |
+| Provider | Model | Full | Lite | Tools | Arabic | Memory | Verdict |
+|----------|-------|:----:|:----:|:-----:|:------:|:------:|:--------|
+| **Anthropic** 🟠 | Sonnet 5 | ✅ | ✅ | ✅ | ✅ | ✅ | 🏆 Recommended |
+| **Anthropic** 🟠 | Fable 5 | ✅ | ✅ | ✅ | ✅ | ✅ | 🏆 Best Overall |
+| **OpenAI** 🟢 | GPT 5.4 | ✅ | ✅ | ✅ | ✅ | ✅ | 🏆 Excellent |
+| **DeepSeek** 🟢 | V4 Flash | ✅ | ✅ | ✅ | ✅ | ✅ | 🚀 Fast |
+| **Alibaba** 🟤 | QWEN 3.7+ | ✅ | ✅ | ✅ | ✅ | ✅ | 🚀 Fast |
+| **xAI** ⚫ | Grok 4 | ✅ | ✅ | ⚠️ | ✅ | ✅ | Good |
+| **Mistral** 🟡 | Large 4 | ✅ | ✅ | ⚠️ | ✅ | ✅ | Good |
+| **Google** 🔵 | Gemini 3.5 Pro | ✅ | ✅ | ⚠️ | ✅ | ❌ | Good |
+
+> 📋 **Full 25+ model matrix → [SUPPORTED_MODELS.md](SUPPORTED_MODELS.md)** includes Llama, Yi, GLM, KIM, Phi, Reka, Cohere, Nemotron & more.
 
 ### Platform Support
 
@@ -362,48 +298,6 @@ Keep a mental model: *every `async def` needs `await` for async operations.*
 
 ---
 
-## ⚡ Supported Platforms
-
-| Provider | Model | Version | Integration |
-|----------|-------|:-------:|:------------|
-| Anthropic | Sonnet 5 | Full | Paste system prompt |
-| Anthropic | Opus 5 | Full | Paste system prompt |
-| Anthropic | Fable 5 | Full | Paste system prompt |
-| OpenAI | GPT 5.4 | Full + Lite | Paste system prompt |
-| OpenAI | GPT 5.5 | Full | Paste system prompt |
-| OpenAI | o5 | Full | Paste system prompt |
-| Google | Gemini 3.5 Flash | Lite | Paste system prompt |
-| Google | Gemini 3.5 Pro | Full | Paste system prompt |
-| Meta | Llama 5 | Full | System prompt |
-| Meta | Llama 4 Turbo | Lite | System prompt |
-| Alibaba | QWEN 3.7 Plus | Full | System prompt |
-| Alibaba | QWEN 3.5 Max | Full | System prompt |
-| DeepSeek | DeepSeek V4 Flash | Full | System message |
-| DeepSeek | DeepSeek V4 | Full | System message |
-| Zhipu AI | GLM 5.2 | Full | System prompt |
-| Zhipu AI | GLM 5.1 Lite | Lite | System prompt |
-| Moonshot | KIM 2.7 | Full | System prompt |
-| Moonshot | KIM 2.5 | Full | System prompt |
-| Mistral | Mistral 4 Large | Full + Lite | System message |
-| Mistral | Mistral 4 Small | Lite | System message |
-| Microsoft | Phi-5 | Lite | System prompt |
-| xAI | Grok 4 | Full + Lite | System message |
-| 01.AI | Yi 3.5 Max | Full | System prompt |
-| NVIDIA | Nemotron 3 Ultra | Full | System message |
-| Cohere | Command R+ 2 | Full | System prompt |
-| Reka | Reka Core 2.5 | Full | System prompt |
-| | | | |
-| Hermes Agent | — | Full | Copy to skills/persona/ |
-| Edge Gallery | — | Lite | URL import |
-| OpenCode CLI | — | Full | `--prompt` flag |
-| Cursor | — | Full | Custom instructions |
-| Ollama | — | Lite | System prompt |
-| OpenRouter | — | Full | System prompt |
-| Codex CLI | — | Full | `--prompt` flag |
-| Any OpenAI API | — | Full | `system` message |
-
----
-
 ## 💸 Token Cost Comparison
 
 | Version | SKILL.md | Core Modules | Capabilities | Total |
@@ -415,7 +309,7 @@ Keep a mental model: *every `async def` needs `await` for async operations.*
 
 ---
 
-## 🎯 Response Quality & QAF
+## 🎯 Response Quality
 
 | Metric | v5.2 | v6.0 | Change |
 |:-------|:----:|:----:|:------:|
@@ -431,7 +325,7 @@ Keep a mental model: *every `async def` needs `await` for async operations.*
 ## 📖 FAQ
 
 **Q: What's the difference between Full and Lite?**
-A: Full (1.8K tokens) has the complete Decision Engine, all 10 Golden Rules, context layers, tool registry, and 8 capability modules. Lite (700 tokens) has compressed rules, no `NEVER` directives, and is designed for Edge Gallery, Gemma, and low-context environments.
+A: Full (1.5K tokens) has the complete Decision Engine, all 10 Golden Rules, context layers, tool registry, and 8 capability modules. Lite (700 tokens) has compressed rules, zero `NEVER` directives, and is designed for Edge Gallery, Gemma, and low-context environments.
 
 **Q: Which version should I use?**
 A: Use Full on Claude, ChatGPT, Hermes, or any platform with ≥16K context. Use Lite on Edge Gallery, Gemma, Ollama, or platforms with <8K context.
@@ -443,7 +337,7 @@ A: Max auto-detects the user's language. Arabic input (Egyptian, Levantine, Gulf
 A: Yes. Start your message with `[mode: absolute]`, `[mode: teacher]`, etc. to lock the mode for that turn.
 
 **Q: Does Max work with local models?**
-A: Yes. Lite version works with Gemma, Llama 3, Mistral, Qwen, and any model with 4K+ context. Full version needs 16K+ context.
+A: Yes. Lite version works with Gemma, Llama, Mistral, Qwen, and any model with 4K+ context. Full version needs 16K+ context.
 
 **Q: How do I contribute a new capability?**
 A: Fork the repo, add a `.md` file under `references/capabilities/` following the template, update the module registry in `SKILL.md`, and submit a PR. See [CONTRIBUTING.md](CONTRIBUTING.md).
@@ -452,13 +346,10 @@ A: Fork the repo, add a `.md` file under `references/capabilities/` following th
 
 ## 🗺️ Roadmap
 
-> **Q3 2026** — v6.1 Plugin SDK & Skill Marketplace prototype
->
-> **Q4 2026** — v6.2 Memory Providers: SQLite, Redis, Vector DB adapters
->
-> **Q1 2027** — v7.0 Multi-Agent Runtime & Community Skill Library
->
-> **Q2 2027** — v7.1 Tool Providers SDK & Webhook integrations
+- **Q3 2026** — v6.1 Plugin SDK & Skill Marketplace prototype
+- **Q4 2026** — v6.2 Memory Providers: SQLite, Redis, Vector DB adapters
+- **Q1 2027** — v7.0 Multi-Agent Runtime & Community Skill Library
+- **Q2 2027** — v7.1 Tool Providers SDK & Webhook integrations
 
 See [ROADMAP.md](ROADMAP.md) for detailed planning and release notes.
 
@@ -504,24 +395,22 @@ See [LICENSE](LICENSE) for the full text.
 
 ## 🚀 Why Max Stands Out
 
-> **Generic System Prompts**
-> → Single-mode, no tool registry, no Arabic, no adaptive loading. Fine for simple tasks but hit limits fast.
+> **Generic System Prompts** → Single-mode, no tool registry, no Arabic, no adaptive loading. Fine for simple tasks but hit limits fast.
 >
-> **ChatGPT Custom GPTs**
-> → Configurable but platform-locked. No Lite version, no tool abstraction, limited Arabic support.
+> **ChatGPT Custom GPTs** → Configurable but platform-locked. No Lite version, no tool abstraction, limited Arabic support.
 >
-> **Claude Projects**
-> → Single-mode, no Decision Engine, no per-mode capability loading. Great for long docs but not adaptive.
+> **Claude Projects** → Single-mode, no Decision Engine, no per-mode capability loading. Great for long docs but not adaptive.
 >
-> **Max v6.0** ✅
-> → **8 intelligent modes** with weighted routing. **5 Arabic dialects** auto-detected. **14 operations × 7 platforms** via Universal Tool Registry. **Dual version** for Full & Lite contexts. **100% prompt** — no plugins, no subscriptions, no vendor lock-in.
+> **Max v6.0** ✅ → 8 intelligent modes with weighted routing. 5 Arabic dialects auto-detected. 14 operations × 7 platforms via Universal Tool Registry. Dual version for Full & Lite contexts. 100% prompt — no plugins, no subscriptions, no vendor lock-in.
 
 ---
 
 <p align="center">
-  Built with ❤️ by <a href="https://github.com/Jenzo0">Jenzo Sky</a>
+  ⭐ <strong>Star this repo</strong> if you find it useful — it helps others discover it!
   <br>
-  ⭐ <strong>Star if useful!</strong> ⭐
+  🍴 <strong>Fork it</strong>, try it with your favorite LLM, and <a href="https://github.com/Jenzo0/max-skill/issues">submit feedback</a>.
+  <br><br>
+  Built with ❤️ by <a href="https://github.com/Jenzo0">Jenzo Sky</a>
   <br><br>
   <em>"Senior Engineer, not just AI."</em>
   <br><br>
