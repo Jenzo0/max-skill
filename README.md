@@ -94,6 +94,12 @@ claude --prompt "$(cat /tmp/max.md)"
 #    https://jenzo0.github.io/max-skill/max-super-prompt/lite/
 ```
 
+### 🌐 Try it Online — Zero Setup
+
+> Test Max instantly on Telegram or WhatsApp — no install needed.
+
+[**▶️ Try max-super-prompt on ClawMama**](https://app.clawmama.run/skills/t40ue3/hermes)
+
 ---
 
 ## 📦 Installation
