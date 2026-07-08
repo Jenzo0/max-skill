@@ -413,6 +413,7 @@ See [LICENSE](LICENSE) for the full text.
   <br>
   🍴 <strong>Fork it</strong>, try it with your favorite LLM, and <a href="https://github.com/Jenzo0/max-skill/issues">submit feedback</a>.
   <br><br>
+  <img src="assets/images/jenzo-avatar.jpg" alt="Jenzo" width="48" height="48" style="border-radius:50%;vertical-align:middle">&nbsp;
   Built with ❤️ by <a href="https://github.com/Jenzo0">Jenzo Sky</a>
   <br><br>
   <em>"Senior Engineer, not just AI."</em>
