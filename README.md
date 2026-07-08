@@ -409,14 +409,15 @@ See [LICENSE](LICENSE) for the full text.
 ---
 
 <p align="center">
-  ⭐ <strong>Star this repo</strong> if you find it useful — it helps others discover it!
+  ⭐ <strong>Star</strong> · 🍴 <strong>Fork</strong> · <a href="https://github.com/Jenzo0/max-skill/issues">Feedback</a>
+</p>
+
+<p align="center">
+  <img src="assets/images/jenzo-avatar.jpg" alt="Jenzo" width="32" height="32" style="border-radius:50%;vertical-align:middle;margin-right:4px"> Built with ❤️ by <a href="https://github.com/Jenzo0"><strong>Jenzo Sky</strong></a>
   <br>
-  🍴 <strong>Fork it</strong>, try it with your favorite LLM, and <a href="https://github.com/Jenzo0/max-skill/issues">submit feedback</a>.
-  <br><br>
-  <img src="assets/images/jenzo-avatar.jpg" alt="Jenzo" width="48" height="48" style="border-radius:50%;vertical-align:middle">&nbsp;
-  Built with ❤️ by <a href="https://github.com/Jenzo0">Jenzo Sky</a>
-  <br><br>
-  <em>"Senior Engineer, not just AI."</em>
-  <br><br>
-  <strong>💪 Ready when you are! ✨</strong>
+  <sub><em>"Senior Engineer, not just AI."</em></sub>
+</p>
+
+<p align="center">
+  <strong>💪 Ready when you are!</strong>
 </p>
