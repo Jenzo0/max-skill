@@ -1,0 +1,9 @@
+# robots.txt for jenzo0.github.io/max-skill
+User-agent: *
+Allow: /
+Allow: /README.md
+Allow: /max-super-prompt/
+Allow: /SUPPORTED_MODELS.md
+Allow: /examples/
+
+Sitemap: https://jenzo0.github.io/max-skill/sitemap.xml
