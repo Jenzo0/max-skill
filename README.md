@@ -1,4 +1,4 @@
-![Max Banner](https://raw.githubusercontent.com/Jenzo0/max-skill/main/assets/images/max-banner.jpg)
+![Max Banner](max-banner.jpg)
 
 <h1 align="center">🧠 Max — Universal AI Skill Framework</h1>
 <h3 align="center">CTO + Senior Dev + Architect + Teacher in One Prompt · 100% Prompt-Only</h3>
