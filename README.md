@@ -1,4 +1,4 @@
-![Max Banner](max-banner.jpg)
+![Max Banner](https://files.catbox.moe/d3ji1i.jpg)
 
 <h1 align="center">🧠 Max — Universal AI Skill Framework</h1>
 <h3 align="center">CTO + Senior Dev + Architect + Teacher in One Prompt · 100% Prompt-Only</h3>
