@@ -35,6 +35,11 @@
 
 ---
 
+
+| |
+|:-:|
+| **🤔 Why Max?** |
+
 ## 🤔 Why Max?
 
 **Max is a universal AI skill framework, system prompt, and multi-mode persona** that transforms any large language model into a full engineering team. Unlike generic prompts that handle only one task type, Max ships with an intelligent **Decision Engine** — it reads your request, auto-selects the right mode (Architect, Code, Teacher, Fast Solve, DevOps, Agent, Absolute, AI/ML), and delivers production-quality output.
@@ -54,6 +59,11 @@ Whether you need an **AI agent system prompt** for Claude, a **bilingual Arabic-
 
 ---
 
+
+| |
+|:-:|
+| **✨ Features** |
+
 ## ✨ Features
 
 | Feature | Description |
@@ -72,6 +82,11 @@ Whether you need an **AI agent system prompt** for Claude, a **bilingual Arabic-
 | 📝 **Production Standard** | Error handling, input validation, tests, docs in every deliverable |
 
 ---
+
+
+| |
+|:-:|
+| **🚀 30-Second Quick Start** |
 
 ## 🚀 30-Second Quick Start
 
@@ -96,6 +111,11 @@ claude --prompt "$(cat /tmp/max.md)"
 [**▶️ Try max-super-prompt on ClawMama**](https://app.clawmama.run/skills/t40ue3/hermes)
 
 ---
+
+
+| |
+|:-:|
+| **📦 Installation** |
 
 ## 📦 Installation
 
@@ -137,6 +157,11 @@ https://jenzo0.github.io/max-skill/max-super-prompt/lite/
 3. Or include via `.cursorrules` file
 
 ---
+
+
+| |
+|:-:|
+| **🏗️ Architecture Overview** |
 
 ## 🏗️ Architecture Overview
 
@@ -200,6 +225,11 @@ max-super-prompt/
 
 ---
 
+
+| |
+|:-:|
+| **🎯 Examples** |
+
 ## 🎯 Examples
 
 ### 💻 Building an API (Code Mode)
@@ -208,6 +238,11 @@ max-super-prompt/
 **User**: "Build a FastAPI auth API with JWT"
 
 **Max**: [mode: code | score: 6]
+
+
+| |
+|:-:|
+| **Solution** |
 
 ## Solution
 
@@ -268,6 +303,11 @@ def get_current_user(credentials: HTTPAuthorizationCredentials = Depends(securit
 
 ---
 
+
+| |
+|:-:|
+| **📊 Model Compatibility** |
+
 ## 📊 Model Compatibility
 
 ### Top Picks
@@ -299,6 +339,11 @@ def get_current_user(credentials: HTTPAuthorizationCredentials = Depends(securit
 
 ---
 
+
+| |
+|:-:|
+| **💸 Token Cost Comparison** |
+
 ## 💸 Token Cost Comparison
 
 | Version | SKILL.md | Core Modules | Capabilities | Total |
@@ -309,6 +354,11 @@ def get_current_user(credentials: HTTPAuthorizationCredentials = Depends(securit
 | **Savings** | **36% ↓** | **47% ↓** | **20% ↓** | **35% ↓** |
 
 ---
+
+
+| |
+|:-:|
+| **🎯 Response Quality** |
 
 ## 🎯 Response Quality
 
@@ -322,6 +372,11 @@ def get_current_user(credentials: HTTPAuthorizationCredentials = Depends(securit
 | Production-ready deliverables | 70% | 90% | +20% |
 
 ---
+
+
+| |
+|:-:|
+| **📖 FAQ** |
 
 ## 📖 FAQ
 
@@ -345,6 +400,11 @@ A: Fork the repo, add a `.md` file under `references/capabilities/` following th
 
 ---
 
+
+| |
+|:-:|
+| **🗺️ Roadmap** |
+
 ## 🗺️ Roadmap
 
 - **Q3 2026** — v6.1 Plugin SDK & Skill Marketplace prototype
@@ -356,6 +416,11 @@ See [ROADMAP.md](ROADMAP.md) for detailed planning and release notes.
 
 ---
 
+
+| |
+|:-:|
+| **📄 Documentation** |
+
 ## 📄 Documentation
 
 - [Installation Guide](https://github.com/Jenzo0/max-skill/wiki/Installation)
@@ -366,6 +431,11 @@ See [ROADMAP.md](ROADMAP.md) for detailed planning and release notes.
 - [Changelog](CHANGELOG.md)
 
 ---
+
+
+| |
+|:-:|
+| **🤝 Contributing** |
 
 ## 🤝 Contributing
 
@@ -386,6 +456,11 @@ We welcome contributions! See [CONTRIBUTING.md](CONTRIBUTING.md) for:
 
 ---
 
+
+| |
+|:-:|
+| **📜 License** |
+
 ## 📜 License
 
 **MIT License** — Free to use, modify, and share.
@@ -393,6 +468,11 @@ We welcome contributions! See [CONTRIBUTING.md](CONTRIBUTING.md) for:
 See [LICENSE](LICENSE) for the full text.
 
 ---
+
+
+| |
+|:-:|
+| **🚀 Why Max Stands Out** |
 
 ## 🚀 Why Max Stands Out
 
