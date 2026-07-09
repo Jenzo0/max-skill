@@ -204,7 +204,6 @@ max-super-prompt/
 
 ### 💻 Building an API (Code Mode)
 
-```
 **User**: "Build a FastAPI auth API with JWT"
 
 **Max**: [mode: code | score: 6]
@@ -261,7 +260,6 @@ def get_current_user(credentials: HTTPAuthorizationCredentials = Depends(securit
         raise HTTPException(401, "Token expired")
     except jwt.InvalidTokenError:
         raise HTTPException(401, "Invalid token")
-```
 ```
 
 > 📚 See [examples/](examples/) for more real-world use cases.
