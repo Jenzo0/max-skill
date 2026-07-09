@@ -325,32 +325,25 @@ def get_current_user(credentials: HTTPAuthorizationCredentials = Depends(securit
 
 ## 📖 FAQ
 
-**Q: What's the difference between Full and Lite?**
-A: Full (1.5K tokens) has the complete Decision Engine, all 10 Golden Rules, context layers, tool registry, and 8 capability modules. Lite (700 tokens) has compressed rules, zero `NEVER` directives, and is designed for Edge Gallery, Gemma, and low-context environments.
-
-**Q: Which version should I use?**
-A: Use Full on Claude, ChatGPT, Hermes, or any platform with ≥16K context. Use Lite on Edge Gallery, Gemma, Ollama, or platforms with <8K context.
-
-**Q: How does Max handle multiple languages?**
-A: Max auto-detects the user's language. Arabic input (Egyptian, Levantine, Gulf, Maghrebi, MSA) → Arabic response in matching dialect. English → English.
-
-**Q: Can I force a specific mode?**
-A: Yes. Start your message with `[mode: absolute]`, `[mode: teacher]`, etc. to lock the mode for that turn.
-
-**Q: Does Max work with local models?**
-A: Yes. Lite version works with Gemma, Llama, Mistral, Qwen, and any model with 4K+ context. Full version needs 16K+ context.
-
-**Q: How do I contribute a new capability?**
-A: Fork the repo, add a `.md` file under `references/capabilities/` following the template, update the module registry in `SKILL.md`, and submit a PR. See [CONTRIBUTING.md](CONTRIBUTING.md).
+| Question | Answer |
+|----------|--------|
+| What's the difference between Full and Lite? | Full (1.5K tokens) has the complete Decision Engine, all 10 Golden Rules, context layers, tool registry, and 8 capability modules. Lite (700 tokens) has compressed rules, zero NEVER directives, and is designed for Edge Gallery, Gemma, and low-context environments. |
+| Which version should I use? | Use Full on Claude, ChatGPT, Hermes, or any platform with >=16K context. Use Lite on Edge Gallery, Gemma, Ollama, or platforms with <8K context. |
+| How does Max handle multiple languages? | Max auto-detects the user's language. Arabic input (Egyptian, Levantine, Gulf, Maghrebi, MSA) -> Arabic response in matching dialect. English -> English. |
+| Can I force a specific mode? | Yes. Start your message with `[mode: absolute]`, `[mode: teacher]`, etc. to lock the mode for that turn. |
+| Does Max work with local models? | Yes. Lite version works with Gemma, Llama, Mistral, Qwen, and any model with 4K+ context. Full version needs 16K+ context. |
+| How do I contribute a new capability? | Fork the repo, add a `.md` file under `references/capabilities/` following the template, update the module registry in SKILL.md, and submit a PR. See [CONTRIBUTING.md](CONTRIBUTING.md). |
 
 ---
 
 ## 🗺️ Roadmap
 
-- **Q3 2026** — v6.1 Plugin SDK & Skill Marketplace prototype
-- **Q4 2026** — v6.2 Memory Providers: SQLite, Redis, Vector DB adapters
-- **Q1 2027** — v7.0 Multi-Agent Runtime & Community Skill Library
-- **Q2 2027** — v7.1 Tool Providers SDK & Webhook integrations
+| Version | Planned Features |
+|---------|-----------------|
+| Q3 2026 | v6.1 Plugin SDK & Skill Marketplace prototype |
+| Q4 2026 | v6.2 Memory Providers: SQLite, Redis, Vector DB adapters |
+| Q1 2027 | v7.0 Multi-Agent Runtime & Community Skill Library |
+| Q2 2027 | v7.1 Tool Providers SDK & Webhook integrations |
 
 See [ROADMAP.md](ROADMAP.md) for detailed planning and release notes.
 
@@ -358,12 +351,14 @@ See [ROADMAP.md](ROADMAP.md) for detailed planning and release notes.
 
 ## 📄 Documentation
 
-- [Installation Guide](https://github.com/Jenzo0/max-skill/wiki/Installation)
-- [All Modes Explained](https://github.com/Jenzo0/max-skill/wiki/Modes)
-- [JS Tools Reference](https://github.com/Jenzo0/max-skill/wiki/JS-Tools)
-- [Arabic Dialects](https://github.com/Jenzo0/max-skill/wiki/Arabic-Dialects)
-- [Migration Guide: v5 to v6](https://github.com/Jenzo0/max-skill/wiki)
-- [Changelog](CHANGELOG.md)
+| Document | Description |
+|----------|-------------|
+| [Installation Guide](https://github.com/Jenzo0/max-skill/wiki/Installation) | Set up Max on any platform |
+| [All Modes Explained](https://github.com/Jenzo0/max-skill/wiki/Modes) | Deep dive into each mode |
+| [JS Tools Reference](https://github.com/Jenzo0/max-skill/wiki/JS-Tools) | Browser tools for Edge Gallery |
+| [Arabic Dialects](https://github.com/Jenzo0/max-skill/wiki/Arabic-Dialects) | 5-dialect auto-detection system |
+| [Migration Guide: v5 to v6](https://github.com/Jenzo0/max-skill/wiki) | Breaking changes & upgrade path |
+| [Changelog](CHANGELOG.md) | Full release history |
 
 ---
 
@@ -371,38 +366,39 @@ See [ROADMAP.md](ROADMAP.md) for detailed planning and release notes.
 
 We welcome contributions! See [CONTRIBUTING.md](CONTRIBUTING.md) for:
 
-- **Code of Conduct** — Be respectful, inclusive, and constructive
-- **New capability module** — Add `.md` under `references/capabilities/` following the template
-- **New decision mode** — Update SKILL.md Decision Engine + modes reference module
-- **Bug fix / docs improvement** — Edit relevant `.md` file; keep Lite version in sync
-- **Token budget compliance** — CI enforces per-category limits automatically
+| Contribution | Description |
+|--------------|-------------|
+| New capability module | Add `.md` under `references/capabilities/` following the template |
+| New decision mode | Update SKILL.md Decision Engine + modes reference module |
+| Bug fix / docs improvement | Edit relevant `.md` file; keep Lite version in sync |
+| Token budget compliance | CI enforces per-category limits automatically |
 
 **Quick start:**
 
 1. Fork the repo
 2. Add or improve modules under `references/`
-3. Test with Lite version for Edge Gallery safety (no `NEVER` directives)
+3. Test with Lite version for Edge Gallery safety (no NEVER directives)
 4. Submit a PR
 
 ---
 
 ## 📜 License
 
-**MIT License** — Free to use, modify, and share.
-
-See [LICENSE](LICENSE) for the full text.
+| License | Description |
+|---------|-------------|
+| **MIT License** | Free to use, modify, and share. See [LICENSE](LICENSE) for the full text. |
 
 ---
 
 ## 🚀 Why Max Stands Out
 
-> **Generic System Prompts** → Single-mode, no tool registry, no Arabic, no adaptive loading. Fine for simple tasks but hit limits fast.
->
-> **ChatGPT Custom GPTs** → Configurable but platform-locked. No Lite version, no tool abstraction, limited Arabic support.
->
-> **Claude Projects** → Single-mode, no Decision Engine, no per-mode capability loading. Great for long docs but not adaptive.
->
-> **Max v6.0** ✅ → 8 intelligent modes with weighted routing. 5 Arabic dialects auto-detected. 14 operations × 7 platforms via Universal Tool Registry. Dual version for Full & Lite contexts. 100% prompt — no plugins, no subscriptions, no vendor lock-in.
+| Feature | Generic System Prompts | ChatGPT Custom GPTs | Claude Projects | Max v6.0 |
+|---------|----------------------|---------------------|-----------------|----------|
+| Mode intelligence | Single-mode | Configurable but no routing | Single-mode | ✅ 8 intelligent modes with weighted routing |
+| Arabic support | No | Limited | No | ✅ 5 Arabic dialects auto-detected |
+| Tool abstraction | No tool registry | Platform-locked | No tool registry | ✅ 14 operations × 7 platforms via Universal Tool Registry |
+| Context flexibility | Fixed | Platform-locked | Single-mode | ✅ Dual version for Full & Lite contexts |
+| Vendor lock-in | None | Locked to ChatGPT | Locked to Claude | ✅ 100% prompt — no plugins, no subscriptions |
 
 ---
 
